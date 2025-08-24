@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Riku Araki | Portfolio">
+  <title>Riku Araki | Portfolio</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav-inner">
+    <div class="brand">Riku Araki</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="works.html">Works</a></li>
+        <li><a href="links.html">Links</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="container">
+
+<section class="hero">
+  <h1>数学・言語と文章の交差点へ</h1>
+  <p>基礎論と生成文法、そして文筆。「過程を楽しむ」をモットーに研究と創作を並走中。</p>
+  <div class="btn-row" style="margin-top:18px">
+    <a class="btn" href="about.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M10 13a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1m-3-3l-4 4"/></svg>自己紹介へ</a>
+    <a class="btn" href="works.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8z"/><path stroke-width="2" d="M14 2v6h6"/></svg>PDF（配布資料）</a>
+    <a class="btn" href="links.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-width="2" d="M10 13a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1m-3-3l-4 4"/></svg>外部リンク</a>
+  </div>
+</section>
+
+<div class="grid">
+  <div class="card half">
+    <div class="kicker">News</div>
+    <div class="section-title">最近の更新</div>
+    <ul class="list">
+      <li>サイト開設。『プロ論』自費出版に向けて準備開始。</li>
+      <li>言語学プリント「日本語におけるScrambling概観」を公開予定。</li>
+    </ul>
+  </div>
+  <div class="card half">
+    <div class="kicker">Focus</div>
+    <div class="section-title">今の関心</div>
+    <ul class="list">
+      <li>数学基礎論（集合論・可測性・正則測度）</li>
+      <li>生成文法（LCA・移動・語順・日本語データ）</li>
+      <li>モダニズム研究（Rotman / McLuhan / 1920s America）</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+<footer class="footer">
+  <div class="container">&copy; <span id="y"></span> Riku Araki</div>
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
