@@ -132,20 +132,6 @@ nav ul {
 .list li + li { margin-top: 6px; }
 
 
-.profile {
-  display: flex;
-  align-items: flex-end; /* 下揃えにする */
-  gap: 12px;             /* 画像と文字の間隔 */
-}
-
-.profile img {
-  display: block;
-}
-
-.profile h3 {
-  margin: 0;
-}
-
 
 .code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
