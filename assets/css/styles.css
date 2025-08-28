@@ -1,3 +1,249 @@
-/* debug */
-html,body { background: #e0f7ff; }
-h1 { outline: 3px dashed; }
+/* Minimal, elegant portfolio styles */
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #666666;
+  --accent: #0a66c2; /* link-ish blue */
+  --card: #f7f7f8;
+  --border: #e6e6e9;
+  --radius: 16px;
+  --maxw: 920px;
+}
+
+* { box-sizing: border-box; }
+
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+header.site-header {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.hero {
+  padding: 72px 0 24px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 3.4vw + 12px, 44px);
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.hero p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 18px;
+}
+
+.card {
+  grid-column: span 12;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .card.half { grid-column: span 6; }
+}
+
+.section-title {
+  font-size: 20px;
+  margin: 24px 0 8px;
+}
+
+.kicker {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.footer {
+  margin-top: 40px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid var(--border);
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.btn:hover { background: #f2f2f4; text-decoration: none; }
+
+.icon {
+  width: 18px; height: 18px; vertical-align: -3px; margin-right: 6px;
+}
+
+.list {
+  margin: 0; padding-left: 18px;
+}
+.list li + li { margin-top: 6px; }
+
+.code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: #f5f5f7;
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+
+html, body {
+  background: #add8e6 !important;
+}
+.container {
+  background: transparent;
+  box-shadow: none !important;
+
+/* サイト全体の背景 */
+html, body {
+  background: #add8e6 !important;  /* 好きな色に */
+}
+
+/* 中央の白い箱（たぶん .container）を透明に */
+.container {
+  background: transparent !important;
+  box-shadow: none !important;  /* 影も消すなら */
+}
+
+/* 1) 背景色を絶対に適用 */
+html, body {
+  background: #add8e6 !important;
+  min-height: 100%;
+}
+
+/* 2) よく白になる要素を一括で透明化 */
+.site, .site-wrapper, .page, .content, .main,
+.wrapper, .section, .container, header, main, footer {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.fa-youtube {
+  color: red;   /* ここを好きな色コードに */
+}
+/* ========= Link Card Styles ========= */
+.link-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 1.05em;
+  margin-bottom: 8px;
+}
+
+.card-header i {
+  font-size: 1.2em;
+  color: var(--accent); /* デフォルトはアクセントカラー */
+}
+
+.card-desc {
+  font-size: 0.9em;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+.link-card .btn {
+  display: inline-block;
+  padding: 8px 14px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 999px;
+  font-size: 0.9em;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.link-card .btn:hover {
+  background: #084c92; /* accent を少し濃く */
+}
+
+/* Instagram用の特別色 */
+.card-header i.fa-instagram {
+  color: #E4405F;
+}
+.link-card.instagram .btn {
+  background: #E4405F;
+}
+.link-card.instagram .btn:hover {
+  background: #c32f4f;
+}
+
+/* YouTube用の特別色 */
+.card-header i.fa-youtube {
+  color: #FF0000;
+}
+.link-card.youtube .btn {
+  background: #FF0000;
+}
+.link-card.youtube .btn:hover {
+  background: #cc0000;
