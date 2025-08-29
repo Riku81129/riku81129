@@ -146,12 +146,12 @@ html, body {
   background: #add8e6 !important;
 }
 
-.content-container {
-  max-width: 800px;   /* 本文の最大幅を制限 */
-  margin: 0 auto;     /* 中央寄せ */
+/* 本文用：中央寄せ＋左右余白 */
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
-
-
 
 
 /* サイト全体の背景 */
