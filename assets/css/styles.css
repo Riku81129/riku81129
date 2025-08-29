@@ -181,6 +181,14 @@ html, body {
 .fa-youtube {
   color: red;   /* ここを好きな色コードに */
 }
+
+.link-group {
+  display: flex;       /* 横並び */
+  flex-wrap: wrap;     /* はみ出したら折り返し */
+  gap: 10px;           /* ボタン間の余白 */
+  margin-bottom: 20px; /* グループ間の余白 */
+}
+
 /* ========= Link Card Styles ========= */
 .link-card {
   border: 1px solid var(--border);
