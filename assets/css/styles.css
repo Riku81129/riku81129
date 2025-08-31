@@ -189,22 +189,31 @@ html, body {
   margin-bottom: 20px; /* グループ間の余白 */
 }
 
+/* 画像グリッド：可変カラム、はみ出さない */
 .image-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* 列幅の下限を小さめに */
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
   margin-top: 12px;
 }
 
-/* ここがポイント：枠（アスペクト比）に収める */
+/* ぜったいにトリミングしない版（等比で枠内に収める） */
 .image-grid img{
-  width: 100%;
-  aspect-ratio: 4 / 3;    /* 枠の縦横比。好みで 1/1, 16/9 などに変更OK */
-  object-fit: contain;    /* 全体表示。はみ出さず“枠に入る” */
-  background: var(--card, #f7f7f8); /* 余白の背景色（レターボックス） */
-  border: 1px solid var(--border, #e6e6e9);
-  border-radius: var(--radius, 12px);
   display: block;
+  width: 100% !important;   /* 枠幅に合わせる */
+  height: auto !important;  /* 縦は自動＝等比 */
+  max-height: 220px;        /* 必要なら上限を設定（不要なら消してOK） */
+  border-radius: var(--radius, 12px);
+  border: 1px solid var(--border, #e6e6e9);
+}
+
+/* 以前の「1枚目だけ大きく」や cover を無効化（入れていた場合） */
+@media (min-width: 860px){
+  .image-grid img:first-child{ grid-column: auto !important; }
+}
+/* 念のための強制無効化 */
+.image-grid img{
+  object-fit: contain !important;   /* cover 指定が残っていても打ち消す */
 }
 
 
