@@ -291,3 +291,27 @@ html, body {
 }
 .link-card.youtube .btn:hover {
   background: #cc0000;
+
+/* 画像は角丸禁止（四角）＆トリミングなしで収める */
+.image-grid img,
+.card .image-grid img,
+.card img {
+  border-radius: 0 !important;     /* ← 角丸を無効化 */
+  width: 100%;
+  height: auto !important;
+  object-fit: contain !important;  /* ← 切り取り禁止で枠内に収める */
+}
+
+/* 画像を角丸に見せてしまう“親の角丸+はみ出し隠し”を解除 */
+.image-grid,
+.image-grid .slot,
+.card .image-grid,
+.card .image-grid .slot {
+  border-radius: 0 !important;     /* 親の角丸も無効化（必要なら） */
+  overflow: visible !important;     /* ← これが超重要。丸く切れるのを防ぐ */
+  clip-path: none !important;       /* 念のため */
+  -webkit-mask-image: none !important; /* 念のため（Safari対策） */
+}
+
+/* グローバルで img に角丸が指定されている場合の最強対策 */
+img { border-radius: 0 !important; }
