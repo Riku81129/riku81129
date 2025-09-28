@@ -237,7 +237,7 @@ html, body {
 
 .profile-photo {
   display: block;
-  margin: 0 auto 20px; /* 中央寄せ＋下に余白 */
+  margin: 0 auto 24px; /* 中央寄せ＋下に余白 */
   border-radius: 8px;
 }
 
