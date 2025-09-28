@@ -154,10 +154,7 @@ html, body {
 }
 
 
-/* サイト全体の背景 */
-html, body {
-  background: #add8e6 !important;  /* 好きな色に */
-}
+
 
 /* 中央の白い箱（たぶん .container）を透明に */
 .container {
