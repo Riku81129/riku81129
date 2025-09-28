@@ -27,7 +27,7 @@ a:hover { text-decoration: underline; }
 header.site-header {
   position: sticky;
   top: 0;
-  background: rgba(173, 216, 230, 0.85); 
+  background: rgba(70, 130, 180, 0.9); 
   border-bottom: 1px solid var(--border);
   z-index: 10;
 }
