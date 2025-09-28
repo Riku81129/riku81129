@@ -235,8 +235,11 @@ html, body {
   .image-grid img:nth-child(3){ grid-column:auto; grid-row:auto; }
 }
 
-
-
+.profile-photo {
+  display: block;
+  margin: 0 auto 20px; /* 中央寄せ＋下に余白 */
+  border-radius: 8px;
+}
 
 /* ========= Link Card Styles ========= */
 .link-card {
