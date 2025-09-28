@@ -53,6 +53,25 @@ nav ul {
   flex-wrap: wrap;
 }
 
+nav ul li a {
+  display: block;               /* ボタンのようにする */
+  padding: 8px 14px;            /* 余白 */
+  text-decoration: none;        /* 下線を消す */
+  color: #333;                  /* 文字色 */
+  font-weight: 500;
+  border: 1px solid #ccc;       /* 枠線で区切る */
+  border-radius: 4px;           /* 少し丸み */
+  transition: all 0.3s ease;    /* アニメーション */
+}
+
+/* ホバー時 */
+nav ul li a:hover {
+  background-color: #0077cc;    /* 背景を青に */
+  color: #fff;                  /* 文字を白に */
+  border-color: #0077cc;
+}
+
+
 .hero {
   padding: 72px 0 24px;
 }
