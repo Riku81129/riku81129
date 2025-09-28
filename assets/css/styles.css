@@ -162,18 +162,6 @@ html, body {
   box-shadow: none !important;  /* 影も消すなら */
 }
 
-/* 1) 背景色を絶対に適用 */
-html, body {
-  background: #add8e6 !important;
-  min-height: 100%;
-}
-
-/* 2) よく白になる要素を一括で透明化 */
-.site, .site-wrapper, .page, .content, .main,
-.wrapper, .section, .container, header, main, footer {
-  background: transparent !important;
-  box-shadow: none !important;
-}
 
 .fa-youtube {
   color: red;   /* ここを好きな色コードに */
