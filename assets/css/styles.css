@@ -82,6 +82,11 @@ nav ul {
   padding: 20px;
 }
 
+.news {
+  margin-bottom: 24px; /* Newsカードの下にだけ隙間 */
+}
+
+
 @media (min-width: 768px) {
   .card.half { grid-column: span 6; }
 }
