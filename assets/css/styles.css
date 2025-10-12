@@ -28,6 +28,7 @@ header.site-header {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   background: rgba(255, 255, 255, 0.8); /* 半透明の白 */
   backdrop-filter: saturate(180%) blur(10px); /* ガラス風のぼかし */
   border-bottom: 1px solid var(--border, #ddd);
@@ -35,7 +36,7 @@ header.site-header {
 }
 
 body {
-  padding-top: 60px; 
+  padding-top: 80px; 
 }
 
 
