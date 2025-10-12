@@ -35,12 +35,14 @@ header.site-header {
   backdrop-filter: saturate(180%) blur(10px); /* ガラス風のぼかし */
   border-bottom: 1px solid var(--border, #ddd);
   z-index: 9999;
+  box-sizing: border-box;  
 }
+
+
 
 body {
   padding-top: 80px; 
 }
-
 
 
 .nav-inner {
