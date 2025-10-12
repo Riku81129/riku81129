@@ -27,7 +27,7 @@ a:hover { text-decoration: underline; }
 header.site-header {
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.9); /* 半透明の白 */
+  background: rgba(255, 255, 255, 0.6); /* 半透明の白 */
   backdrop-filter: saturate(180%) blur(10px); /* ガラス風のぼかし */
   border-bottom: 1px solid var(--border);
   z-index: 10;
@@ -181,15 +181,6 @@ html, body {
 }
 
 
-
-
-/* 中央の白い箱（たぶん .container）を透明に */
-.container {
-  background: transparent !important;
-  box-shadow: none !important;  /* 影も消すなら */
-}
-
-
 .fa-youtube {
   color: red;   /* ここを好きな色コードに */
 }
@@ -214,7 +205,7 @@ html, body {
   width: 100%;
   height: auto !important;        /* ← これで“枠”が発生しない */
   object-fit: contain !important; /* 切り取りゼロ */
-  border-radius: 14px;
+  border-radius: 0;
   background: transparent;
   border: none;
 }
