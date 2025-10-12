@@ -34,6 +34,11 @@ header.site-header {
   z-index: 9999;
 }
 
+body {
+  padding-top: 60px; 
+}
+
+
 
 .nav-inner {
   display: flex;
