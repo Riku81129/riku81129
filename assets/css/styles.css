@@ -25,12 +25,13 @@ a:hover { text-decoration: underline; }
 }
 
 header.site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  background: rgba(255, 255, 255, 0.6); /* 半透明の白 */
+  left: 0;
+  background: rgba(255, 255, 255, 0.8); /* 半透明の白 */
   backdrop-filter: saturate(180%) blur(10px); /* ガラス風のぼかし */
-  border-bottom: 1px solid var(--border);
-  z-index: 10;
+  border-bottom: 1px solid var(--border, #ddd);
+  z-index: 9999;
 }
 
 
