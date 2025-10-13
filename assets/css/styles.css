@@ -107,7 +107,7 @@ nav ul li a:hover {
 
 .card {
   grid-column: span 12;
-  background: var(--card);
+  background:  rgba(255, 255, 255, 1.0);;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 20px;
