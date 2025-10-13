@@ -45,7 +45,7 @@ body {
 
 @media (max-width: 640px){
   body {
-    padding-top: 160px; /* スマホ, 半ウィンドウ用 */
+    padding-top: 200px; /* スマホ, 半ウィンドウ用 */
   }
 }
 
