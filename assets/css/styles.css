@@ -31,8 +31,7 @@ header.site-header {
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.8); /* 半透明の白 */
-  backdrop-filter: saturate(180%) blur(10px); /* ガラス風のぼかし */
+  background: rgba(255, 255, 255, 1.0);
   border-bottom: 1px solid var(--border, #ddd);
   z-index: 9999;
   box-sizing: border-box;  
