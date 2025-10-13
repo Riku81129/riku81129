@@ -40,7 +40,13 @@ header.site-header {
 
 
 body {
-  padding-top: 120px; 
+  padding-top: 110px; 
+}
+
+@media (max-width: 640px){
+  body {
+    padding-top: 160px; /* スマホ, 半ウィンドウ用 */
+  }
 }
 
 
