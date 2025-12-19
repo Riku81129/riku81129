@@ -23,7 +23,7 @@ jobs:
         with:
           root_file: modernism.tex
           working_directory: tex
-          latexmk_use_latexmk: true
+          compiler: latexmk
           args: -pdfdvi -dvipdfmx -interaction=nonstopmode -halt-on-error
 
       - name: Move PDF into pdfs/
