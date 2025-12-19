@@ -18,13 +18,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build modernism.tex (LuaLaTeX)
+      - name: Build modernism.tex (pLaTeX + dvipdfmx)
         uses: xu-cheng/latex-action@v3
         with:
           root_file: modernism.tex
           working_directory: tex
-          latexmk_use_lualatex: true
-          args: -interaction=nonstopmode -halt-on-error
+          latexmk_use_latexmk: true
+          args: -pdfdvi -dvipdfmx -interaction=nonstopmode -halt-on-error
 
       - name: Move PDF into pdfs/
         run: |
@@ -36,4 +36,3 @@ jobs:
         with:
           add: "pdfs/modernism.pdf"
           message: "Auto-build modernism.pdf"
-
