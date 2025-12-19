@@ -1,1 +1,39 @@
+name: Build PDFs
+
+on:
+  push:
+    paths:
+      - "tex/**"
+      - ".github/workflows/build-pdfs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build modernism.tex (LuaLaTeX)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: modernism.tex
+          working_directory: tex
+          latexmk_use_lualatex: true
+          args: -interaction=nonstopmode -halt-on-error
+
+      - name: Move PDF into pdfs/
+        run: |
+          mkdir -p pdfs
+          mv "tex/modernism.pdf" "pdfs/modernism.pdf"
+
+      - name: Commit updated PDF
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "pdfs/modernism.pdf"
+          message: "Auto-build modernism.pdf"
 
