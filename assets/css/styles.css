@@ -187,11 +187,6 @@ nav ul li a:hover {
   border: 1px solid var(--border);
 }
 
-
-html, body {
-  background: #add8e6 !important;
-}
-
 /* 本文用：中央寄せ＋左右余白 */
 .content {
   max-width: 800px;
