@@ -24,6 +24,13 @@ jobs:
           root_file: |
             modernism.tex
             Ascoli-Arzela.tex
+            Optionality.tex
+            Watanabe_Akira.tex
+            Poole_FurtherExercise.tex
+            MP.tex
+            UnderstandingMinimalism_Exercise.tex
+            report_0.tex
+            
           working_directory: tex
           compiler: latexmk
           args: -pdfdvi -interaction=nonstopmode -halt-on-error -file-line-error
