@@ -41,4 +41,15 @@ jobs:
         run: |
           ls -la tex
           test -f tex/modernism.pdf
+     
+      - name: Debug logs (always)
+        if: always()
+        run: |
+          echo "===== tex contents ====="
+          ls -la tex
+          echo "===== tail modernism.log ====="
+          tail -n 120 tex/modernism.log || true
+          echo "===== latexmk fls ====="
+          tail -n 80 tex/modernism.fls || true
+
 
