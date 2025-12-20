@@ -1,0 +1,533 @@
+\documentclass{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{tikz}
+\usepackage[linguistics]{forest}
+
+\usepackage{ascmac}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{fancybox}
+\usepackage{framed}
+\usepackage[most]{tcolorbox}
+\usepackage{movement-arrows}
+\newtcolorbox{problem}[1][]{
+  colframe=black,
+  colback=white,
+  fonttitle=\bfseries,
+  title=#1
+}
+
+\newtcolorbox{marker}{
+enhanced,
+colback=white,
+colframe=black!60,
+boxrule=0.4pt,
+left=8mm,
+overlay={
+  % 左の帯（黒）
+  \fill[black!85] 
+    (frame.north west) rectangle ([xshift=6mm]frame.south west);
+
+  % 感嘆符
+  \node[white,font=\bfseries\Large] 
+    at ([xshift=3mm]frame.west) {!};
+
+  % 右下の折れ曲がり（控えめ）
+  \fill[black!10]
+    (frame.south east) -- ++(-6mm,0) -- ++(6mm,6mm) -- cycle;
+},
+drop shadow,
+}
+
+
+
+\begin{document}
+\begin{center}
+{\large \textbf{Exercise 8.13-16}}\par
+\vspace{0.5em}
+荒木 理求\par
+\texttt{rikuman81129@gmail.com}\par
+最終更新$\colon$2025年12月19日\\
+
+\end{center}
+
+
+\begin{problem}[Exercise 8.13]
+(i)のデータを参考に(ii-a),(ii-b)のLF表示を考え, 量化詞の作用域の違いを説明せよ.　
+\begin{enumerate}
+\item[(i)] a. Some student attended every course. 
+\item[] $\rightsquigarrow$ some student $\succ$ every course, every course $\succ$ some student 
+\item[] b. Some student said that Mary attended every course.
+\item[] $\rightsquigarrow$ some student $\succ$ every course, *every course $\succ$ some student 
+\end{enumerate}
+
+\begin{enumerate}
+\item[(ii)] a. Some student seems to have attended every course.
+\item[]$\rightsquigarrow$ some student $\succ$ every course, every course $\succ$ some student
+\item[] b. Some student seems to himself to have attended every course.
+\item[]$\rightsquigarrow$ some student $\succ$ every course, *every course $\succ$   some student
+
+\end{enumerate}
+\end{problem}
+(1) QP は原則TP(IP)に付加すること,\footnote{May (1977) に基づく, 最も古典的な分析である. May (1985) 等はVPへの付加も想定している.} および (2) Scope Principle \footnote{May (1985) の提案を単純化したものである.} を仮定する.
+
+\begin{itembox}[l]{Scope Principle}
+ QP AがQP Bを非対称にc-command し, かつそのときに限り QP A $\succ$ QP B となる.
+\end{itembox}
+
+\begin{enumerate}
+\item[(ii)] a. Some student seems to have attended every course.
+
+\item[] c. [{\tiny IP$_\text{A}$} \mkword[ec1]{\uline{every course}} [{\tiny IP$_\text{B}$}\uwave{some student} to have [{\tiny VP} \uwave{some student} attended \mkword[ec2]{\uline{every course}} ]]] \mvarrow{ec2}{ec1} \fbox{QR}
+
+\item[] d. [{\tiny TP} \uwave{some student} seems [{\tiny IP$_\text{A}$} \uline{every course} [{\tiny IP$_\text{B}$} \uwave{some student} to have [{\tiny VP} \uwave{some student} attended \uline{every course} ]]]]
+
+\item[] e. [{\tiny TP} \uwave{some student} seems [{\tiny IP$_\text{A}$} \uline{every course} [{\tiny IP$_\text{B}$} [\xout{some student}] to have [{\tiny VP} [\xout{some student}] attended \xout{every course} ]]]]
+\item[]$\rightsquigarrow$ \uwave{some student} $\succ$ \uline{every course}
+
+\item[] f. [{\tiny TP} [\xout{some student}] seems [{\tiny IP$_\text{A}$} \uline{every course} [{\tiny IP$_\text{B}$} [\xout{some student}] to have [{\tiny VP} \uwave{some student} attended \xout{every course} ]]]]
+\item[]$\rightsquigarrow$ \uline{every course} $\succ$ \uwave{some student}
+\end{enumerate}
+\begin{itemize}
+\item 元の作用域は(e)のようにmatrix TPの主語をLFで残せば得られる.
+\item (f)のように\textit{some student}の下位コピーを利用することで, 作用域が逆転する解釈を得られる (cf. GBにおける再構成).
+\end{itemize}
+
+\begin{enumerate}
+\item[(ii)] b. Some student seems \textcolor{red}{to himself} to have attended every course.
+
+\item[] g. [{\tiny TP} \uwave{some student}$+$\fbox{himself} seems [{\tiny PP} to \fbox{himself} ] [{\tiny IP$_\text{A}$} \uline{every course} [{\tiny IP$_\text{B}$} \uwave{some student} to have [{\tiny VP} \uwave{some student} attended \uline{every course} ]]]]   \hfill\fbox{covert A-movement}
+
+\item[] h. [{\tiny TP} \uwave{some student}$+$himself seems [{\tiny PP} to \xout{himself} ] [{\tiny IP$_\text{A}$} \uline{every course} [{\tiny IP$_\text{B}$} \xout{some student} to have [{\tiny VP} \xout{some student} attended \xout{every course} ]]]] 
+\item[]$\rightsquigarrow$ \uwave{some student} $\succ$ \uline{every course}
+
+\item[] i. *[{\tiny TP} \xout{some student$+$himself} seems [{\tiny PP} to himself ] [{\tiny IP$_\text{A}$} \uline{every course} [{\tiny IP$_\text{B}$} \xout{some student} to have [{\tiny VP} some student attended \xout{every course} ]]]]
+\end{enumerate}
+
+
+\begin{itemize}
+\item 元の作用域は(h)のようにmatrix TPの主語をLFで残せば得られる. 実際, \textit{himself}の解釈も問題ない.
+\item しかし(f)と異なり, (i)のように\textit{some student}の下位コピーを利用しようとすると, \textit{himself}が解釈不可能なため派生がcrashし, 逆の作用域の解釈は得られない.
+\end{itemize}
+
+\begin{marker}
+QRはc-command関係を作り出すため, 照応詞のように``構造が出来上がった後''の移動ではない. さらにchain reductionは複数通り (この場合$2\times3$通り) 考えられる. \\
+$\leadsto$ Spell-Outの作用や移動の動機を含め, QRについてはより厳密な議論が必要である.
+\end{marker}
+
+\begin{problem}[Exercise 8.14]
+\noindent(i)の解釈を書き下し, その派生を与えよ.
+\begin{enumerate}
+\item[(i)] a. The boys wondered which jokes about each other the girls told.
+\item[] b. The boys wondered which jokes about each other the girls heard.
+\end{enumerate}
+\end{problem}
+\begin{enumerate}
+\item[(i)] a. The boys wondered which jokes about each other the girls told.
+\item[]\uline{解釈その1}$\colon$ 
+\item[]The boys wondered which$_x$ the girls$+$each other$_{y}$ told [ $x$ jokes about $y$ ]
+\item[]\uline{LFその1}$\colon$ 
+\item[] [{\tiny TP} The boys wondered [{\tiny CP} [which \xout{jokes about each other} ]  [{\tiny TP} the girls$+$each other told [ \xout{which} jokes about \xout{each other} ]]]]
+
+\item[]\uline{解釈その2}$\colon$ 
+\item[]The boys$+$each other$_{y}$ wondered [which jokes about $y$]$_{x}$ the girls told $x$
+\item[]\uline{LFその2}$\colon$ 
+\item[] [{\tiny TP} The boys$+$each other wondered [{\tiny CP} [ which jokes about \xout{each other} ] [{\tiny TP} the girls told [ \xout{which jokes about each other} ]]]]
+\end{enumerate}
+
+\begin{itemize}
+\item 相互代名詞は先行詞によって認可される位置に``不可視な''移動をする.
+\item 束縛原理Aにおいては, Preference Principleによって後回しにされる[Spec,CP]での意味領域の限定が可能(解釈その2)である.
+\end{itemize}
+\begin{enumerate}
+\item[(i)] b. The boys wondered which jokes about each other the girls \textcolor{red}{heard}.
+\item[]\uline{解釈その1}$\colon$ 
+\item[]The boys wondered which$_x$ the girls$+$each other$_{y}$ heard [ $x$ jokes about $y$ ]
+\item[]\uline{LFその1}$\colon$ 
+\item[] [{\tiny TP} The boys wondered [{\tiny CP} [which \xout{jokes about each other} ]  [{\tiny TP} the girls$+$each other heard [ \xout{which} jokes about \xout{each other} ]]]]
+
+\item[]\uline{解釈その2}$\colon$ 
+\item[]*The boys$+$each other$_{y}$ wondered [which jokes about $y$]$_{x}$ the girls heard $x$
+\item[]\uline{LFその2}$\colon$ 
+\item[]*[{\tiny TP} The boys$+$each other wondered [{\tiny CP} [ which jokes about \xout{each other} ] [{\tiny TP} the girls heard [ \xout{which jokes about each other} ]]]]
+\end{enumerate}
+
+\begin{itemize}
+\item (a),(b)は同一の構造をもつが, (b)においては (判断はできないが, 主題の意図を察するにおそらく) 解釈2が許されない. 例えば\textit{tell}, \textit{hear}の$\theta$役割の違いが解釈の違いにも影響を及ぼしているかもしれない.
+\item 高い位置の再帰代名詞/相互代名詞を移動させ, Preference Principleから[Spec,CP]
+に\textit{wh}-operatorのみ残すと, FIを満たさず, 収束しないのであった. 解釈2はそのあとのオプションであり, (b)における非対称性も自然であるといえよう.
+\end{itemize}
+
+
+\begin{problem}[Exercise 8.15]
+(i)を導出する派生(ii)-(vi)は, Extension Conditionだけで除外することはできない. Minimalist Programのもとで, どのように非文と予測できるのか?
+
+\begin{enumerate}
+\item[(i)] *Which book did you leave the library without finding?
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(ii)] a. K = [{\tiny PP} without PRO finding [ which book ]]
+ \item[] b. L = [{\tiny VP} leave the library ]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(iii)] a. K = [{\tiny PP} without PRO finding [ which book ]]
+ \item[] b. L = [{\tiny VP} leave the library ]
+ \item[] c. M = [ which book ]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(iv)] a. N = [ did you [{\tiny VP} [{\tiny VP} leave the library ] [{\tiny PP} without PRO finding [ which book ]]]]
+ \item[] b. M = [ which book ]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(v)] [[ which book ]$_i$ did you [{\tiny VP} [{\tiny VP} leave the library ] [{\tiny PP} without PRO finding [ which book ]$_i$ ]]]
+\end{enumerate}
+
+\begin{enumerate}
+\item[(vi)] [[ which book ]$_i$ did you [{\tiny VP} [{\tiny VP} leave the library ] [{\tiny PP} without PRO finding [ \xout{which book} ]$_i$ ]]]
+\end{enumerate}
+
+\end{problem}
+
+\begin{enumerate}
+\item[(i)] *Which book did you leave the library without finding? (=(78))
+\end{enumerate}
+
+まずExtension Condition違反となる派生を復習する.
+
+\begin{itembox}[l]{Extension Condition (=(74))}
+Overt applications of Merge can only target root syntactic objects.
+\end{itembox}
+「付加部は適用外」というstipulationは放棄したのであった.
+
+\begin{enumerate}
+ \item[(80)] a. K = [{\tiny PP} without PRO finding [ which book ]]
+ \item[] b. L = [ [{\tiny C} \textcolor{red}{did} ] you [{\tiny VP} leave the library ]]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(81)] a. K = [{\tiny PP} without PRO finding [ which book ] ]
+ \item[] b. L = [ did you [{\tiny VP} leave the library ]]
+ \item[] c. M = [ which book ]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(82)] a. K = [{\tiny PP} without PRO finding [ which book ]]
+ \item[] b. N = [ [ which book ] did you [{\tiny VP} leave the library ]]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(83)] [[ which book ] did you [{\tiny VP} [{\tiny VP} leave the library ] [{\tiny PP} without PRO finding [ which book ]]]]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(84)] [[ which book ] did you [{\tiny VP} [{\tiny VP} leave the library ] [{\tiny PP} without PRO finding [ \xout{which book} ]]]]
+\end{enumerate}
+
+\begin{itemize}
+\item (80)までに[+wh]の素性をもつCが併合されている. この素性によって\textit{which book}のコピーが動機付けられる.
+\item (81)におけるコピーはadjunct islandに問題を起こさない (付加部とは関係の中で定義される).
+\item (82)$\to$(83)でVPがrootでないにもかかわらずPPと併合されており, Extension Conditionに違反する.
+\end{itemize}
+
+さて, 問題となる派生を見てみよう.
+
+\begin{enumerate}
+ \item[(ii)] a. K = [{\tiny PP} without PRO finding [ which book ]]
+ \item[] b. L = [{\tiny VP} leave the library ]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(iii)] a. K = [{\tiny PP} without PRO finding [ which book ]]
+ \item[] b. L = [{\tiny VP} leave the library ]
+ \item[] c. M = [ which book ]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(iv)] a. N = [ did you [{\tiny VP} [{\tiny VP} leave the library ] [{\tiny PP} without PRO finding [ which book ]]]]
+ \item[] b. M = [ which book ]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(v)] [[ which book ]$_i$ did you [{\tiny VP} [{\tiny VP} leave the library ] [{\tiny PP} without PRO finding [ which book ]$_i$ ]]]
+\end{enumerate}
+
+\begin{itemize}
+\item (ii)$\to$(iii)で\textit{which book}をコピーし, その後(iii)$\to$(iv)でVPと付加部を併合することによって, Extensiton Condition違反を回避している.
+\item しかし(ii)$\to$(iii)におけるコピーは何に動機付けられるのか? Move $=$ Copy $\&$ MergeはLast Resortであって, 積極的には選択されない. (ii)時点でNumerationのindexは0でないため, コピーに先駆けて併合が行われるはず. 
+\item (ii)でK,Lを併合すると[{\tiny PP} without$\cdots$]がadjunct islandになり, \textit{which book}がコピーできなくなるので, 収束しない.
+\end{itemize}
+
+\begin{problem}[Exercise 8.16]
+(i)のようなparasitic gap (寄生空所) のある文は, sideward movementによって説明可能である.
+\begin{enumerate}
+ \item[(i)] Which paper did you file without reading?
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(ii)] a. K = [{\tiny PP} without reading [ which paper ]]
+ \item[] b. L = [{\tiny VP} file ]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(iii)] a. K = [{\tiny PP} without reading [ which paper ]]
+ \item[] b. L = [{\tiny VP} file [ which paper ]]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(iv)] [{\tiny VP} [{\tiny VP} file [ which paper ]] [{\tiny PP} without reading [ which paper ]]]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(v)] [[{\tiny C} did ] you [{\tiny VP} [{\tiny VP} file [ which paper ]] [{\tiny PP} without reading [ which paper ]]]]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(vi)] a. [[ which paper ] did you [{\tiny VP} [{\tiny VP} file [ which paper ]] [{\tiny PP} without reading [ which paper ]]]]
+\item[] b. [ [ which paper ] did you [{\tiny VP} [{\tiny VP} file [ \xout{which paper} ]] [{\tiny PP} without reading [ \xout{which paper} ]]]] 
+\end{enumerate}
+
+この提案が正しいとすれば, 非文となる(vii)のparasitic gapはどのように除外されるのか, 派生(viii)--(x)に沿って考えよ.
+
+\begin{enumerate}
+\item[(vii)] *Who did you file which paper without reading?
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(viii)] a. K = [{\tiny PP} without reading [ which paper ]]
+ \item[] b. L = [{\tiny VP} file ]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(ix)] a. K = [{\tiny PP} without reading [ which paper ]]
+ \item[(ix)] b. L = [{\tiny VP} file [ which paper ]]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(x)] a. [[ who ] [ did you file [ which paper ]] [{\tiny PP} without reading [ which paper ]]] \footnote{p.285 (x) は誤植である.}
+ \item [] b. [[ who ] [ did you file [ \xout{which paper} ]] [{\tiny PP} without reading [ \xout{which paper} ]]] 
+
+\end{enumerate}
+
+\end{problem}
+8.15と同様に, まずは (1) Extension Condition, (2) adjunct island, (3) コピーする動機 に注目しながら, 正文である(i)を見る.
+
+\begin{enumerate}
+ \item[(i)] Which paper did you file without reading?
+\end{enumerate}
+
+\begin{marker}
+parasitic gapは移動の痕跡としないのが一般的である.　
+\begin{enumerate}
+\item[(i)$'$]\mkword[ec1]{\uline{Whichi paper}} did you file \mkword[ec2]{$t_i$} without reading $e$? \mvarrow{ec2}{ec1}
+\end{enumerate}
+\end{marker}
+
+\begin{enumerate}
+ \item[(ii)] a. K = [{\tiny PP} without reading [ which paper ]]
+ \item[] b. L = [{\tiny VP} file ]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(iii)] a. K = [{\tiny PP} without reading [ which paper ]]
+ \item[] b. L = [{\tiny VP} file [ which paper ]]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(iv)] [{\tiny VP} [{\tiny VP} file [ which paper ]] [{\tiny PP} without reading [ which paper ]]]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(v)] [[{\tiny C} did ] you [{\tiny VP} [{\tiny VP} file [ which paper ]] [{\tiny PP} without reading [ which paper ]]]]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(vi)] a. [[ which paper ] did you [{\tiny VP} [{\tiny VP} file [ which paper ]] [{\tiny PP} without reading [ which paper ]]]]
+\end{enumerate}
+
+\begin{itemize}
+\item (ii)$\to$(iii)では\textit{file}の\textit{Theme} $\theta$--roleを付与するために\textit{which book}をコピーしており, adjunct islandでもない.
+\item (iii)$\to$(iv)の併合はExtension Conditionを満たす.
+\item (v)$\to$(vi)における\textit{which book}のコピーはCのwh素性に駆動される.
+\end{itemize}
+
+\begin{marker}
+(ii)--(vi)の派生では\textit{which book}が\textit{reading}と\textit{file}から$\theta$役割をもらうので$\theta$--criterionに違反するが, 移動として分析するため, ここでは許容する.
+\end{marker}
+
+次に非文となる(vii)を観察する.
+
+\begin{enumerate}
+\item[(vii)] *Who did you file which paper without reading?
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(viii)] a. K = [{\tiny PP} without reading [ which paper ]]
+ \item[] b. L = [{\tiny VP} file ]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(ix)] a. K = [{\tiny PP} without reading [ which paper ]]
+ \item[] b. L = [{\tiny VP} file [ which paper ]]
+\end{enumerate}
+
+\begin{enumerate}
+ \item[(x)] [{\tiny CP} [ who ] [ did you file [ which paper ]] [{\tiny PP} without reading [ which paper ]]]
+\end{enumerate}
+
+\begin{itemize}
+\item (1)--(3)に関わる部分は先の派生と同じなので問題なし.
+\item (ix)$\to$(x)で\textit{who}は[Spec, CP]に併合されるので, $\theta$役割が付与されず, $\theta$--criterionに違反する.
+\end{itemize}
+
+\noindent このように(vii)が非文であることは簡単にわかる. またここまでの議論が正しければ, (xi)\footnote{p.285 (x-a) のデータ.}は(xii)で\textit{who}が$\theta$役割を付与されるので, 正文となる.
+
+\begin{enumerate}
+\item[(xi)] Who filed which paper without reading.
+\item[(xii)] [{\tiny VP} who [{\tiny VP} filed which paper without reading which paper]]
+\end{enumerate}
+
+しかし$\theta$--criterionにstipulationを設けたうえで$\theta$--criterionによってある派生を排除するというのはad hocな処理に過ぎず, より精緻な議論が必要である.
+
+
+\newpage
+\begin{problem}[Exercise 8.1]
+格素性はSpec-headの関係で認可されると仮定する. このときsplit Infl (i.e. TP$\&$Agr projection) とunsplit Infl$\&$light verb (i.e. TP$\&$$v$P) の両方のアプローチで(4)のLF表示を与えよ. またその表示において, 束縛原理で用いる統率範疇(domain)の定義を修正すべきか答えよ.
+\begin{enumerate}
+\item[(4)] a. *[ Mary$_i$ said that [{\tiny TP} Joe liked these pictures of herself$_i$ ]] \hfill(束縛原理A違反)
+\item[] b. [ Mary$_i$ said that [{\tiny TP} Joe liked these pictures of her$_i$ ]]
+\item[] c. *[ He$_i$ said that [{\tiny TP} Mary likes these pictures of Joe$_i$ ]]　\hfill(束縛原理C違反)
+\end{enumerate}
+\end{problem}
+\begin{enumerate}
+\item[(i)]
+
+\begin{tabular}[t]{cc}
+a.
+\begin{forest}
+[AgrOP[DP[these pictures of herself$_i$, {roof}]][AgrO$'$[AgrO+liked][VP[DP[Joe, {roof}]][V$'$[V[$t_\mathrm{V}$]][DP[$t_\mathrm{obj}$]]]]]]
+\end{forest}
+&
+b.
+\begin{forest}
+[AgrSP$_2$[DP[Joe, {roof}]][AgrS$'$[AgrS+T][\doublebox{TP}[$t_\mathrm{T}$][AgrOP[$\cdots t_\mathrm{subj} \cdots$, {roof}]]]]]
+\end{forest}
+\end{tabular}
+
+\item[]
+c.
+\begin{forest}
+[AgrSP$_1$[DP[Mary$_i$, {roof}]][AgrS$'$[AgrS+T][TP[$t_\mathrm{T}$][VP[DP[$t_\mathrm{subj}$, {roof}]][V$'$[V[said]][CP[C[that]][AgrSP$_2$[$\cdots$ herself$_i$ $\cdots$, {roof}]]]]]]]]
+\end{forest}
+
+\item[]
+d. [{\tiny AgrSP$_1$} \fbox{Mary$_i$} $\cdots$ [{\tiny AgrSP$_2$} $\cdots$ [\textcolor{red}{\tiny TP} $\cdots$ [{\tiny AgrOP} theses pictures of \fbox{herself$_i$} $\cdots$ ]]]]
+\end{enumerate}
+
+\begin{enumerate}
+\item[(ii)]
+\begin{forest}
+[CP[C[that]][\doublebox{TP}[DP[Joe, {roof}]][T$'$[T[{[+Past]}]][$v$P[DP[$t_\mathrm{subj}$]][$v'$[$v$+liked][VP[V[$t_\mathrm{V}$]][DP[*herself$_i$, {roof}]]]]]]]]
+\end{forest}
+\end{enumerate}
+
+\begin{itembox}[l]{Domain (=(2))}
+$\alpha$ is the domain for $\beta$ iff $\alpha$ is the smallest IP (TP) containing $\beta$ and the governor of $\beta$.
+\end{itembox}
+
+
+\begin{itemize}
+\item (i) はTP+Agrのアプローチで, (d) のように\textit{herself}を含む最小のTPに先行詞\textit{Mary}が存在しないので, 束縛原理A違反となる. したがって束縛原理Bの統率範疇としても機能することもわかる. 
+\item (ii) も少し構造が大きくなるだけで, 統率範疇は今まで通りで問題ない.
+\end{itemize}
+
+
+\begin{problem}[Exercise 8.2]
+(i)のデータは不可視な\textit{wh}移動と束縛原理Bの
+\begin{enumerate}
+\item[(i)] John$_i$ wondered which woman liked which pictures of him$_i$.
+\end{enumerate}
+\end{problem}
+
+\begin{enumerate}
+\item[(ii)] a. [{\tiny TP} John$_{i}$ wondered [[ which pictures of him$_{i}$]$_{k}$ + [ which woman]$_{j}$ [ $t_{j}$ liked $t_{k}$ ]]]
+\item[] b. [{\tiny TP} John$_{i}$ wondered [ which$_{k}$ + [ which woman]$_{j}$] [{\tiny TP} $t_{j}$ liked $t_{k}$ pictures of him$_{i}$ ]]]
+\end{enumerate}
+
+\begin{itemize}
+\item (a)の$\textit{him}$の統率範疇はmatrix TPだから束縛原理B違反となり, wh句全体の不可視な移動を仮定すると, 誤った予測をする.
+\item (b)の$\textit{him}$の統率範疇は[$t_j$ liked $t_k$ pictures of him$_i$]となり, \textit{wh}のみの移動を支持する.
+\end{itemize}
+
+\subsection*{8.3}
+\begin{enumerate}
+ \item[(11)] John$_{i}$ wondered which pictures of him$_{i/*k}$ Fred$_{k}$ liked. 
+ \item[] a. Fred$_{k}$ liked which pictures of him$_{i}$ 
+ \item[] b. [{\tiny CP} [ which pictures of him$_{i}$ ] $Q$ Fred$_{k}$ liked $t$ ]
+ \item[] c. [{\tiny TP} John$_{j}$  [{\tiny CP} [ which pictures of him$_{i}$ ] $Q$ Fred$_{k}$ liked $t$ ]]
+\end{enumerate}
+\begin{itemize}
+ \item (a)で束縛原理Bから\textit{Fred}に$k$が添え字づけられる.
+ \item (b)では(a)における添え字づけによって\textit{him} $\neq$ \textit{Fred}の解釈が保たれ, 束縛原理Bの適用の有無について考える必要がない.
+ \item (c)で\textit{John}に$j$ ($\neq k$) が添え字づけられる.
+\end{itemize}
+$\leadsto$ 派生の各段階で束縛原理Bを適用 \& contraindexing では\textit{him}の先行詞が文中に存在せず, うまくいかない.
+
+\subsection*{8.4}
+\begin{enumerate}
+\item[(16)] He$_{*i}$ wondered which picture of John$_{i}$ he$_{*i}$ liked.
+\item[(i)] Which picture of John$_i$ did he$'_{*i}$ say that he$_i$ liked?
+\item[] a. [{\tiny TP} he$_{*i}$ liked which picture of John$_{i}$ ]
+\item[] b. [{\tiny CP} [ which picture of John$_{i}$] that he$_{*i}$ liked $t$ ]
+\item[] c. [{\tiny TP} he$'_{*i}$ say [{\tiny CP} [ which picture of John$_{i}$] that he$_{*i}$ liked $t$ ]
+\item[] d. [{\tiny CP} [ which picture of John$_{i}$] did [ he$'_{*i}$ say [ $t'$ that he$_{*i}$ liked $t$ ]]]
+\end{enumerate}
+\begin{itemize}
+\item (a)で束縛原理Cから\textit{he} $\neq$ \textit{John}が決まる.
+\item (b)でも束縛原理Cが適用されるが, \textit{he} $=$ \textit{John}の解釈は(a)によって退けられる.
+\item (c)では\textit{he'} $\neq$ \textit{John}が決まる. 
+\item (d)でも束縛原理Cが適用されるが, \textit{he}$'$ $=$ \textit{John}の解釈は(c)によって退けられる.
+\end{itemize}
+$\leadsto$ 派生の各段階で束縛原理Cを適用 \& 一度得た (先行詞の参照に関する) 解釈を保持では \textit{he} ($=$ \textit{John}) の解釈は不可能である. \\
+\quad この派生のDS $=$ (a) からは\textit{he} $=$ \textit{John}の解釈を説明できず, (b)以降の段階における\textit{he}, \textit{John}への (効果のある) 束縛原理Cの適用が必須である.
+
+\begin{thebibliography}{99}
+\bibitem{Kaneko2016}
+金子義雅・中村捷・原口庄輔（編著） (2016). 『増補版 チョムスキー理論辞典』研究社.
+
+\bibitem{Hornstein1995}
+Hornstein, Norbert (1995) \textit{Logical Form: From GB to Minimalism}. Oxford: Blackwell.
+
+\bibitem{Hornstein2005}
+Hornstein, Norbert, Jairo Nunes \& Kleanthes Grohmann (2005). \textit{Understanding Minimalism}. Cambridge: Cambridge University Press.
+
+\bibitem{May1977}
+May, Robert (1977) ``The Grammar of Quantification.'' Doctoral dissertation, MIT.
+
+\bibitem{May1985}
+May, Robert (1985) \textit{Logical Form: Its Structure and Derivation}. Cambridge: MIT Press. (\cite{Kaneko2016}[pp.421-422], \cite{Hornstein1995}[p.153]より参照)
+
+
+
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+\end{document}
