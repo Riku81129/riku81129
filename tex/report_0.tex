@@ -1,0 +1,95 @@
+\documentclass[11pt,titlepage]{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{tikz}
+\usepackage[linguistics]{forest}
+
+\usepackage{ascmac}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{url}
+\usepackage{xcolor}
+\renewcommand{\qed}{\unskip\nobreak\quad\qedsymbol}
+
+
+\begin{document}
+\begin{center}
+{\large \textbf{生成文法 : 普遍性と多様性の狭間で}}\par
+\vspace{0.5em}
+荒木 理求\par
+\texttt{rikuman81129@gmail.com}\par
+2025年9月15日
+\end{center}
+
+生成文法は「言語の本質を抜き出す」、あるいは「普遍性を探る」学問である。人間のみが高度に発達したことばを話すメカニズムを解明する以上、通言語的な研究が必要不可欠なことは言うまでもない。Chomskyが記述言語学を``ちょうちょ集め (butterfly-collecting)''と揶揄したのは、決して個別言語を対象とする研究を非難するためではなく、彼の打ち出した原理とパラメータのアプローチからもわかる通り、マクロの視点とミクロの視点のどちらか（ここではミクロの視点だが）にのみ注力する手法に警鐘を鳴らすためであろう。そのためにも、当プログラムの初期は、極度の一般化をする必要があったに違いない。生成文法では確かにChomskyのマニフェストに則り、様々な言語の研究も盛んで、例えばBakerの``The Atoms of Language''\cite{Baker 2001}は、言語とパラメータのアプローチを体現しているといえよう。
+
+私がこの話題で印象に残っているのは、明治学院大学の平岩健先生のコメントである。東京言語研究所における講義で、「長く研究している間に、どの言語も``同じさ''ばかりが目につくようになって、新しい言語を学ぶときの楽しさが一つ減ってしまった」とおっしゃっていた。生成文法の研究者がたどり着く境地を垣間見た気がして、とても興奮したことを覚えている。しかしながら、平岩先生は琉球諸語の専門家でもあり、これはマクロの視点とミクロの視点が両立可能であることの証左である。
+
+ここまで普遍性と個別性（$=$マクロの視点とミクロの視点）のいわば``二人三脚''の、生成文法のアプローチについて述べた。以下、最近の自分の興味と交えて「多言語」を研究する利点について述べ、またその観点から生成文法研究の問題点を論じる。
+
+Miyagawa (2010)\cite{Miyagawa2010}は次のデータから、英語のQRと日本語のかき混ぜの類似性を指摘する（例文の引用元は省略する）。
+
+量化詞が二つある場合、QRやかき混ぜにより表層順序と逆の作用域が得られることがある。
+\begin{enumerate}
+  \item[(1)] Someone loves everyone.
+  \item[(2)] everyone$_j$ [someone loves t$_j$] \\
+  $\rightsquigarrow$ everyone $\succ$ someone
+  \item[(3)] someone$_i$ everyone$_j$ [t$_i$ loves t$_j$] \\
+  $\rightsquigarrow$ someone $\succ$ everyone
+\end{enumerate}
+日本語では、基本語順（SOV）では目的語が主語を越えて作用域を取るのは困難だが、かき混ぜで目的語を文頭に移動させると可能になる。
+\begin{enumerate}
+  \item[(4)] Dareka-ga daremo-o aishiteiru. \\
+        $\rightsquigarrow$ someone $\succ$ everyone, *everyone $\succ$ someone
+  \item[(5)] Daremo-o$_i$ dareka-ga t$_i$ aishiteiru. \\
+        $\rightsquigarrow$ someone $\succ$ everyone, everyone $\succ$ someone
+  \item[(6)] Sake to biiru-o$_i$ John ka Bill-ga t$_i$ nonda (rasii).\\
+        $\rightsquigarrow$ $\forall x \in \{\text{sake, beer}\}\, \exists y \in \{\text{John, Bill}\}\,[y \text{ drank } x]$, 
+        $\exists y \in \{\text{John, Bill}\}\, \forall x \in \{\text{sake, beer}\}\,[y \text{ drank } x]$
+  \item[(7)]Nanika-o$_i$ [{\tiny NP} [{\tiny S} dare-ga $t_j$ osieta] gakusei$_j$]-mo t$_i$ mottekita. \hfill\\
+        $\rightsquigarrow$ $\exists x (x = \text{thing})\, \forall y (y = \text{person})\,[\text{the student that $y$ taught brought } x]$, \\
+        $\forall y (y = \text{person})\, \exists x (x = \text{thing})\,[\text{the student that $y$ taught brought } x]$
+\end{enumerate}
+
+この観察から着想を得て、Miyagawa (2010) は、英語のQRを日本語のかき混ぜに還元する方針を打ち出す。データ自体非常に興味深いが（だからこそ不必要な情報ながら載せた）、ここで言及すべきは、MiyagawaがJohnson (2000)\cite{Johnson2000}の英語のQRとドイツ語・オランダ語のかき混ぜを同一視するアプローチに基礎を求めている点である。一見、日本語におけるQRの存在やかき混ぜが統語的に扱えるものなのかという問いを解消するための、日本語と英語の共通項を見出す発想に思えるが、その実ドイツ語やオランダ語という別の言語による仲介あってこそのアイディアなのだ。ここに、普遍性を見つけるための、個別性の重要さを見ることができる。
+
+最後に「多言語」研究における問題として-これもマクロの視点とミクロの視点にかかわるものだが-「主観による単一言語を基準とした極度の一般化」を挙げたい。例えば上の例では、Miyagawa (2010)のアイディアは魅力的だが、日本語への``過度な''還元を目指しているという指摘は認めざるを得ないだろう。この場合はあまり問題にならないが、しかしほかの学問もそうであるように、英語圏で発達した分野だけあって、英語中心の研究がなされていることは深刻である。特に私が驚いたのは、Kayne (1994)\cite{Kayne}におけるLCA (Linear Correspondence Axiom)なる次の提案である。\\
+
+\begin{itembox}[l]{\textbf{Linear Correspondence Axiom}}
+LI $\alpha$ は（線形順序で）LI $\beta$ を先行する$\iff$\\
+(i) $\alpha$ が非対称に $\beta$ をc-commandするか、あるいは\\
+(ii) $\alpha$ を支配するXPが非対称に  $\beta$ をc-commandする
+\end{itembox}
+
+これはhead-initialたる英語への``忖度''とでもいえる提案である。もしKayneが日本人であれば、「先行する」がそのまま「後続する」に代わったであろう。マクロの視点とミクロの視点を頻繁に行き来する生成文法の研究は、その強力な引力の半面、危険性も孕むのだ。
+
+
+
+
+
+\begin{thebibliography}{99}
+\bibitem{Baker2001}
+Mark C. Baker.
+\newblock {\em The Atoms of Language: The Mind's Hidden Rules of Grammar}.
+\newblock Basic Books, 2002.
+
+\bibitem{Johnson2000}
+Johnson, Kyle (2000) \textit{How far Quantifiers will go}. Ms., University of Massachusetts, Amherst.
+
+\bibitem{Kayne1994}
+Richard S. Kayne.
+\newblock {\em The Antisymmetry of Syntax}.
+\newblock MIT Press, 1994.
+
+\bibitem{Miyagawa2010}
+Miyagawa, Shigeru (2010) \textit{Why Agree? Why Move? Unifying Agreement-Based and Discourse-Configurational Languages}. MIT Press. Ch. 16``Optionality''
+
+\end{thebibliography}
+
+
+
+\end{document}

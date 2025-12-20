@@ -1,0 +1,343 @@
+\documentclass{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{tikz}
+\usepackage[linguistics]{forest}
+\usepackage{ascmac}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{tipa}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{url}
+\usepackage{enumitem}
+\usepackage{endnotes}
+\renewcommand{\notesname}{注}
+\let\footnote=\endnote
+\renewcommand{\theendnote}{\arabic{endnote})}
+\usepackage{etoolbox}
+\patchcmd{\enoteformat}{1.8em}{0pt}{}{}
+
+
+
+
+\renewcommand{\qed}{\unskip\nobreak\quad\qedsymbol}
+
+\usepackage{etoolbox}
+\patchcmd{\enoteformat}{5em}{0pt}{}{}
+\title{渡辺 明 『生成文法』 演習問題の解答}
+
+\author{荒木 理求\\ \texttt{rikuman81129@gmail.com}}
+\date{\today}
+\begin{document}
+\maketitle
+
+
+
+
+\subsection*{第2章 統語演算のメカニズム p.48}
+\begin{boxnote}
+1. 次の例文のS構造(S-structure)を書きなさい.\\
+\vspace{-10pt}
+\begin{enumerate}
+\item[]
+(X1)  John's mother was angry.
+\end{enumerate}
+\end{boxnote}
+\vspace{10pt}
+\begin{enumerate}
+\item[]
+(X1)のS構造\\
+\begin{forest}
+[S[NP[John's mother, {roof}]][Aux[V[be+PAST, name=Aux]]][VP[V[$t$, name=V]][AP[A[angry]]]]]
+\draw[->](V)to[out=south, in=south](Aux);
+\end{forest}
+\end{enumerate}
+
+\newpage
+\begin{boxnote}
+2. 文法的に可能な文が無限に存在することの証明を, 日本語の例文を使って示しなさい.
+\end{boxnote}
+\vspace{10pt}
+\begin{shadebox}
+実際のデータから考えてみる.
+\begin{enumerate}
+\item[]
+a. 花子が笑った.\\
+b. 太郎が花子が笑ったと言った.\\
+c. 弘が太郎が花子が笑ったと言ったと思った.\\
+$\vdots$\\
+\end{enumerate}
+\vspace{-10pt}
+のように, 埋め込み節(embeded clause)を利用することで, 文を長くすることができる. これを教科書(cf. 2.1.3 p.21)に真似て, 一般化すればよい.
+\end{shadebox}
+
+\begin{proof}
+\indent 背理法により示す. 有限の, 最大の長さを持った日本語の文$S^{max}$が存在すると仮定する. ところが
+\[
+S'=私がS^{max}と思う
+\]
+という文も可能な日本語の文となり, $S'$は$S^{max}$より長いので, 矛盾する. よって$S^{max}$は存在しない.
+\end{proof}
+
+
+\begin{boxnote}
+3. 本章での助動詞システムの分析が正しいとすると, 次の例文の文法性についてどのような予測をするか, 論じなさい.\\
+\vspace{-10pt}
+\begin{enumerate}
+\item[]
+\indent(X2)  They all said that John was being obnoxious before I arrived, and being obnoxious he was!
+\end{enumerate}
+\end{boxnote}
+\vspace{10pt}
+\noindent(X2)の``and''以下を考えればよい.
+\begin{enumerate}
+\item[]
+(a)  $\cdots$, and being obnoxious he was!
+\end{enumerate}
+まず(a)のD構造(D-structure)は次の様である.\\
+\begin{enumerate}
+\item[]
+(b)  he [{\tiny Aux} PAST][{\tiny VP} be [{\tiny VP} being obnoxious]].\\
+\item[]
+\begin{forest}
+[S[NP[he, {roof}]][Aux[PAST, name=Aux]][VP[V[be, name=V]][VP[V[being]][AP[A[obnoxious]]]]]]
+\end{forest}
+\end{enumerate}
+(b)から``be"動詞のAuxへの主要部移動(head movement)(cf. 2.3.1 pp.33-36)の結果, 派生(derivation) (c)を得る.
+\begin{enumerate}
+\item[]
+(c)  he [{\tiny Aux} was] [{\tiny VP} $t$ [{\tiny VP} being obnoxious]].\\
+\item[]
+\begin{forest}
+[S[NP[he, {roof}]][Aux[V[be+PAST, name=Aux]]][VP[V[$t$, name=V]][VP[V[being]][AP[A[obnoxious]]]]]]
+\draw[->](V)to[out=south, in=south](Aux);
+\end{forest}
+\end{enumerate}
+この構造に動詞句前置(VP fronting)を適用\footnote{ VPが移動する位置については議論の余地がある.}すれば
+\begin{enumerate}
+\item[]
+(d)  [{\tiny VP} $t$ [{\tiny VP} being obnoxious]]\\
+(e)  [{\tiny VP} being obnoxious]
+\end{enumerate}
+のどちらかが移動し, それぞれ
+\begin{enumerate}
+\item[]
+(d)$'$  [{\tiny VP} $t$ being obnoxious]$_i$ he was $t_i$\\
+(e)$'$  [{\tiny VP} being obnoxious]$_i$ he was $t$ $t_i$
+\end{enumerate}
+となり\footnote{痕跡(trace)が複数ある場合, 添え字によって区別する.}, 結果として共に(a)に等しい. よって2章の助動詞システムの分析を認めれば, (a)は正文であると予測する.
+
+
+\subsection*{第3章 句構造の一般理論 p.83}
+\begin{boxnote}
+1. 形容詞にも代用表現が存在する. 以下の例文をどのように分析すればよいか, 論じなさい.\\
+\vspace{-10pt}
+\begin{enumerate}
+\item[]
+(X1)  John is fond of Mary. Bill seems so, too.
+\end{enumerate}
+\end{boxnote}
+\vspace{10pt}
+まず前半部分(a)は, 3章までの分析によると次の様な構造を持つ.
+\begin{enumerate}
+\item[]
+(a) John is fond of Mary.\\
+\item[]
+\begin{forest}
+[TP[NP[John, {roof}]][T$'$[T[V[be+PRES, name=Aux]]][VP[V$'$[V[$t$, name=V]][AP[A$'$[A[fond]][PP[of Mary, {roof}]]]]]]]]
+\draw[->](V)to[out=south west, in=south](Aux);
+\end{forest}
+\end{enumerate}
+さて, 後半部分(b)は(c)として解釈され, ``fond of Mary''が``so''によって置き換えられていることがわかる. 
+\begin{enumerate}
+\item[]
+(b) Bill seems so, too.\\
+(c) Bill seems [fond of Mary], too.
+\item[]
+(b)
+\begin{forest}
+[TP[NP[Bill, {roof}]][T$'$[T[PRES]][VP[seems so, {roof}]]]]
+\end{forest}
+\qquad
+(c)
+\begin{forest}
+[VP[V$'$[V[seems]][AP[A$'$[A[fond]][PP[of Mary, {roof}]]]]]]
+\end{forest}
+\end{enumerate}
+したがって, 代用表現の``so''はAPまたはA$'$を置き換えたものである, といえる. このデータのみからでは, ``one''や``do so''といった代用表現と異なり, 中間投射A$'$の存在を示すことは難しい\footnote{例えば同じ前提で述語内主語仮説(predicate internal subject hypothesis)(cf. 3.6 p.80)とコピー理論(copy theory of movement)を採用することで, ``so''がA$'$を置き換えたものである, と主張できるかもしれない.}.
+\vspace{10pt}
+
+\begin{boxnote}
+2. TPを採用するシステムでは以下の例文はどのように分析されるか, 論じなさい.\\
+\vspace{-10pt}
+\begin{enumerate}
+\item[]
+(X2)  John should not leave the country.
+\end{enumerate}
+その際, ``should''のようなmodalの助動詞には不定詞の用法がないという事実がどう関係するかも合わせて考慮に入れること.
+\end{boxnote}
+\vspace{10pt}
+2章では, 元々助動詞の位置として提案したAuxが(cf. 2.2.1 p.25), 文に助動詞が含まれない場合にも時制の情報を担うものとして存在すると考えた(cf. 2.3.2 pp.37-40). 3章では句構造の一般理論をXバー理論として定式化したので, 統一的な分析を目指し, Sをある主要部の投射(projection)と見做す必要があった. そこでSにおいて必ず存在する, 時制の情報を担う要素を主要部Tと考え, SからTPへと変更した(cf. 3.4 pp.64-65). \\
+\begin{enumerate}
+  \item[] 
+  \begin{forest}
+   [S[NP][Aux][VP]]
+  \end{forest}
+ \quad
+{\Large
+  $\displaystyle
+    \xrightarrow{\text{Sの発展的解消}}
+  $
+}
+\quad
+  \begin{forest}
+   [TP[NP][T$'$[T][VP]]]
+  \end{forest}
+\end{enumerate}
+
+この経緯を考えると2章と逆の議論により, 助動詞もTに位置すると仮定するのが自然である. 実際, 問題文中で指摘される通り, ``should''のようなmodalの助動詞\footnote{法助動詞と訳されることが多い.}には不定詞の用法がないことから, modalの助動詞自身が時制の情報を含んでいると推測される. したがって(X2)の構造は次の様である.
+\begin{enumerate}
+\item[]
+\begin{forest}
+[TP[NP[John, {roof}]][T$'$[T[should]][NegP[Neg$'$[Neg[not]][VP[V$'$[V[leave]][NP[the country, {roof}]]]]]]]]
+\end{forest}
+\end{enumerate}
+
+
+
+\begin{boxnote}
+3. 日本語の形容詞の否定は次のような形をとる.\\
+\vspace{-10pt}
+\begin{enumerate}
+\item[]
+(X3)  その論文が面白くなかった（こと）.
+\end{enumerate}
+これはどのような統語分析をすればよいか, 論じなさい. その際, (X4)のような存在を示す文の否定形は(X5)ではなく, (X6)になることも考慮に入れること.
+\begin{enumerate}
+\item[]
+(X4)  その分析には問題があった.\\
+(X5) *その分析には問題があらなかった.\\
+(X6)  その分析には問題がなかった.
+\end{enumerate}
+\end{boxnote}
+\vspace{10pt}
+まず(X4)の構造を考えてみる. 日本語の時制も接辞(affix)であって, 動詞に付着する必要があると仮定したので(cf. 3.6 pp.76-77), 英語とパラレルな議論ができるよう, 「あった」は(a)``aru''のTへの主要部移動(cf. 2.3.1 pp.33-35\&2.4 pp.42-43), あるいは(b) affix hopping(cf. 2.3.2 pp.38-40)\footnote{移動でないことを強調するため, 痕跡の代わりに空集合を用いた. この意味では, ここでだけの記号である.} によって説明されるべきである. つまり(X4)の構造として次の二通りが考えられる(簡単のため 「その分析には」は無視する).
+\begin{enumerate}
+\item[]
+(a)
+\begin{forest}
+[TP[T$'$[VP[NP[問題が, {roof}]][V$'$[V[$t$, name=V]]]][T[V[at-ta, name=T]]]]]
+\draw[->](V)to[out=south east, in=south](T);
+\end{forest}
+\qquad
+(b)
+\begin{forest}
+[TP[T$'$[VP[NP[問題が, {roof}]][V$'$[V[at-ta, name=V]]]][T[$\emptyset$ ,name=T]]]]
+\draw[densely dashed, ->] 
+      (T) to[out=south, in=north east]
+      node[midway, above right, xshift=3pt, yshift=3pt, font=\itshape] {affix hopping}
+      (V);
+\end{forest}
+\end{enumerate}
+
+そこで(b)を仮定し, (X4)の否定を考えてみると, 否定辞の``nak''によって``aru''と``ta''の隣接性(adjacency)が失われてしまい, Tの位置に新たな``aru''が挿入される(cf. 3.6 pp.76-77)\footnote{ここではdo-supportになぞらえてaru-supportと呼ぶ.}. よって以下の構造を得る.
+\begin{enumerate}
+  \item[]%
+\begin{forest}
+    for tree={
+      anchor=center,
+      parent anchor=south,
+      child anchor=north,
+      s sep=1.2em,
+      l sep=1.8em,
+      scale=1,
+      transform shape
+    },
+    tikz+={%
+      \draw[densely dashed, ->,
+            shorten >=1pt, shorten <=1pt]
+        % T.south から大きく下げ、aru.north east へカーブ
+        (T.south) to[out=south, in=north east, looseness=1.5]
+        node[midway, below=7mm, font=\Large\bfseries] {×}
+        node[midway, above right, xshift=3pt, yshift=3pt, font=\itshape] {affix hopping}
+        (V.north east);
+    }
+    [TP
+      [T$'$
+        [NegP
+          [Neg$'$
+            [VP
+              [NP [問題が, {roof}] ]
+              [V$'$ [V [aru, name=V] ] ]
+            ]
+            [Neg [nak] ]
+          ]
+        ]
+        [T [ta, name=T] ]
+      ]
+    ]
+\end{forest}
+{\Large
+  $\displaystyle
+    \xrightarrow{\text{aru-support}}
+  $
+}
+\begin{forest}
+[TP[T$'$[NegP[Neg$'$[VP[NP[問題が, {roof}]][V$'$[V[aru, name=V]]]][Neg[nak]]]][T[at-ta ,name=T]]]]
+\end{forest}
+\end{enumerate}
+これは(X5)に他ならず, 非文となるので(b)はあり得ない. よって(a)を採用すべきで, 実際, 次の様に(X6)を得る.
+
+\begin{enumerate}
+\item[]
+\begin{forest}
+[TP[T$'$[NegP[Neg$'$[VP[NP[問題が, {roof}]][V$'$[V[$t$, name=V]]]][Neg[nak]]]][T[V[at-ta ,name=T]]]]]
+\draw[->](V)to[out=south east, in=south](T);
+\end{forest}
+\end{enumerate}
+これで準備が整ったので, (X3)の分析に入る. (X3)を肯定文にすると
+\begin{enumerate}
+\item[]
+(c) その論文が面白かった.
+\end{enumerate}
+であり, 「かった」をローマ字表記すれば``k-atta''となるので, やはり「ある」の過去形``atta''が含まれている. したがって(X3)のD構造(D-structure)においても, Vの位置を占める``aru''の存在を仮定するのが妥当である\footnote{(X3)や(c)のD構造は動詞句を含まず, aru-supportによって「かった」の形をとる可能性もあるが, ここでは特に(X4), (X6)のような存在文と整合性のある議論を行うため, 動詞句の投射を前提としている.}. さて上の議論により, ``aru''はTへ主要部移動するのであった\footnote{``aru''が元の位置に留まれば, やはりaru-supportによってS構造が「*その論文は面白くあらなかった」となってしまう.}. それゆえS構造は次の様になる.
+\begin{enumerate}
+\item[]
+\begin{forest}
+[TP[T$'$[NegP[Neg$'$[VP[NP[その論文が, {roof}]][V$'$[AP[面白く, {roof}]][V[$t$, name=V]]]][Neg[nak]]]][T[V[at-ta ,name=T]]]]]]
+\draw[->](V)to[out=south east, in=south](T);
+\end{forest}
+\end{enumerate}
+これはまさに(X3)である. 最後に(X3)及び(c)の現在形についても言及しておく.
+\begin{enumerate}
+\item[]
+(d) *その論文が面白くなくある.\\
+(e) その論文が面白くない.\\
+(f) *その論文が面白くある.\\
+(g) その論文が面白い.
+\end{enumerate}
+(d)と(e)のコントラストは, 否定文に生じている場合には「ある」の現在形は音形を持たず, 現在形の「ない」は\textipa{/k/}から\textipa{/i/}への音変化による, との分析によって説明できる(cf. 3.6 p.76)\footnote{存在文の否定の現在形, 例えば「その分析には問題がない」にも同じことがいえる. ただし音形を持たない``aru''が主要部移動によるものか, それともaru-ssupportによって出現したのかは異なる.}.  (f)と(g)については, あるものの性質を形容詞によって述べる文に限定して, 肯定文にまでその仕組みを拡張すればよい.　 
+\begin{enumerate}
+\item[]
+(h) その論文は実用性はないが, 面白くはある.\\
+(i)  私は常に面白くありたいと思っている.
+\end{enumerate}
+などの例文から, 肯定文における``aru''の存在がad-hocな議論ではないことが窺える.
+
+
+\theendnotes
+\begin{thebibliography}{9}
+\bibitem{watanabe1} 渡辺 明.
+\newblock 『生成文法』
+\newblock 東京大学出版会, 第9刷, 2021.
+
+\bibitem{haraguchi} 原口庄輔 他.
+\newblock『増補版　チョムスキー理論辞典』
+\newblock 研究社, 初版, 2016.
+\end{thebibliography}
+
+
+\end{document}

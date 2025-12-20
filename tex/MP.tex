@@ -1,0 +1,528 @@
+\documentclass[dvipdfmx, xcolor={dvipsnames},12pt]{beamer}
+\usepackage{bxdpx-beamer}
+\usepackage{pxjahyper}
+\usepackage{otf}
+\usetheme{CambridgeUS}
+
+\usepackage[linguistics]{forest}
+\usepackage{ascmac}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{url}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{ulem}
+\usepackage{fancybox}
+\usepackage{framed}
+\usepackage[most]{tcolorbox}
+\usepackage{varwidth} 
+\tcbuselibrary{skins,breakable}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{movement-arrows}
+\usepackage{expex}
+\usetikzlibrary{positioning}
+
+
+
+
+\newcommand{\N}{\mathbb{N}}%自然数
+\newcommand{\Z}{\mathbb{Z}}%整数
+\newcommand{\Q}{\mathbb{Q}}%有理数
+\newcommand{\R}{\mathbb{R}}%実数
+\newcommand{\C}{\mathbb{C}}%複素数
+
+\newtcolorbox{Def}[2][]{%
+enhanced,
+title={#2},
+fonttitle=\bfseries,
+colback=cyan!5,
+colframe=cyan!50!black,
+sharp corners=northwest,
+% --- ここからタイトルの見た目調整 ---
+attach boxed title to top left={%
+xshift=0mm, % 左端から少し内側
+yshift*=-0.5mm % 枠線に半分かぶせる
+},
+varwidth boxed title*=-3mm, % タイトルの幅に合わせた小さい箱
+boxed title style={%
+colback=cyan!50!black,
+colframe=cyan!50!black,
+rounded corners,
+sharp corners=south,
+boxrule=0.5pt,
+},
+% --- ここまで ---
+#1
+}
+
+\newtcolorbox{thm}[2][]{%
+enhanced,
+title={#2},
+fonttitle=\bfseries,
+colback=green!5,
+colframe=green!50!black,
+sharp corners=northwest,
+% --- ここからタイトルの見た目調整 ---
+attach boxed title to top left={%
+xshift=0mm, % 左端から少し内側
+yshift*=-0.5mm % 枠線に半分かぶせる
+},
+varwidth boxed title*=-3mm, % タイトルの幅に合わせた小さい箱
+boxed title style={%
+colback=green!50!black,
+colframe=green!50!black,
+rounded corners,
+sharp corners=south,
+boxrule=0.5pt,
+},
+#1
+}
+
+\newtcolorbox{lem}[2][]{%
+enhanced,
+title={#2},
+fonttitle=\bfseries,
+colback=blue!5,
+colframe=blue!50!black,
+sharp corners=northwest,
+% --- ここからタイトルの見た目調整 ---
+attach boxed title to top left={%
+xshift=0mm, % 左端から少し内側
+yshift*=-0.5mm % 枠線に半分かぶせる
+},
+varwidth boxed title*=-3mm, % タイトルの幅に合わせた小さい箱
+boxed title style={%
+colback=blue!50!black,
+colframe=blue!50!black,
+rounded corners,
+sharp corners=south,
+boxrule=0.5pt,
+},
+% --- ここまで ---
+#1
+}
+
+\newtcolorbox{Ex}[2][]{%
+enhanced,
+title={#2},
+fonttitle=\bfseries,
+colback=violet!5,
+colframe=violet!50!black,
+sharp corners=northwest,
+% --- ここからタイトルの見た目調整 ---
+attach boxed title to top left={%
+xshift=0mm, % 左端から少し内側
+yshift*=-0.5mm 
+},
+varwidth boxed title*=-3mm, % タイトルの幅に合わせた小さい箱
+boxed title style={%
+colback=violet!50!black,
+colframe=violet!50!black,
+rounded corners,
+sharp corners=south,
+boxrule=0.5pt,
+},
+#1
+}
+
+\newtcolorbox{Rem}[2][]{%
+enhanced,
+title={#2},
+fonttitle=\bfseries,
+colback=red!5,
+colframe=red!80!black,
+sharp corners=northwest,
+% --- ここからタイトルの見た目調整 ---
+attach boxed title to top left={%
+xshift=0mm, % 左端から少し内側
+yshift*=-0.5mm 
+},
+varwidth boxed title*=-3mm, % タイトルの幅に合わせた小さい箱
+boxed title style={%
+colback=red!80!black,
+colframe=red!80!black,
+rounded corners,
+sharp corners=south,
+boxrule=0.5pt,
+},
+#1
+}
+
+
+
+\newtcolorbox{marker}{
+enhanced,
+colback=yellow!20,
+colframe=yellow!40!black,
+boxrule=0.4pt,
+left=8mm,
+overlay={
+% 左の!帯
+\fill[brown!80!black] (frame.north west) rectangle ([xshift=6mm]frame.south west);
+\node[white,font=\bfseries\Large] at ([xshift=3mm]frame.west) {!};
+% 右下折れ曲がり
+\fill[yellow!70!white]
+(frame.south east) -- ++(-6mm,0) -- ++(6mm,6mm) -- cycle;
+},
+drop shadow
+}
+
+
+
+\title{The Minimalist Program. pp.222-223}
+\author{Riku Araki}
+\date{December 12, 2025}
+
+\begin{document}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.}
+``butterfly collecting''的な構造主義言語学に対し, 十分に記述的であり, かつ説明能力を備えた理論の初期の追及が, $1960$年代のX$'$理論の発展を支えていた. 
+$\leadsto$\textcolor{red}{自然科学としての言語学}
+\vspace{1em}
+\begin{itemize}
+\item 第一段階として語彙目録 (lexicon) を言語計算から分離し, 語彙特性 (lexical property) と句構造規則 (phrase structure rule) にまたがる不毛な議論を回避した. 
+\item 句構造規則は\textbf{文脈自由 (context-free)} という単純な形式に還元された.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.}
+Mary read the book という文は次のような構造を持つと分析できる.
+\begin{center}
+\begin{forest}
+[S[NP[N[Mary]]][VP[V[read]][NP[Det[the]][N[book]]]]]
+\end{forest}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.}
+これは次の書き換え規則に従っている$\colon$
+\begin{tabular}{p{0.45\linewidth} p{0.45\linewidth}}
+
+\begin{enumerate}
+\item[(1)] $\langle$\,S\,$\rangle$ $\to$ $\langle$\,NP\,$\rangle$ $\langle$\,VP\,$\rangle$
+\item[(2)] $\langle$\,NP\,$\rangle$ $\to$ $\langle$\,N\,$\rangle$
+\item[(3)] $\langle$\,NP\,$\rangle$ $\to$ $\langle$\,Det\,$\rangle$ $\langle$\,N\,$\rangle$
+\item[(4)] $\langle$\,VP\,$\rangle$ $\to$ $\langle$\,V\,$\rangle$ $\langle$\,NP\,$\rangle$
+\end{enumerate}
+
+&
+\begin{enumerate}
+\item[(5)] $\langle$\,Det\,$\rangle$ $\to$ $\langle$\,the\,$\rangle$
+\item[(6)] $\langle$\,N\,$\rangle$ $\to$ $\langle$\,Mary\,$\rangle$
+\item[(7)] $\langle$\,N\,$\rangle$ $\to$ $\langle$\,book\,$\rangle$
+\item[(8)] $\langle$\,V\,$\rangle$ $\to$ $\langle$\,read\,$\rangle$
+\end{enumerate}
+\end{tabular}
+
+\vspace{1em}
+
+ここで$X\to Y$は$X$を$Y$に書き換えることを意味する.
+\begin{marker}
+例えば\cite{Watanabe2009}で上の(2), (3) をまとめて$\langle$NP$\rangle$ $\to$ $(\langle$Det$\rangle$)$\langle$N$\rangle$
+のように, 「中身が出てこなくてもよい」という意味で$(\cdot)$を使っているが, これは数学的には好ましくなく, 使われない.
+\end{marker}
+\end{frame}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.}
+規則 (2), (6) を使わなければ The book read the book という文法的に正しい別の文が生成される. また規則
+\vspace{0.5em}
+\begin{enumerate}
+\item[(9)] $\langle$\,VP\,$\rangle$ $\to$ $\langle$\,Adv\,$\rangle$ $\langle$\,VP\,$\rangle$
+\item[(10)] $\langle$\,Adv\,$\rangle$ $\to$ $\langle$\,carefully\,$\rangle$
+\end{enumerate}
+\vspace{0.5em}
+を追加すれば, Mary carefully read the book も生成される. このような分析から, Chomskyは句構造文法を数学的に定義した.
+\begin{marker}
+句構造文法は``Three models for the description of language.'' \textit{IRE Trans. on Information Theory 2} (1956), 113-124. にて提案された. 以前述べた通り, これ以降Chomskyは``数理論理学''的なアプローチへの興味を失ったが, Hopf代数や圏論を用いたMCBモデルを2025年に発表したのだから, 数学を信じる気持ちはむしろ増しているといってよい.
+\end{marker}
+\end{frame}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.}
+\begin{Def}{定義1. 句構造文法.}
+次のシステム$G\coloneq\langle V_\text{N}, V_\text{T}, S, P\rangle$を\textbf{句構造文法}という.
+\begin{itemize}
+\item $V_\text{N}$はアルファベット, その元を非終端記号 (nonterminal symbol) または変数という.
+\item $V_\text{T}$もアルファベットで $V_\text{N}\cap V_\text{T}=\emptyset$を満たす. またその元を終端記号 (terminal symbol) という.
+\item $S\in V_\text{N}$で, 開始記号という.
+\item $P$は$u\to v$という形の式の集合である. ただし$u,v\in (V_\text{N}\cup V_\text{T})^*$ (すなわち$V_\text{N}\cup V_\text{T}$上の語全体の集合) で, かつ$u$は少なくとも一つ変数を含む. $P$の元を生成規則という.
+\end{itemize}
+\end{Def}
+\end{frame}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.}
+句構造文法は単に文法ともよぶ. さてこれで文脈自由文法が定義できる.
+
+\begin{Def}{定義2. 文脈自由文法.}
+文法$G=\langle V_\text{N}, V_\text{T}, S, P\rangle$, $V\coloneq V_\text{N}\cup V_\text{T}$において, $P$の生成規則が
+\[
+A\to \beta \hspace{20pt}(A\in V_\text{N}, \beta\in V^*)
+\]
+という形の物だけであるとき\footnote{正確には, 開始記号$S$以外の右辺には空語$\lambda$が現れないという制約をつける.}, $G$は\textbf{文脈自由文法 (Context-Free Grammar; CFG)}であるといい, $G$によって生成される言語を\textbf{文脈自由言語(Context-Free Language; CFL)}という.
+\end{Def}
+\end{frame}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.}
+\vspace{-10pt}
+\begin{Ex}{例3.}
+$G_1\; \colon\; S\to aSb, S\to ab$は文脈自由文法であり, $G_1$によって生成された言語$L(G_1)$は
+\[
+L(G_1)=\{a^{n}b^{n}\;\colon\; n\in\N\}
+\]
+という文脈自由言語である.
+\end{Ex}
+\begin{tikzpicture}[
+    every node/.style={font=\small},
+    >=stealth
+]
+
+% 上の段（非終端を含む文字列）
+\node (S0) at (0,1.2) {$S$};
+\node (S1) at (2.5,1.2) {$aSb$};
+\node (S2) at (5,1.2) {$aaSbb$};
+\node (S3) at (7.5,1.2) {$aaaSbbb$};
+\node (S4) at (10,1.2) {$\cdots$};
+
+% 下の段（終端だけの文字列）
+\node (T1) at (2.5,-0.2) {$ab$};
+\node (T2) at (5,-0.2) {$aabb$};
+\node (T3) at (7.5,-0.2) {$aaabbb$};
+\node (T4) at (10,-0.2) {$\cdots$};
+
+% 上の段の横方向の矢印
+\draw[->] (S0) -- (S1);
+\draw[->] (S1) -- (S2);
+\draw[->] (S2) -- (S3);
+\draw[->] (S3) -- (S4);
+
+% 上から下への斜め矢印（S 中の S を ab に書き換え）
+\draw[->] (S0) -- (T1);
+\draw[->] (S1) -- (T2);
+\draw[->] (S2) -- (T3);
+\draw[->] (S3) -- (T4);
+
+\end{tikzpicture}
+
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.}
+\vspace{-5pt}
+\begin{Ex}{例4.}
+$G_2\coloneq \langle V_\text{N}, V_\text{T}, S, P\rangle$, ただし
+\begin{align*}
+&V_\text{N}\coloneq \{\langle\text{S}\rangle, \langle\text{NP}\rangle, \langle\text{VP}\rangle, 
+\langle\text{Det}\rangle, \langle\text{N}\rangle, \langle\text{V}\rangle, \langle\text{Adv}\rangle\}\\
+&V_\text{T}\coloneq \{\langle\text{the}\rangle, \langle\text{Mary}\rangle, 
+\langle\text{book}\rangle, \langle\text{read}\rangle, \langle\text{carefully}\rangle\}\\
+&P\;\colon\; \text{(1)--(10) の生成規則}
+\end{align*}
+とすると, $G_2$は文脈自由文法であり, $G_2$によって生成された言語 $L(G_2)$ は
+\[
+\langle\text{Mary}\rangle\;
+\langle\text{carefully}\rangle\;
+\langle\text{read}\rangle\;
+\langle\text{the}\rangle\;
+\langle\text{book}\rangle
+\]
+を含む文脈自由言語である.
+\end{Ex}
+\end{frame}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.}
+\begin{itemize}
+\item 単なる句構造文法の研究から, 動機は「文法$G_2$にあるような生成規則を, 普遍文法に含まれるフォーマットだけで統一的に説明すること」に向かった.
+\item 第二段階として究極のメタ規則を構成することが至上命令となり, Chomskyが1970年にX$'$理論を導入した.
+\end{itemize}
+
+\begin{Rem}{予想$^\text{lx}$5. X$'$理論.}
+句構造一般の理論として, 次のメタ規則が普遍文法に含まれている.
+\begin{enumerate}
+  \setlength{\itemsep}{2pt} % ← 行間調整
+  \item[(i)] $XP = \{WP, X'\}$
+  \item[(ii)] $X' = \{X', YP\}$
+  \item[(iii)] $X' = \{X^\text{min}, ZP\}$
+\end{enumerate}
+\end{Rem}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.20--22}
+
+\begin{marker}
+\textbf{Note 22.}\; 例えば限定形容詞 (a red carのように名詞に隣接して出てくる形容詞) や関係節, 付加詞 (副詞など) の句構造を分析することはかなり難しい.
+\end{marker}
+
+次の段階として, 極小主義のもとで句構造や移動をどのように分析すべきかが問題になる.
+\begin{itemize}
+\item LFインターフェースでは, 語彙項目LIと, その非音韻的な性質LF(LI) (i.e. LFインターフェースで解釈されるような意味素性と形式素性) にアクセス可能でなければならない. 
+\end{itemize}
+\[
+C_{\mathrm{HL}}:
+N  \stackrel{{\color{blue}\text{(O)}}}{\rightarrow} \Sigma 
+\stackrel{\text{Spell-Out}}{\longrightarrow}
+\begin{cases}
+\Sigma_{\mathrm{L}} \stackrel{{\color{blue}\text{(C)}}}{\rightarrow} \lambda  \\[4pt]
+\Sigma \stackrel{{\color{blue}\text{(P)}}}{\rightarrow} \pi 
+\end{cases}
+\]
+\end{frame}
+
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.22--24}
+
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[>=stealth, thick, node distance=1.8cm, every node/.style={transform shape}]
+
+  % Nodes
+  \node (AP) [draw, inner sep=5pt] {\scriptsize A--P};
+  \node (PF) [right=of AP] {\scriptsize PF ($\pi$)};
+  \node (Sys) [right=of PF, draw, inner sep=5pt, align=center, text width=35mm] 
+        {\scriptsize 言語の認知システム\\(Cognitive system)};
+  \node (LF) [right=of Sys] {\scriptsize LF ($\lambda$)};
+  \node (CI) [right=of LF, draw, inner sep=5pt] {\scriptsize C--I};
+
+  % 基本の横線
+  \draw[-] (PF) -- (AP)
+    node[midway, below=6pt] {
+      \scriptsize
+      \begin{tabular}{c}
+        {\color{red}{\fontsize{14pt}{14pt}\selectfont\boldmath ↑}}\\
+        最小出力条件
+      \end{tabular}
+    };
+
+  \draw[-] (LF) -- (CI)
+    node[midway, below=6pt] {
+      \scriptsize
+      \begin{tabular}{c}
+        {\color{red}{\fontsize{14pt}{14pt}\selectfont\boldmath ↑}}\\
+        最小出力条件
+      \end{tabular}
+    };
+
+ % ===== Sys → PF 取り消し版 =====
+\draw[->] (Sys) -- (PF)
+    node[midway, below=4pt] {
+      \scriptsize
+      \begin{tabular}{c}
+        {\color{blue}{\fontsize{14pt}{14pt}\selectfont\boldmath ↑}}\\
+        \xout{包括性の条件}
+      \end{tabular}
+    };
+
+% ===== Sys → LF 通常版 =====
+\draw[->] (Sys) -- (LF)
+    node[midway, below=4pt] {
+      \scriptsize
+      \begin{tabular}{c}
+        {\color{blue}{\fontsize{14pt}{14pt}\selectfont\boldmath ↑}}\\
+        包括性の条件
+      \end{tabular}
+    };
+
+\end{tikzpicture}%
+}
+\begin{itemize}
+\item 極小主義の用語では, LFインターフェースにおいてLIとLF(LI) は$C_\mathrm{HL}$から可視でなければならない, といえる. 運用システム側から完全解釈に代表される最小出力条件が課せられ, C--Iインターフェースでは解釈不可能な素性は不可視, 可能な素性は可視になるのであった.
+\item さらに$C_\mathrm{HL}$はLF--インターフェースで, LIの形式素性FF(LI) にもアクセス可能である. これは FF(LI)$\subset$LF(LI) から明らか.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, l.25}
+John saw a boy を考える. 形式素性とはLIに含まれる情報のうち統語に関わる素性なので, 名詞boyは形式素性として
+[範疇素性$\colon$N], [人称素性$\colon$3], [性素性$\colon$masculine],  
+[数素性$\colon$singular], [格素性$\colon$accusative]を持つ. 
+
+\begin{center}
+\begin{forest}
+[形式素性[解釈不可能素性[強素性][弱素性]][解釈可能素性]]
+\end{forest}
+\end{center}
+
+この中で格素性は解釈不可能素性であって, 派生の中で照合され, C--Iインターフェースでは不可視になる. 他の解釈可能素性は意味解釈に必要なので, 照合されても可視でなければならない.
+\end{frame}
+
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.26--31}
+\begin{itemize}
+\item $C_\mathrm{HL}$はLIが組み合わさってできるより大きな構成物にもアクセス可能である. 例えばNPやVPといった単位でも解釈される.
+\item しかしどの投射レベルでも解釈されるわけではなく, 経験的には最大投射のみLF表示に関係するというのが自然に思える.
+\end{itemize}
+\vspace{1em}
+したがって最小出力条件の要請から, LF--インターフェースで$C_\mathrm{HL}$は最小投射 (i.e. LI) と最大投射にのみアクセス可能で, 中間投射にはアクセスできないと仮定する.
+\end{frame}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.223, ll.1--6}
+\begin{Rem}{予想$^\text{lx}$6. 包括性の条件.}
+$C_{\mathrm{HL}}$によって形成された任意の構造は, 数え上げNに属する語彙項目に存在する要素のみから成る.
+\end{Rem}
+包括性の条件を採用すれば, 投射レベルをXP (i.e. X$^\text{max}$) やX$^\text{min}$といったラベルで区別することができず, 句構造, すなわちほかの統語対象との関係から決定するほかない (cf. Muysken). 
+\begin{marker}
+ただしわかりやすさのため, 以後非公式な記号としてX$^\text{min}$, X$'$, XPを用いることにする.
+\end{marker}
+\end{frame}
+
+\begin{frame}
+\frametitle{The development of X-bar theory p.222, ll.1--6}
+\begin{Def}{定義$^\text{lx}$7. 投射のレベル}
+\begin{enumerate}
+\item[(i)] それ以上投射しない範疇を最大投射という.
+\item[(ii)] 数え上げから選択されたLIを最小投射という.
+\item[(iii)] 最小投射でも最大投射でもない範疇を中間投射という.
+\end{enumerate}
+\end{Def}
+先の議論より, X$'$はインターフェースにおいて不可視であり, かつ$C_\mathrm{HL}$はアクセスできない.
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{References}
+\begin{thebibliography}{99}
+\bibitem{Sipser2023}
+Sipser, Michael（著）・田中圭介／藤岡淳（監訳）・阿部正幸／植田広樹／太田和夫／渡辺治（訳） (2023)
+『計算理論の基礎〈1〉オートマトンと言語〔原著第3版〕』 共立出版.
+
+\bibitem{Kaneko2016}
+金子義雅・中村捷・原口庄輔（編著） (2016). 『増補版 チョムスキー理論辞典』研究社.
+
+\bibitem{Tanaka1997}
+田中尚夫（著） (1997)
+『計算論理入門 ― 情報の数理』 裳華房.
+
+\bibitem{Watanabe2009}
+渡辺明 (2009). 『生成文法』 東京大学出版会.
+
+
+\bibitem{Chomsky1995}
+Chomsky, Noam (1995) \textit{The Minimalist Program}. Cambridge, MA: MIT Press.
+(20th anniversary editioin, 2015), Chapter 4 “Categories and Transformations”.
+
+
+\end{thebibliography}
+\end{frame}
+
+\end{document}

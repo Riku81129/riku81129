@@ -1,0 +1,688 @@
+\documentclass{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{tikz}
+\usepackage[linguistics]{forest}
+\usepackage{enumitem}
+\usepackage{ascmac}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{url}
+\usepackage{xcolor}
+\renewcommand{\qed}{\unskip\nobreak\quad\qedsymbol}
+
+\begin{document}
+\begin{center}
+{\Large \textbf{A Note on Optionality in Miyagawa (2010)}}\par
+\vspace{0.5em}
+荒木 理求\par
+\texttt{rikuman81129@gmail.com}\par
+\date{2025年8月17日}
+\end{center}
+\section{はじめに}
+Quantifier Raising (QR) は, May (1977) により提案された数量詞移動規則であり, S構造からLF表示を導出するLF移動の一種である. 文中の数量詞句（QP）をIPに付加（adjoin）し, そのc-command領域を作用域として解釈する. May (1985)はこの作用域と構造の関係を作用域の原理(Scope Principle)\footnote{\cite{Kaneko2016}[421-422]によれば, $\sum$連鎖($\sum$-sequence)を定義し, 演算子が同一の$\sum$連鎖の成員である場合, どちらが広い作用域を持ってもよく, そうでない場合はc-command領域に依存するとしていた.}として定式化した.\\
+\noindent \textbf{作用域の原理}（May 1985, Miygawa 2010:355(4)より引用）：
+\begin{quote}
+QP AがQP Bを非対称にc-commandし, かつそのときに限りQP A$\succ$QP Bとなる.\qed
+\end{quote}
+\indent かき混ぜ(Scrambling)は, Ross (1967, 1986) により提案された移動規則で, 比較的自由な語順を説明する.
+語順の自由度を説明するアプローチには, 移動変形によるものと, 基底構造で自由語順を直接生成するものがある.  
+Hale (1982, 1983) は, 非階層型（nonconfigurational）言語の自由語順を基底構造に由来すると分析し, Farmer (1984) は日本語についてHaleの立場を採用する一方,  Saito (1985) は, 日本語を階層型言語とし, 基本語順は主語–目的語–動詞（SOV）であると主張した.  ここでSaitoは, Mayの提案に従い, 日本語においても数量詞句がIPに付加することを想定する.\\
+\indent Miyagawa (2010) はMay (1977) とSaito (1985) の議論を基盤とし, さらにJohnson (2000) の分析を踏まえ, 「一度移動させた上で, その移動に制限を課す」という方針の下, 見かけ上異なるQRとかき混ぜに統一的な説明を与えることを目的とする. 本稿では, Miyagawa (2010) の議論を検討し, その利点と問題点を明らかにする.
+
+\section{基本的事実}
+\subsection{QRの存在}
+May (1985) は先行詞内削除(Antecedent-Contained Deletion, ACD) の解釈からQRの必要性を論じる．
+ACDでは省略部（ellipsis）の中に先行詞VPが埋め込まれており，そのままでは無限後退が生じる．
+これを回避するには，目的語をQRで上方に移動させ，省略部の先行詞を適切に確定させる必要がある. これはQRの存在を指示する, 独立した証拠となる.
+\begin{enumerate}[label=(\arabic*)]
+  \item John kissed everyone that Sally did [{\tiny VP} e].
+  \item \parbox{\linewidth}{[everyone that Sally did [{\tiny VP} e]]$_i$ [John kissed e$_i$]}
+  \item \parbox{\linewidth}{[everyone that Sally did [{\tiny VP} kissed e]] [John kissed e]}
+\end{enumerate}
+
+\subsubsection{かき混ぜの存在}
+Saito (1985) は, 日本語のOS型構文が統語的移動操作に由来することを, Harada (1977) による下接の条件が関与するとの指摘に依拠して主張する\footnote{「統語的な移動が存在する$\Rightarrow$下接の条件が観察される」は真だが, 逆は偽であり, 依然として日本語のかき混ぜを文体論上の規則として扱う立場もある.}.
+\begin{enumerate}[label=(\arabic*), start=3]
+  \item [(4)]?*[A-no hon-o]$_i$ John-ga [{\tiny NP} [{\tiny S} $ec$ $t_i$ katta] hito]-ni aitagatteiru rasii. \hfill(Saito 1985:285(11a))\\
+\end{enumerate} 
+
+
+
+\subsection{作用域の逆転}
+\subsubsection{同一節内での移動}
+量化詞が二つある場合，QRやかき混ぜにより表層順序と逆の作用域が得られることがある. QRの例はよく知られている(Chomsky 1977, May 1977).
+\begin{enumerate}[label=(\arabic*), start=5]
+  \item Someone loves everyone.
+  \item everyone$_j$ [someone loves t$_j$] \\
+  $\rightsquigarrow$ everyone $\succ$ someone
+  \item someone$_i$ everyone$_j$ [t$_i$ loves t$_j$] \\
+  $\rightsquigarrow$ someone $\succ$ everyone
+\end{enumerate}
+日本語では，基本語順（SOV）では目的語が主語を越えて作用域を取るのは困難だが，かき混ぜで目的語を文頭に移動させると可能になる (Kuroda 1969, 1979).
+\begin{enumerate}[label=(\arabic*), start=8]
+  \item Dareka-ga daremo-o aishiteiru. \\
+        $\rightsquigarrow$ someone $\succ$ everyone, *everyone $\succ$ someone
+  \item Daremo-o$_i$ dareka-ga t$_i$ aishiteiru. \\
+        $\rightsquigarrow$ someone $\succ$ everyone, everyone $\succ$ someone
+  \item Sake to biiru-o$_i$ John ka Bill-ga t$_i$ nonda (rasii).\hfill(Hoji 1985:242(62))\\
+        $\rightsquigarrow$ $\forall x \in \{\text{sake, beer}\}\, \exists y \in \{\text{John, Bill}\}\,[y \text{ drank } x]$, 
+        $\exists y \in \{\text{John, Bill}\}\, \forall x \in \{\text{sake, beer}\}\,[y \text{ drank } x]$
+  \item Nanika-o$_i$ [{\tiny NP} [{\tiny S} dare-ga $t_j$ osieta] gakusei$_j$]-mo t$_i$ mottekita. \hfill (Hoji 1985:242(63))\\
+        $\rightsquigarrow$ $\exists x (x = \text{thing})\, \forall y (y = \text{person})\,[\text{the student that $y$ taught brought } x]$, \\
+        $\forall y (y = \text{person})\, \exists x (x = \text{thing})\,[\text{the student that $y$ taught brought } x]$
+\end{enumerate}
+他方, 基本語順のままでも, 二つ目のQPがある特定の集団(specific group of indivisuals)のことを指す場合, 逆の作用域が出るとの指摘もある\footnote{特定の集団を指しにくい, \textit{55\%-no}や\textit{10 izyoo-no}といったQPを用いると, 曖昧性は出づらくなる. 例えば, [30\%-no ginkoo-ga] [10 izyoo-no kaisya-ni] huseina kasituke-o syooninsiteiru. (Ueyama 1998:25(48a))といった文では, 逆の作用域の解釈はより難しくなる. 筆者は(12)においても, 作用域の逆転は起きにくい.}.
+\begin{enumerate}[label=(\arabic*), start=12]
+  \item Dareka-ga uti-no subete-no sensyu-o bikoositeiru (toyuu koto-wa, zen'in-ga kiken-ni sarasareteiru toyuu koto da.)\hfill(Ueyama 1998:25(47))\\
+        $\rightsquigarrow$ $\exists x\, [\forall y (y = \text{athlete})\, [x \text{ is shadowing } y]]$, 
+        $\forall y (y = \text{athlete})\, [\exists x\, [x \text{ is shadowing } y]]$
+\end{enumerate}
+
+
+\subsubsection{時制節からの移動}
+時制節（finite clause）を越えるQRとかき混ぜは, 共に新たな作用域に寄与しない. May (1977)は量化詞が最初に生成された節でしかQRは適用されないことを指摘する.
+\begin{enumerate}[label=(\arabic*), start=13]
+  \item Some student thinks that John saw every band. \\
+  $\rightsquigarrow$ some student $\succ$ every band, *every band $\succ$ some student
+\end{enumerate}
+また, 長距離かき混ぜは文法的ではあるが，作用域には影響しない(Tada 1993, Miyagawa 2010:356(12)より引用)\footnote{筆者の判断では, everyone $\succ$ someoneの解釈も比較的可能である. 例えば, 太郎のクラスメイト皆が, 「太郎は意外とああいう人のことが好きなんだよな」と別々の人を思い浮かべている状況を表し得る. 一方で, そもそも長距離かき混ぜが文法的でないと判断する日本語母語話者もいる.}.
+\begin{enumerate}[label=(\arabic*), start=14]
+  \item Daremo-o$_i$ dareka-ga [Taroo-ga t$_i$ aishiteiru to] omotteiru. \\
+  $\rightsquigarrow$ someone $\succ$ everyone, *everyone $\succ$ someone
+\end{enumerate}
+\subsubsection{不定詞節からの移動}
+不定詞節（infinitival clause）の場合は，QR, かき混ぜ共に作用域の逆転が可能である. 実際, 量化詞は不定詞節から抜け出すことができる.
+\begin{enumerate}[label=(\arabic*), start=15]
+  \item Someone wanted to visit every city in Tokyo.\\
+  $\rightsquigarrow$ someone $\succ$ every city, every city $\succ$ someone
+\end{enumerate}
+かき混ぜも同様に新たな作用域を生み出す.
+\begin{enumerate}[label=(\arabic*), start=16]
+  \item Dareka-ga Hanako-ni [{\tiny IP} dono-hon-mo yomu yoo ni] itta. \\
+  $\rightsquigarrow$ someone $\succ$ every, *every $\succ$ someone
+  \item Dono-hon-mo$_i$ dareka-ga Hanako-ni [{\tiny IP} t$_i$ yomu yoo ni] itta. \hfill(Miyagawa 2010:357(13a))\\
+  $\rightsquigarrow$ someone $\succ$ every book, every book $\succ$ someone
+\end{enumerate}
+\subsection{まとめ}
+ACDにより, QRのような移動の存在が保証される. また, QRとかき混ぜはいずれも量化詞を移動させることで新たな作用域を可能にする．両者とも時制節を越えて移動しても新たな作用域は得られないが，不定詞節では可能である．
+この観察は，QRとかき混ぜが可視性の違い（covert/overt）を除けば同一の操作である可能性を示唆する．
+
+\section{先行研究}
+\subsection{QRに関する先行研究}
+
+\subsubsection{QRを仮定するアプローチ}
+\paragraph{付加する位置}
+May (1985) や Koopman \& Sportiche (1982) は、場合によってはQPがVPに付加されるとする.
+これは、関係節の内部にある代名詞束縛を扱う際に, 一対一原理\footnote{同じ量化詞（束縛子）が同じ局所領域で複数の変数を同時に束縛してはならないという制約. 例えば 
+*Everyone$_i$ [someone he$_i$ met] likes t$_i$.
+では, \textit{everyone} が \textit{he$_i$} と痕跡 \textit{t$_i$} を同時に束縛してしまい, 違反となる.}
+の違反を避けるための分析である.
+\paragraph{制約との関係における問題}
+QRは移動規則の一種であるため, 他の移動と同様に制約原理との関係が問題となる.
+\begin{itemize}
+    \item \textbf{下接の条件（Subjacency）}：
+    May (1977) ではQRも下接条件に従うとされるが, Chomsky (1986) ではLF移動は下接条件の適用外とされるなど, 立場が分かれる.
+    \item \textbf{空範疇原理（Empty Category Principle, ECP）}：
+    QRによって生じる痕跡はECPに従うと予測され, Kayne (1981) はフランス語の例からその予測を支持する.
+\end{itemize}
+\paragraph{まとめ}
+QRの存在は, LFという独立した表示レベルの存在を裏付ける一方で, その制約適用の有無は理論的な影響が大きいため, 慎重な議論が必要である.　IP付加としての古典的QR分析は, その後のVP付加説や格理論ベースのアプローチ（Kitahara 1996 など）への発展の基礎となった.
+
+\subsubsection{QRを仮定しないアプローチ}
+Hornstein (1995), Kitahara (1996), Pica \& Snyder (1995) は, QRを独立の派生操作として仮定せず,
+格理論に基づくDP移動の結果から逆の作用域やACDの事実を導けると主張する.
+
+\paragraph{格の一致のための移動}
+Chomsky (1991, 1993) の分析では, 主語・目的語は格の一致のためにAgrS, AgrOのSpecに移動し,
+その結果, 主語は目的語の下にコピーを残す. 
+
+\begin{enumerate}[label=(\arabic*)]
+  \item [(18)][{\tiny AgrSP} someone$_i$ [{\tiny TP} [{\tiny AgrOP} everyone$_j$ [{\tiny$v$P} t$_i$ [{\tiny VP} loves t$_j$ ]]]]]
+\end{enumerate}
+
+\paragraph{Hornstein(1995)の提案}
+Hornstein (1995) は, 目的語が主語より広い作用域を取る場合, 二段階のA移動によって説明を与える\footnote{ここではScope Principleを前提としている. 詳細は異なるが, 本質的なアイディアは\\
+\noindent \textbf{作用域の原理}（May 1977, Miygawa 2010:355(4)より引用)：
+\begin{quote}
+QP AがQP Bを非対称にc-commandし, かつそのときに限りQP A$\succ$QP Bとなる.\qed
+\end{quote}
+である.}.
+\begin{enumerate}[label=(\alph*)]
+    \item 目的語の繰り上げ(raising)（i.e. Spec,AgrOPなど高い位置への移動）
+    \item 主語の繰り下げ(lowering)（i.e. $\theta$位置への再構成(reconstruction)）
+\end{enumerate}
+(18)では, \textit{everyone}のSpec,AgrOPへのA移動と\textit{someone}のSpec,$v$Pへの再構成\footnote{Hornstein(1995)ではSpec,VPに繰り下げられるが, ここではSpec,$v$Pが$\theta$位置であると想定する.}によって, \textit{everyone}が\textit{someone}を非対称にc-commandし, \textit{everyone}$\succ$\textit{someone}の解釈が可能となる.
+
+この理論は, 埋め込み節が時制節の文とECM構文に作用域の違いが生じることも説明できる(Hornstein 1995).
+
+\begin{enumerate}[label=(\arabic*), start=19]
+  \item Somebody believes that [{\tiny TP} everyone is kind]. \hfill(Johnson 2000:5(12a))\\
+        $\rightsquigarrow$ somebody $\succ$ everyone, *everyone $\succ$ somebody
+  \item Somebody believes [{\tiny IP} everyone to be kind].\hfill(Johnson 2000:5(12b))\\
+        $\rightsquigarrow$ somebody $\succ$ everyone, everyone $\succ$ somebody
+\end{enumerate}
+
+(19) では, 埋め込み節が時制節であるため, \textit{everyone} は埋め込み節内部で格を受け取り, 主節に移動することができない. したがって, \textit{everyone} が主節の \textit{somebody} を越えて広い作用域を取ることはできない.  
+一方, (20) のようなECM構文では, \textit{everyone} が主節のSpec,AgrOPに移動して格を受ける. そのため,  \textit{somebody} がSpec,$v$Pに再構成されれば, \textit{everyone} が主節において\textit{someone}を非対称にc-commandし, \textit{everyone} $\succ$ \textit{somebody} の解釈が可能となる. \\
+ここで, 格の一致を理由に量化詞の繰り上げを許しているので
+
+\begin{enumerate}[label=(\arabic*), start=15]
+  \item Someone wanted to visit every city in Tokyo.\\
+  $\rightsquigarrow$ someone $\succ$ every city, every city $\succ$ someone
+\end{enumerate}
+
+のような, コントロール(control)構文には説明を与えていない.
+
+\paragraph{Kitahara (1996)の定式化(Miyagawa 2010:358(15)より引用)}
+Kitahara(1996)はこれをAoun \& Li (1989) の作用域の原理として定式化した.\\
+\noindent \textbf{作用域の原理*}（Aoun \& Li 1989; Kitahara 1996 改訂版, Miyagawa 2010:358(15)より引用）：
+\begin{quote}
+量化詞 $X$ は, LFにおいて $Y$ に関連づけられた各連鎖(chain)の少なくとも1つの要素をc-commandし, かつそのときに限り, $X\succ Y$となり得る. \qed
+\end{quote}
+たとえば(18)で, 目的語 $everyone$ は主語の低いコピーをc-commandできるため、$everyone \succ someone$ が導かれる.
+
+\paragraph{付加詞の作用域の問題}
+しかし, 付加詞(adjunct)が主語より広い作用域を取れる場合があり, 格の一致のための移動では説明が困難である. 
+\begin{enumerate}[label=(\arabic*), start=21]
+  \item A different student stood near every visitor. \hfill(Johnson 2000:8(20))\\
+        $\rightsquigarrow$ *a different student$\succ$ every visitor, every visitor$\succ$ a different student
+\end{enumerate}
+Hornstein (1995), Pica \& Snyder (1995)は一応の解決策を示すが, その問題点は後述する.\\
+\indent さらにChomsky (2000, 2001)が提案するProbe-goalによる一致のメカニズムでは, 主語がSpec,$v$Pの位置で格付与されるので, Hornstein (1995)らのアプローチはMPとの相性が悪い.
+\paragraph{まとめ}
+格のための移動によるアプローチは, 主語の低いコピーを参照することで逆の作用域を説明でき, QRを不要とするという理論的利点を持つ. 
+これにより, QRに対する移動制約の是非を巡る対立を回避できる可能性がある. 
+しかし, 不定詞節からの取り出しや付加詞の作用域, 再構成が阻害される環境など, 追加のメカニズムを要する現象が残る.
+
+
+\subsection{かき混ぜに関する先行研究 (Ueyama 1998)}
+
+\subsubsection{A移動的な性質}
+\paragraph{WCO効果の欠如}
+(22)はA$'$移動に分類されるwh移動が引き起こす, 典型的なWCO (weak crossover, 弱交差)効果であり, Ueyama (1998) は(24)を用いて\footnote{Saito (1992)は ?Dare-o$_i$ [so-itu-no hahaoya]-ga e$_i$ aisiteru no. を例に挙げるが, これは判断が合わなかった.}, かき混ぜがWCO効果の対象とならないことを指摘している.  この点は, (23)でQRがWCO効果を引き起こすことと対照的であり, かき混ぜのA移動的性質を示す証拠とされる.
+
+\begin{enumerate}[label=(\arabic*), start=22]
+  \item *Who$_i$ does his$_i$ mother like $t_i$?
+　\item *His$_i$ best friend hit every student$_i$. \hfill(Ueyama 1998:17(12a))\\
+        $\rightsquigarrow$ *every student$_i$ $\succ$ his best friend$_i$
+  \item Toyota-sae$_i$-o [so-ko$_i$-o tekisisiteiru kaisya]-ga $t_i$ uttaeta. \footnote{\textit{sae}はかき混ぜを自然にするための焦点化要素である.}
+\end{enumerate}
+再帰代名詞の束縛可能性についてもA移動的な性質を示すが, Ueyama (1998)は \textit{otagai}を再帰代名詞とする前提を避け(Hoji 1998), 扱っていないことに注意されたい.
+
+\subsubsection{A$'$移動的な性質}
+\paragraph{再構成効果}
+wh移動では, (25)のような再構成効果が観察される一方, (26)のような繰り上げ(raising)は非文となる(Engdahl 1980など). したがって, 再構成効果はA$'$移動の性質といえる. 日本語のOS型かき混ぜ(27)も, Hoji (1985), Yoshimura (1992)などにより, 同様の再構成効果を示すとされる.
+
+\begin{enumerate}[label=(\arabic*)]
+ \item[(25)] [Which pictures of himself]$_i$ does John like t$_i$? \hfill (Barss 1986:17(1))
+ \item[(26)] *[Which friend of his son]$_i$ seems to even John t$_i$ to win the prize? \hfill (Ueyama 1998:19(22b))
+ \item[(27)] [So-ko$_j$-o tekisisiteiru kaisya]$_i$-o Toyota-sae$_j$-ga t$_i$ uttaeta. \hfill (Ueyama 1998:20(23b))
+\end{enumerate}
+
+\paragraph{束縛条件Cの回避}
+Saito (1992) は, OS型かき混ぜが束縛条件Cの違反を引き起こさない例を示し, これを英語の話題化(topicalization)と類似のA$'$移動と捉える.
+
+\begin{enumerate}[label=(\arabic*), start=28]
+  \item Zibunzisin$_i$-o [Hanako$_i$-ga $t_i$ hihansita] (koto). \hfill(Saito 1992:77(18))\\
+\end{enumerate}
+
+\paragraph{完全な再構成}
+Saito (1989, 1992) は, かき混ぜによる移動がLFで取り消され, wh句が基底位置に再構成される現象を指摘する.  
+これにより, 表層的にはwh句がQの作用域外にあるにもかかわらず, Qの作用域内で解釈される構造が得られる.
+
+\begin{enumerate}[label=(\arabic*)]
+  \item[(29)] ?Dono hon-o$_i$ Masao-ga [{\tiny CP} [Hanako-ga $t_i$ tosyokan-kara karidasita] ka] siritagatteiru (koto). \hfill(Saito 1992:84(33b))
+\end{enumerate}
+
+\subsubsection{Deep OS-type と Surface OS-type}
+Ueyama (1998) は, 日本語のOS型構文に見られる性質の多様性を, LFにおけるDL(dislocated NP[= DP])\footnote{Ueyama (1998)の用語で, かき混ぜの対象となったDPを指す. }の位置の違いによって, Deep OS-typeとSurface OS-typeに二分して説明する.\\
+\noindent \textbf{Deep OS-type}：
+\begin{itemize}
+  \item \textbf{PF}: DLが文頭に現れる（DP-ACC/DAT \dots DP-NOM \dots V）.
+  \item \textbf{LF}: DLが文頭に残り, A位置にあり, 主語をc-commandする.
+  \item \textbf{性質}: WCO効果が生じない, 束縛可能性のパターンがA移動と一致するなど, A移動的性質を示す. 
+\end{itemize}
+
+\noindent \textbf{Surface OS-type}：
+\begin{itemize}
+  \item \textbf{PF}: DLが文頭に現れる（DP-ACC/DAT \dots DP-NOM \dots V）.
+  \item \textbf{LF}: DLは基底位置（VP内部の$\theta$位置）に戻される（i.e. 再構成される）.
+  \item \textbf{性質}: 再構成効果,  束縛条件C(Binding condition C)の回避, wh句の完全な再構成(radical reconstruction)\footnote{Saito (1989)ではundoingとも呼ばれているが, ここではMiyagawa (2010)に従って, radical reconstructionの訳語を用いる.}など, A$'$移動的性質を示す. 
+\end{itemize}
+(i) かき混ぜはA移動である, (ii) A$'$移動である, (iii) LFで移動が取り消される(i.e. 完全な再構成)という性質は, それぞれDeep OS-typeとSurface OS-typeに帰属させることで統一的に説明できる. Deep OS-typeは(i)に, Surface OS-typeは(ii)と(iii)に対応する.\\
+\noindent \textbf{Ueyama (1998:(10a))の提案}：
+\begin{quote}
+OS型の構文はDeep DLかSurface DLのどちらかを含む. \qed
+\end{quote}
+\subsubsection{かき混ぜによる作用域の逆転の説明}
+2.2節で見たように, かき混ぜでOS型になると, 逆の作用域の解釈が可能になる.
+\begin{enumerate}[label=(\arabic*), start=8]
+  \item Dareka-ga daremo-o aishiteiru.\hfill (Kuroda 1969, 1970)\\
+        $\rightsquigarrow$ someone $\succ$ everyone, *everyone $\succ$ someone
+  \item Daremo-o$_i$ dareka-ga t$_i$ aishiteiru. \hfill (Kuroda 1969, 1970)\\
+        $\rightsquigarrow$ someone $\succ$ everyone, everyone $\succ$ someone
+  \item Sake to biiru-o$_i$ John ka Bill-ga t$_i$ nonda (rasii). \hfill (Hoji 1985:242(62))\\
+        $\rightsquigarrow$ $\forall x \in \{\text{sake, beer}\}\, \exists y \in \{\text{John, Bill}\}\,[y \text{ drank } x]$, 
+        $\exists y \in \{\text{John, Bill}\}\, \forall x \in \{\text{sake, beer}\}\,[y \text{ drank } x]$
+  \item Nanika-o$_i$ [NP [S dare-ga e$_{cj}$ osieta] gakusei$_j$]-mo t$_i$ mottekita. \hfill (Hoji 1985:242(63))\\
+        $\rightsquigarrow$ $\exists x (x = \text{thing})\, \forall y (y = \text{person})\,[\text{the student that $y$ taught brought } x]$, \\
+        $\forall y (y = \text{person})\, \exists x (x = \text{thing})\,[\text{the student that $y$ taught brought } x]$
+\end{enumerate}
+これらのデータを, Ueyama (1998)は次の様に一般化する.\\
+\noindent \textbf{Ueyama (1998)の一般化}：
+\begin{quote}
+(i) SO型構文：QP$_1$-NOM QP$_2$-ACC/DAT V \\
+\hspace*{1em} QP$_1 \succ$ QP$_2$, \quad *QP$_2 \succ$ QP$_1$ \\[0.5em]
+(ii) OS型構文：QP$_2$-ACC/DAT QP$_1$-NOM V \\
+\hspace*{1em} QP$_1 \succ$ QP$_2$, \quad QP$_2 \succ$ QP$_1$\hfill\qed
+\end{quote}
+この一般化に説明を与えるために, Ueyama (1998)は, Huang (1982) および Hoji (1985) の議論を発展させた次の仮説を採用する.\\
+\noindent \textbf{作用域解釈に関する仮説(Scope Interpretation Hypothesis)}：
+\begin{quote}
+(a) QP Aの作用域はQR適用後のQP Aがc-commandする領域である.\\
+(b) QR適用前\footnote{S構造である必要はなく, ここでは再構成した後のLFを想定している.}にQP AがQP Bをc-commandするとき, QR適用後もQP AはQP Bをc-commandしなければならない.\hfill\qed
+\end{quote}
+Ueyama (1998:(10a))の提案により, PFでは同一のOS語順を持つ構文も, LFにおけるDLの位置は二通りある. このとき, 作用域解釈に関する仮説の下で異なる派生を得る.
+\begin{itemize}
+  \item LFでDLが高位置（i.e. A位置）に残る場合（Deep OS-type）：QR適用前はDLが主語をc-commandするので, QRを適用するとDLが常に主語より広い作用域を取る. $\rightsquigarrow$ QP-DAT$\succ$ QP-NOM
+  \item LFでDLが基底位置に再構成される場合（Surface OS-type）：QR適用前は主語がDLをc-commandするので, QRを適用すると主語が常にDLより広い作用域を取る. $\rightsquigarrow$ QP-NOM $\succ$ QP-DAT
+\end{itemize}
+\subsubsection{他言語への適用における問題}
+\paragraph{Deep/Surface OS-typeに分かれる理由の不明確さ}  
+OS語順におけるDLの位置の違いをLFでの再構成の有無によってDeep OS-typeとSurface OS-typeに二分しているが, なぜこの二種類の派生が生じるのかという統語上の理由は与えられていない.
+
+\paragraph{英語の説明困難}  
+作用域解釈に関する仮説を日本語や中国語など一部の言語にのみ適用するというパラメータ化は, 習得可能性の観点から不自然であり, Ueyama(1998)もUGに含めるべきだと指摘している. しかし, 日本語のように広範にOS語順を許す言語は少なく\footnote{世界の語順調査\cite{WALS}によれば, OS語順を頻繁に許す言語は全体の約1割程度に過ぎない. さらに日本語のように, 情報構造によらず統語的に広範なOS語順が可能な言語はごく少数である.}, UGにOS語順の違いを持ち込む妥当性は低い.
+
+\paragraph{経済性の非対称性}  
+日本語はかき混ぜとQRの二操作を必要とする一方, 英語はQRだけで逆の作用域が可能となるため, 派生の経済性に大きな差が生じる.
+
+\paragraph{不要なQR}  
+Huang (1982)やHoji (1985), Ueyama(1998)が仮定する, QRの前後でc-command関係を保存する条件は, QRによって新たな作用域を獲得しない. したがって, MPにおける最後の手段(Last resort)\footnote{Chomsky (1995)で定義された厳密な用語とは区別して, 素性の照合に限らない``広義''最後の手段として使用している. Miyagawa (2010)も同じ意味で用いることがある.}の発想に則れば, 日本語におけるQRはかき混ぜを持たない言語との整合性を保つために仮定された, \textit{ad hoc}な要素に見える.
+
+\subsubsection{まとめ}
+\noindent \textbf{Deep OS-type}：
+\begin{itemize}
+  \item \textbf{PF}: DLが文頭に現れる（DP-ACC/DAT \dots DP-NOM \dots V）.
+  \item \textbf{LF}: DLが文頭に残り, A位置にあり, 主語をc-commandする.
+  \item \textbf{性質}: WCO効果が生じない, 束縛可能性のパターンがA移動と一致するなど, A移動的性質を示す.
+  \item \textbf{作用域}: QR適用後もDLが広い作用域を取る（QP-DAT$\succ$ QP-NOM）.
+\end{itemize}
+\noindent \textbf{Surface OS-type}：
+\begin{itemize}
+  \item \textbf{PF}: DLが文頭に現れる（DP-ACC/DAT \dots DP-NOM \dots V）.
+  \item \textbf{LF}: DLは基底位置に再構成される..
+  \item \textbf{性質}: 再構成効果, 束縛条件Cの回避, wh句の完全な再構成など, A$'$移動的性質を示す.
+  \item \textbf{作用域}: QR適用後も主語が広い作用域を取る（QP-NOM $\succ$ QP-DAT）.
+\end{itemize}
+
+(8),(9)のような日本語のデータのコントラストを上手く説明する一方で, 通言語的な説明としてはほとんど機能しないため, 新たな仮定や操作が必要となる.
+
+
+\subsection{QRとかき混ぜを同一視する先行研究 (Johnson 2000)}
+
+\subsubsection{QRと話題化の比較}
+\paragraph{類似点}
+従来の理論では, QRと話題化はいずれも移動先が非項(non-argument)位置であり, A$'$-移動に分類される.
+
+\begin{enumerate}[label=(\arabic*)]
+    \item[{(30)}][{\tiny TP }Mary$_i$, [{\tiny TP} someone [{\tiny $v$P} loves $t_i$]]]\hfill(Johnson 2000:1(2b))
+\end{enumerate}
+
+また, 下接の条件など同一の局所性制約(locality constraints)のもとにあると想定される. 次の様に, 複合名詞句から抜き出すことができない\footnote{文脈がないため, 単なる話題化の代わりに分裂文(cleft)を用いている.}.
+\begin{enumerate}[label=(\arabic*), start=31]
+  \item Someone met the [{\tiny NP} child that talked to everyone]. \hfill (Johnson 2000:1(3a)) \\
+        $\rightsquigarrow$ someone $\succ$ everyone, *everyone $\succ$ someone
+  \item *It's Mary$_i$ that someone met the [{\tiny NP} child that talked to $t_i$].\hfill(Johnson 2000:1(3b))
+\end{enumerate}
+
+\paragraph{相違点}
+しかし, 話題化では埋め込み時制節からの目的語の移動が可能である一方, QRでは同様の構造で逆の作用域を取ることができない.
+\begin{enumerate}[label=(\arabic*), start=33]
+  \item It's Mary$_i$ that I told someone you would visit $t_i$. \hfill (Johnson 2000:2(6a))\\
+  \item I told someone you would visit everyone. \hfill(Johnson 2000:2(6b))\\
+        $\rightsquigarrow$ someone $\succ$ everyone, *everyone $\succ$ someone
+\end{enumerate}
+
+また, たとえば, QRは全称量化詞が埋め込まれた主語から抜け出すことを許すが, 話題化では許されない.
+\begin{enumerate}[label=(\arabic*), start=35]
+  \item A resident of every California city curses its traffic. \hfill(Johnson 2000:(8a))\\
+        $\rightsquigarrow$ every Cal. city $\succ$ a resident
+  \item *It's Sacramento$_i$ that a resident of $t_i$ curses its traffic.\hfill(Johnson 2000:(8b))
+\end{enumerate}
+
+これらの事実は, QRと話題化が同一のA$'$移動であるとする分析では説明できない.
+
+\subsubsection{Hornstein (1995)の補足} 
+
+\paragraph{否定による制約}
+(37)に見られるように, 存在量化詞は否定の作用域内に現れられない.
+\begin{enumerate}[label=(\arabic*), start=37]
+  \item I have not met some student. (Johnson 2000:7(17))\\
+        $\rightsquigarrow$ *not $\succ$ some student, \ \ some student $\succ$ not
+\end{enumerate}
+Hornstein(1995)は目的語の移動先を$v$P付加と想定しており, 構造は
+
+\begin{enumerate}[label=(\arabic*)]
+\item[(38)][{\tiny TP}$\cdots$[{\tiny NegP}$\cdots$[{\tiny AgrOP}$\cdots$[{\tiny $v$P}$\cdots$]]]]
+\end{enumerate}
+
+の形を取る\footnote{$v$Pを導入して書き換えている.}.  
+この場合, NegがAgrOPより高い位置にあるため, 目的語は否定より広い作用域を取れないはずである. 
+また, Lewis, Heim, Kampらに依拠した不定名詞句(indefinite)を特別視するアプローチでは, (39)のように非不定名詞句で作用域の反転が生じるデータを説明できない.
+
+\begin{enumerate}[label=(\arabic*), start=39]
+  \item I haven't read almost everything. \hfill(Johnson 2000:6(14a))\\
+        $\rightsquigarrow$ almost everything $\succ$ not, not $\succ$ almost everything
+\end{enumerate}
+
+そこでJohnson (2000) は, NegPより高い位置にAgrOPを投射する, 次の構造を想定する
+\footnote{実際は
+[{\tiny IP}$\cdots$[{\tiny AgrOP}$\cdots$[{\tiny NegP}$\cdots$[{\tiny TP}$\cdots$[{\tiny VP}$\cdots$]]]]]
+のような構造を想定し,
+ I can believe every one of Will's claims. 
+        $\rightsquigarrow$ every claim $\succ$ can, can $\succ$ every claim
+に見られる, モーダルの助動詞と量化詞の作用域の逆転も説明している.}.
+
+\begin{enumerate}
+\item[(40)][{\tiny TP}$\cdots$[{\tiny NegP}$\cdots$[{\tiny AgrOP}$\cdots$[{\tiny $v$P}$\cdots$]]]]
+\end{enumerate}
+
+(37)の存在量化詞が否定より広い作用域を取る事実は, Hornstein (1995)の提案に基づくと, (41)において\textit{some}$\succ$\textit{not}とするために, 主語がSpec,$v$Pに再構成されないことを意味する. このときJohnson (2000)が改訂した(40)の構造に従えば,  \textit{some} $\succ$ \textit{many}となることが必要となり, 確かに正しい.
+
+\begin{enumerate}[label=(\arabic*), start=41]
+\item Some student or other hasn't answered many of the questions.\hfill(Johnson 2000:8(18))\\
+        $\rightsquigarrow$ some student $\succ$ many, *many $\succ$ some student
+\end{enumerate}
+
+したがって, この観察はHornstein (1995)がQRの操作の一部に再構成を数えることを支持する.
+
+\paragraph{付加詞のQR}
+Hornstein(1995)は, QRをA移動として理解するため, 原則として付加詞が移動対象になることは想定していない.
+しかし次のように, 付加詞が主語より広い作用域を取る現象が存在する.
+\begin{enumerate}[label=(\arabic*)]
+  \item[(15)] Someone wanted [{\tiny IP} to visit every friend in Tokyo]. \\
+  $\rightsquigarrow$ someone $\succ$ every friend, every friend $\succ$ someone
+  \item[(21)] A different student stood near every visitor. \\
+  $\rightsquigarrow$ *a different student$\succ$ every visitor, every visitor$\succ$ a different student
+  \item[(42)] A different student tried to stand near every visitor. \hfill(Johnson 2000:9(22))
+\end{enumerate}
+Hornstein (1995)は(21)に関して, 付加詞を高い位置に基底生成することで, 主語を再構成すれば付加詞のc-command領域に入ると説明する.
+しかし(42)の\textit{near every visitor}が\textit{stand}を修飾している場合も, \textit{a different student}より広い作用域を取り得るので, 修飾の位置に依存した分析は難しい\footnote{(42)で \textit{tried to stand} を複合述語(complex predicate)とする反論が考えられるが, VP省略のテストから簡単に棄却される.}.  
+したがって, 付加詞のQRはA移動には還元できない。
+
+\paragraph{再構造化}
+Hornstein (1995)は(15)の例に対して, ロマンス諸語の再構造化(restructuring)と同様の仕組みで説明を試みる.
+しかし Kennedy (1997) らが示すように, \textit{expect}, \textit{hope}, \textit{require} など再構造化を許さない動詞でも広い作用域解釈が可能であり, また \textit{for}を伴う場合には広い作用域が得られないという問題点がある.
+
+\subsubsection{QRとかき混ぜの同一視}
+
+QRはA/A$'$移動のどちらかとしては捉えきれない. そこでJohnson (2000)は, Diesing (1992)らの立場を踏襲し, 英語のQRはドイツ語などで観察されるかき混ぜと同一の移動であると仮定する. その根拠として, Johnsonはドイツ語・オランダ語のかき混ぜが以下の性質を持ち, 英語のQRと一致することを挙げる(Besten \& Rutten 1989).
+\begin{itemize}
+    \item 不定詞節を超えて逆の作用域の解釈を可能にする
+    \item 補文標識がある場合は阻害される
+    \item 時制節からの節越えは不可
+    \item 付加詞も移動可能
+\end{itemize}
+この同一視により, 作用域の逆転はかき混ぜが許可される環境でのみ可能になると予測される.
+
+\subsubsection{Inverse Linkingと名詞句からの外置}
+\paragraph{Inverse Linking}
+Inverse Linking とは, DP内部の修飾句にある数量詞がDPの外に作用域を取る現象である.
+\begin{enumerate}[label=(\arabic*), start=35]
+    \item A resident of almost every California city curses its traffic.\\
+    $\rightsquigarrow$ a resident $\succ$ almost every Cal. city, almost every Cal. city $\succ$ a resident
+\end{enumerate}
+Kennedy (1997)が指摘する通り, 前置詞句のみをDPから取り出すA移動は考えづらいため, Johnson (2000)はDP内部の前置詞句が不可視なかき混ぜによって取り出さると考える. ドイツ語でも同様の前置詞句のかき混ぜが観察される\footnote{Müller (1993) が指摘するように, 他動詞の主語DPから前置詞句を抜き出すことは, かき混ぜでも難しい}. 
+
+\paragraph{名詞句からの外置}
+名詞句からの外置 (Extraposition from NP) とは, Ross (1967)の用語で, ［{\tiny NP} NP S$'$］という構造中のS$'$を右側に移動させる変形をいう.
+\begin{enumerate}[label=(\arabic*), start=43]
+    \item A report [{\tiny PP} about almost every California city] appeared today.\hfill(Johnson 2000:14(41))\\
+    $\longrightarrow$ A report appeared today [{\tiny PP} about almost every California city].
+\end{enumerate}
+関係節が移動する場合は, 関係節外置と呼ばれ, 移動は下接の条件に従う. また主語名詞句からの外置はその節に, 目的語名詞句からの外置は動詞句に付加されると考えられる. さらに, 右方移動規則はPF部門の文体規則である可能性も指摘されている (Chomsky 1986). 
+
+\paragraph{制約の共有・同一視}
+さらに, Inverse Linkingと名詞句からの外置が以下の制約を共有することを示す.
+\begin{itemize}
+    \item 属格 (genitive) を含むDPからは移動不可 (Müller 1993)
+    \item 他のDPに埋め込まれたDPからは移動不可 (Ross 1967, Akmajian 1975)
+    \item 補部たるDPからは移動不可 (Selkirk 1977)
+    \item 移動に伴う形容詞の作用域の固定 (Rochemont \& Culicover 1990)
+\end{itemize}
+名詞句からの外置はA/A$'$移動のどちらでもないため, 英語におけるかき混ぜの表出の一つと見る\footnote{Johnson (2000)は名詞句からの外置とかき混ぜの相違点も指摘する.}. 名詞句からの外置の存在は, 英語のQRをかき混ぜの一種と見做す方針に正当性を与える.
+
+\subsubsection{まとめ}
+Johnson (2000) によれば, 英語のQRは不可視なかき混ぜであり, その振る舞いはドイツ語などのかき混ぜと一致する.  
+Inverse Linkingも同様に説明され, 名詞句からの外置と同一の制約を共有することは, Johnson (2000)の提案を裏付ける.
+QRの振る舞いをA/A$'$移動ではなくかき混ぜに還元することで, 不定詞節や付加詞の移動も統一的に扱うことができる.
+
+
+
+\section{Miyagawa (2010)の提案}
+\subsection{作用域経済と先端素性による任意移動}
+\paragraph{要旨}
+Miyagawa (2010)は, Johnson (2000)らが提案する, 英語のQRをドイツ語に見られるかき混ぜと同一の操作とみなす立場を拡張する. すなわち, 日本語のように表層的にはより自由なかき混ぜも, 本質的には同一の移動操作であると考え, これらをすべてEF (Edge Feature, 先端素性)によって駆動される任意移動 (Optional Movement)の一形態と位置づける. また, 経済性を標榜するMPのもとで, Fox (2000)らの先読み (look-ahead)によって移動自体を制限する方針に対し, 移動させてから作用域経済 (Scope Economy)によって制限をかけ, 過剰生成 (over generation)を防ぐアプローチを取る.
+
+
+\paragraph{作用域経済}
+Fox (2000)はSSO (Scope-shifting operation, 作用域を変化させる操作)に次の制約を課す.
+\begin{quote}
+\noindent\textbf{作用域経済}(Scope Economy) (Fox 2000:3, Miyagawa 2010:360(23)より引用)\\
+SSOは意味的に空であってはならない.\qed
+\end{quote}
+この原則により, 例えば(45)では従属節の\textit{every boy}が行う移動は新たな作用域関係を生じないため許されず, 逆の作用域は得られない. 一方(46)では, \textit{every boy}が\textit{what}を越えて移動することで新たな作用域関係 （pair-list解釈, PL）が可能になるため, 作用域経済が移動を許し, \textit{every boy}$\succ$ \textit{one girl}の解釈が可能になる.
+
+\begin{enumerate}[label=(\arabic*), start=45]
+ \item One girl knows that every boy bought a present for Mary. \hfill(Miyagawa 2010:362(28a))\\
+ one girl $\succ$ every boy, *every boy $\succ$ one girl
+ \item One girl knows what every boy bought for Mary. \hfill(Miyagawa 2010:362(28b))\\
+ one girl $\succ$ every boy, every boy$\succ$ one girl
+\end{enumerate}
+
+\paragraph{任意移動}
+Miyagawa (2010)は, Fox (2000)やBošković(2007)が提案する先読みによる移動の回避ではなく, Saito (1989)やTada (1993)に基づく日本語かき混ぜの研究の知見を導入し.新たなアプローチを探る. またChomsky (2008)のフェーズ(Phase)理論を援用し, フェーズ主要部(i.e. $v$, C)のEFが指定部への移動を引き起こすことを認める. すると, 任意移動を次のように定式化できる.
+\begin{quote}
+\noindent\textbf{任意移動} (Miyagawa 2006b:9(6))\\
+要素はEFをもつ任意の位置へ自由に移動することができる.\qed
+\end{quote}
+ただし, EFのみによって駆動される任意移動は, wh移動のような, 素性一致のため義務的に移動する要素が存在する場合, それより優先されることはない. 義務的移動が生じる場合には, 任意移動は抑制される. 
+
+\paragraph{日本語の長距離かき混ぜ}
+さて, 英語のQRが日本語のかき混ぜと同一の操作ならば, (45)/(46)のような対比が, 日本語では目に見える形で実現されるはずである. 実際, Tada (1993)によれば, 長距離かき混ぜは通常, 新たな作用域関係をもたらさない. (14)では, 従属節の全称量化詞\textit{daremo}がSpec,CPに移動しても, 越えるのが固有名詞\textit{Taro}であるため, 作用域経済により更なる移動は許されず, 逆の作用域は得られない.
+\begin{enumerate}[label=(\arabic*), start=14]
+ \item Daremo-o$_i$ dareka-ga [Taroo-ga $t_i$ aishiteiru to] omotteiru. \\
+ someone $\succ$ everyone, *everyone $\succ$ someone
+\end{enumerate}
+
+一方(47)では, 従属節内部で\textit{daremo}がまずSpec,$v$Pに移動し, \textit{dareka}を越えて新たな作用域関係を得る. さらにSpec,CPで\textit{ituka}を越えて作用域関係を更新するため, 作用域経済がMatrix CPへの移動を許し, 逆の作用域が可能となる(Miyagawa 2006b).
+\begin{enumerate}[label=(\arabic*), start=47]
+ \item Daremo-o$_i$ dareka-ga [ituka dareka-ga $t_i$ kisu-sita to] omotteiru. \hfill(Miyagawa 2010:363(30))\\
+ someone $\succ$ everyone, everyone $\succ$ someone
+\end{enumerate}
+このように, EFと作用域経済を組み合わせることで, 英語の(45)/(46), 日本語の(14)/(47)の対比を統一的に説明できる.
+
+\subsection{作用域経済の適用}
+Johnson (2000)は, 否定辞が存在する場合に主語の再構成が阻害され, 逆の作用域が得られないことを示した. 
+
+\begin{enumerate}[label=(\arabic*), start=41]
+  \item Some student or other hasn't answered many of the questions.\\
+   $\rightsquigarrow$ some student $\succ$ many, *many $\succ$ some student
+\end{enumerate}
+
+この事実は, 作用域経済が移動を評価するタイミングに重要な示唆を与える. すなわち, 任意移動が行われたフェーズではなく, その次のフェーズで意味的効果の有無が検証されるということである. (41)では, 下位の$v$Pフェーズで目的語\textit{many of the questions}が主語\textit{some student or other}を越えて移動しても, 次のCPフェーズでは存在量化詞の主語が否定辞を超えた後なので低いコピーが不可視となり, 新たな作用域関係は得られず, 移動は不適格となる.
+\begin{quote}
+\noindent\textbf{作用域経済の適用領域} (Miyagawa 2010:364(33))\\
+作用域経済は, あるフェーズにおける任意移動を, その次のフェーズにおいて評価する. ルートフェーズにおいては, 評価は移動と同時に行われる.\qed
+\end{quote}
+
+さらに, May (1985)が指摘する次の対比も説明できる. 
+\begin{enumerate}[label=(\arabic*), start=48]
+ \item What$_i$ did every student read $t_i$? \hfill(Miyagawa 2010:366(34a))\\
+   $\rightsquigarrow$ PL, no PL
+ \item Which student$_i$ $t_i$ read every book? \hfill(Miyagawa 2010:366(34b))\\
+   $\rightsquigarrow$ *PL, no PL
+\end{enumerate}
+(48)では\textit{every student}が\textit{what}を越えてCPに移動し, 新たな作用域関係を作るため, PL解釈が可能になる. 一方(49)では\textit{every book}のCPへの移動は$v$P段階と同じ作用域関係を複製するだけで, 作用域経済に違反するため, PL解釈は得られない. 
+
+加えて, May (1985, 1988)は, 以下の対比も指摘する. 
+\begin{enumerate}[label=(\arabic*), start=50]
+ \item Which boy loves every girl? \hfill(Miyagawa2010:367(37a))\\
+$\rightsquigarrow$ *PL, no PL
+ \item Which boy loves each girl? \hfill(Miyagawa2010:367(37b))\\
+$\rightsquigarrow$ PL, no PL
+\end{enumerate}
+(50)はPL解釈を許さないが, (51)は許す. これは\textit{each}が固有に焦点を持つため, CPへの移動が義務的であり, このような義務的移動は作用域経済の制約を受けないからである. 
+
+
+\subsection{完全な再構成による過剰生成の回避}
+Saito (1989, 1992)はかき混ぜは意味的に空であり, LFにおいて必ず基底位置に戻されると主張し, その過程を完全な再構成と呼ぶのであった. (14)のような長距離かき混ぜでは新たな作用域関係が得られず, Saito (2004)はこれを完全な再構成の証拠とする.
+\begin{enumerate}[label=(\arabic*), start=14]
+ \item Daremo-o$_i$ dareka-ga [Taroo-ga $t_i$ aishiteiru to] omotteiru. \\
+ $\rightsquigarrow$someone $\succ$ everyone, *everyone $\succ$ someone
+\end{enumerate}
+
+Tada (1993)も完全な再構成の立場をとり, 長距離かき混ぜの文末着地点は作用域を形成しない位置\footnote{Saito (1985) に従い, TPへの付加を仮定している.}であるため, この位置では量化詞\textit{everyone}が作用域を取れないと分析する. 結果として, 意味的役割を持たないこの位置の要素は, 作用域を取れる基底位置へ完全な再構成をされる必要がある. Tadaの分析は, 完全な再構成が許容されない構造の修復として機能し, 過剰生成を防ぐとMiyagawa (2010)は解釈する.\\
+\indent さらにMiyagawa (2010)は, 完全な再構成がQRにも適用可能であると提案する. QRは目に見えないかき混ぜとして, EFによってフェーズの端に移動する. もしこの移動が作用域経済を満たせば移動は許可されるが, 満たさない場合にはその位置で解釈できず（Tada 1993）, 過剰生成を避けるために基底位置へ完全な再構成をされる必要がある, とSaito (1989)の理論を発展させる.
+
+\section{Miyagaw (2010)の評価}
+\subsection{利点}
+\paragraph{格一致のための移動を仮定するアプローチとの比較}
+Johnson (2000)を発展させた理論なので, May (1985)やHornstein (1995)らの理論が持つ問題に抵触しない.
+\paragraph{Deep/Surface OS-typeに分かれる理由}
+Ueyama (1998)のアプローチにおけるDeep/Surface OS-typeに対し, 統語的な説明を与えており, 発展的解消に成功している. 
+\paragraph{理論的最小性}
+フェーズ理論のもとでは, 少ない仮定で実現できる操作であり, QRの存在を認めつつ(i.e. ACDと整合性と保ちつつ), 理論的負担が軽い.
+\paragraph{パラメータの省略可能性}
+英語のQRをかき混ぜとして分析できれば, 新たなパラメータを設定する必要がない. かき混ぜ$+$QRも解消され, 経済性にも差が出ない.
+\subsection{問題点}
+\paragraph{英語における作用域の逆転} 
+Johnson (2000)において, 上位コピーが不可視のになる理論の詳細は提示されておらず, Miyagawa (2010)も補足していない. Miyagawa (2010) は日本語については一応の説明を与えているものの, 逆に英語については不十分である. 例えば
+\begin{enumerate}
+ \item[(5)] Someone loves everyone.
+ \item[(5a)] [{\tiny CP} everyone$_i$ [{\tiny TP} someone$_j$ [{\tiny $v$P} $t'_i$ [{\tiny $v$P} $t_j$ loves $t_i$]]]].
+\item[(5b)] [{\tiny CP} someone$_j$ [{\tiny TP} someone$_j$ [{\tiny $v$P} $t'_i$ [{\tiny $v$P} $t_j$ loves $t_i$]]]]
+\end{enumerate}
+となり, (5a)では\textit{every} $\succ$ \textit{some}が$v$Pフェーズと同じ作用域を複製し, (5b)では$someone$の移動がそもそも作用域の変化をもたらさないため, 作用域経済に違反する. もし英語でも作用域経済に違反したら完全な再構成がなされるのであれば, 逆の作用域は得られないので, テクニカルな再構成が必要になる. しかし再構成を許せば, 例えば
+\begin{enumerate}
+\item[(49)] Which student$_i$ $t_i$ read every book? \\
+\end{enumerate}
+のPL解釈不可能性を作用域経済の違反によって説明していたことと矛盾する. 実際
+\begin{enumerate}
+\item[(49a)] [{\tiny $v$P} every book$_j$ [{\tiny $v$P} which student$_i$ loves $t_j$]]
+\end{enumerate}
+のように, \textit{every book} $\succ$ \textit{which student}となるフェーズが考えられるからである. 結局, 英語でどのように逆の作用域が得られるか, 明らかでない.
+
+\paragraph{完全な再構成}
+完全な再構成を否定するデータは(5)だけではない. 例えば
+\begin{enumerate}
+\item[(46)] One girl knows what every boy bought for Mary. \\
+ one girl $\succ$ every boy, every boy$\succ$ one girl
+\end{enumerate}
+において, \textit{every boy} $\succ$ \textit{what}のPL解釈がでなくなってしまうため, 中間コピーをLFで参照する必要がある. 作用域が関係するDPが複数ある場合, より慎重な検証が不可欠となる.
+
+\paragraph{付加詞の位置}
+Hornstein (1995)へのJohnson (2000)の指摘同様, (47)では\textit{ituka}がどこに併合されているかに, 厳密な議論が必要である.
+\begin{enumerate}[label=(\arabic*), start=47]
+ \item Daremo-o$_i$ dareka-ga [ituka dareka-ga $t_i$ kisu-sita to] omotteiru. (Miyagawa 2010:363(30))\\
+ someone $\succ$ everyone, everyone $\succ$ someone
+\end{enumerate}
+
+
+\paragraph{不定詞節からの抜き出し}
+(15)のようなコントロール構文では逆の作用域が許されるのであった\footnote{ここではPROを用いているが, MPの下で議論するため, 以下Hornstein (1999) の提案するコントロールの移動理論 (Movement theory of control, MTC) に従う.}.
+\begin{enumerate}[label=(\arabic*)]
+  \item[(15)] Someone$_i$ wanted [{\tiny IP} PRO$_i$ to visit every city (in Tokyo)]. \\
+$\rightsquigarrow$ every city $\succ$ someone
+\end{enumerate}
+Miyagawa (2010)の提案に従って分析してみると, まず(15a)では新たな作用域\textit{every city} $\succ$ \textit{someone}が得られる. その後(15b)のように, EPPの要請で\textit{someone}がSpec,IPに移動する. さらにIは先端素性を持たないので, ここでは任意移動が起きず, \textit{wanted}から$\theta$役割をもらうために, \textit{someone}が主節のSpec,$v$Pへ移動する. したがって(15c)の通り, \textit{every city}が主節の$v$Pへ付加する任意移動が考えられる. しかしこのCPフェーズでは新たな作用域が生まれず, $v$Pフェーズで実現された\textit{every friend} $\succ$ \textit{someone}を複製するに過ぎないので, 作用域経済に違反してしまう. 
+\begin{enumerate}
+  \item[(15a)] [{\tiny $v$P} every city$_j$ [{\tiny $v$P} someone$_i$ visit $t_j$]]
+  \item[(15b)] [{\tiny IP} someone$_i$ to [{\tiny $v$P} every city$_j$ [{\tiny $v$P} $t_i$ visit $t_j$]]].
+  \item[(15c)] [{\tiny $v$P} every city$_j$ [{\tiny $v$P} someone$_i$ wanted [{\tiny IP} $t'_i$ to [{\tiny $v$P} $t'_j$ [{\tiny $v$P} $t_i$ visit $t_j$]]]]].
+ 
+\end{enumerate}
+結果として, 作用域経済の違反時に完全な再構成を仮定するのであれば, 不定詞節の目的語は主節の主語より広い作用域を取ることができず, 不定詞節からの抜き出しを一般の場合で示すことができない. これは
+\begin{enumerate}[label=(\arabic*), start=14]
+  \item Daremo-o$_i$ dareka-ga [Taroo-ga t$_i$ aishiteiru to] omotteiru. \\
+$\rightsquigarrow$ someone $\succ$ everyone, *everyone $\succ$ someone
+\end{enumerate}
+も説明できないことを意味する.
+
+
+
+\paragraph{逆の作用域における下位コピーの必要性}
+Miyagawa (2010)では, Johnson (2010)が示した, 逆の作用域の解釈における下位コピーの必要性を, 構造的に高く位置する主語は作用域関係を複製してしまうことから説明する. すなわち, 逆の作用域を得るためには再構成が不可欠である. しかし元の作用域で解釈する場合も, 作用域経済の違反による完全な再構成で説明を与えたため, いかなる解釈の場合にも再構成を用いることになり, 理論を簡潔に定式化することは困難である.
+
+
+\paragraph{その他の課題}
+\begin{itemize}
+\item 日本語でEPPを仮定し, さらにSpec,TPに移動するのは何でも良い, というのはかなり強い仮定である.
+\item 任意移動 と言いつつ, 日本語で逆の作用域を出す場合, 決定的な目的語のSpec,TPへの移動はEPPの要請を満たすための, 義務的な操作である.
+\item 英語の逆の作用域を説明するために, 日本語のようなアプローチを取ることも考えられるが, EPPで主語がSpec,TPに移動する理論が標準的なので, 難しい.
+\end{itemize}
+
+
+\section{おわりに}
+QRをかき混ぜに還元する方針は, 計算量の観点から望ましいと思われる. 一方で, Miyagawa (2010)の提案は, EFによる任意移動, 作用域経済, 及び完全な再構成のみで完結する枠組みではなく, 任意の言語で許される全ての解釈を正確に予測するように, 具体的なメカニズムの構築が求められる. 本稿では内容のまとめに終始してしまい, 有益な提案ができなかったので, 今後の課題としたい. またHornstein (1995) を参照してJohnson, Miyagawaらの理論の理解を深めつつ, FoxやBoškovićの先読みの議論と比較し, よりよい理論を作りたい.
+
+
+\begin{thebibliography}{99}
+
+% =======================
+% 直接参照した文献
+% =======================
+
+\bibitem{Kaneko2016}
+金子義雅・中村捷・原口庄輔（編著） (2016). 『増補版 チョムスキー理論辞典』研究社.
+
+\bibitem{Hoji1985}
+Hoji, Hajime (1985) ``Logical Form Constraints and Configurational Structures in Japanese.'' Doctoral dissertation, University of Washington.
+
+\bibitem{Hornstein2005}
+Hornstein, Norbert, Jairo Nunes \& Kleanthes Grohmann (2005). \textit{Understanding Minimalism}. Cambridge: Cambridge University Press.
+
+\bibitem{Johnson2000}
+Johnson, Kyle (2000) ``How far Will Quantifiers Go?''. University of Massachusetts, Amherst.
+
+\bibitem{May1977}
+May, Robert (1977) ``The Grammar of Quantification.'' Doctoral dissertation, MIT.
+
+\bibitem{Miyagawa2006a}
+Miyagawa, Shigeru (2006a) ``On the Undoing Property of Scrambling: A Response to Bošković.'' \textit{Linguistic Inquiry}, 37:607-624.
+
+\bibitem{Miyagawa2006b}
+Miyagawa, Shigeru (2006b) ``Moving to the Edge.'' 
+\textit{Proceedings of the KALS-KASELL International Conference on English and Linguistics}, 3-18. Pusan National University, Busan, Korea.
+
+\bibitem{Miyagawa2010}
+Miyagawa, Shigeru (2010) ``Optionality.'' In Cedric Boeckx (ed.), \textit{The Oxford Handbook of Linguistic Minimalism}, 354–376. Oxford: Oxford University Press.
+
+\bibitem{Saito1985}
+Saito, Mamoru (1985) ``Some Asymmetries in Japanese and Their Theoretical Implications.'' Doctoral dissertation, MIT.
+
+\bibitem{Ueyama1998}
+Ueyama, Ayumi (1998) ``Two Types of Dependency.'' Doctoral dissertation, University of Southern California.
+
+\bibitem{WALS}
+Dryer, Matthew S. \& Martin Haspelmath (eds.) (2025). 
+\textit{The World Atlas of Language Structures Online}. 
+Leipzig: Max Planck Institute for Evolutionary Anthropology. 
+Available at: \url{https://wals.info}
+
+\noindent 本ノートの1, 3.1.1は\cite{Kaneko2016}をベースに作成した.
+
+
+\end{thebibliography}
+
+
+
+
+
+\end{document}
