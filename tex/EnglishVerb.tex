@@ -1,0 +1,157 @@
+\documentclass{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{tikz}
+\usepackage[linguistics]{forest}
+\usepackage{ascmac}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{url}
+\renewcommand{\qed}{\unskip\nobreak\quad\qedsymbol}
+
+\usepackage{etoolbox}
+\begin{center}
+{\large \textbf{英語動詞の移動}}\par
+\vspace{0.5em}
+荒木 理求\par
+\texttt{rikuman81129@gmail.com}\par
+\today
+\end{center}
+\begin{document}
+\maketitle
+\subsection*{本動詞の主要部移動の有無}
+英語とフランス語の両者で, 連結詞(copula)たるbe動詞はVからTへと主要部移動(head-movement)するのであった. しかし本動詞の振る舞いは異なり, 見かけ上英語ではTヘ移動しないが, フランス語では移動する. VPにかかる副詞(VP-orieted adverb)$\mathit{completely}$の位置を基準に, このことを確かめてみよう$\colon$
+\begin{enumerate}
+ \item[(77)] a. John $\mathit{completely}$ answered the question.\\
+                 b. *John answered $\mathit{completely}$ the question.
+ \vspace{10pt}
+ \item[(78)] a. Jean r\'{e}pondait $\mathit{compltm\acute{e}nt}$ \`{a} la question.\\
+ \hspace{8pt}         Jean answered (imperf) $\mathit{completely}$ the question.\\
+ \hspace{8pt}    'Jean completely answered the question.'\\
+                 b. *Jean $\mathit{compltm\acute{e}nt}$ r\'{e}pondait \`{a} la question.
+\end{enumerate}
+(77)(=英語のデータ)では, 本動詞が副詞の(線形順序で)右側に位置し, 左側には現れない. 一方(78)(=フランス語のデータ)はその逆であり, 上の主張が従う. このときの木構造は以下の様である$\colon$
+\begin{enumerate}
+\item[(77)]
+{\fontsize{8pt}{8pt}\selectfont
+\begin{forest}
+[TP[DP[John$_i$, name=spec TP, {roof}]][T$'$[T[\lbrack Past\rbrack, name=T]][$\mathit{v}$P[AdvP[completely, {roof}]][$\mathit{v}$P[DP[$t_i$, name=DP]][$\mathit{v}'$[$\mathit{v}+$answered, name=v][VP[V$'$[V[$t_V$, name=V]][DP[the question, {roof}]]]]]]]]]
+\draw[->](V)to[out=-140, in=-100, looseness=1](v);
+\draw[->, dotted](v)to[out=-140, in=-100](T);
+\end{forest}}
+\item[(78)]
+{\fontsize{8pt}{8pt}\selectfont
+\begin{forest}
+[CP[C$'$[C][TP[DP[Jean$_i$, name=spec TP, {roof}]][T$'$[T[$v$+r\'{e}pondait, name=T]][$\mathit{v}$P[AdvP[compl\'{e}tement, {roof}]][$\mathit{v}$P[DP[$t_i$, name=DP]][$\mathit{v}'$[$t_v$$'$, name=v][VP[V$'$[V[$t_v$, name=V]][PP[\`{a} la question, {roof}]]]]]]]]]]]
+\draw[->](v)to[out=-140 ,in=-100](T);
+\draw[->](V)to[out=-140, in=-110, looseness=0.7](v);
+\end{forest}}
+\end{enumerate}
+フランス語はyes/no疑問文で本動詞がCまで移動する点でも英語と異なる\footnote{実は英語も中英語期(1100年$\textendash$1500年)までは本動詞がCまで移動していたと考えられる.16世紀以降, do迂言法を用いるという新たな規則が発達した.\cite{hotta1}\cite{hotta2}}
+$\colon$
+\begin{enumerate}
+\item[(79)] a. R\'{e}pondait-il \`{a} la question?\\
+                b. *Answered he the question?\\
+\item[(79a)]
+{\fontsize{8pt}{8pt}\selectfont
+\begin{forest}
+[CP[C$'$[C[T[$v$+R\'{e}pondait, name=C]]][TP[DP[-il$_i$, {roof}]][T$'$[T[$t_v$$''$, name=T]][$v$P[DP[$t_i$]][$v'$[$t_v$$'$, name=v][VP[V$'$[V[$t_v$, name=V]][PP[\`{a} la question, {roof}]]]]]]]]]]
+\draw[->](T)to[out=-140 ,in=-100](C);
+\draw[->](v)to[out=-140 ,in=-100, looseness=1](T);
+\draw[->](V)to[out=-140, in=-110, looseness=0.7](v);
+\end{forest}}
+\end{enumerate}
+否定文の観察からも同様の結論を得る. 実際, 英語はNegPを越えてTに移動することはせず, 虚辞(expletive)の$\mathit{do}$が現れる$\colon$
+\newpage
+\begin{enumerate}
+\item[(80)] a. *John goes $\mathit{not}$ to the store.\\
+                b. John does $\mathit{not}$ go to the store.
+\vspace{10pt}
+\item[(80b)]
+{\fontsize{8pt}{8pt}\selectfont
+\begin{forest}
+[TP[DP[John$_i$, {roof}]][T$'$[T[does, name=T]][NegP[not][Neg$'$[Neg][$v$P[DP[$t_i$]][$v'$[$v$+go, name=v][VP[V$'$[V[$t_v$, name=V]][PP[to the store,  {roof}]]]]]]]]]]
+\draw[->](V)to[out=-140, in=-110, looseness=0.7](v);
+\draw[->, dotted](v)to[out=-140, in=-100](T);
+\end{forest}}
+\end{enumerate}
+他方, フランス語では本動詞がNegPの(線形順序で)左側に現れる必要がある$\colon$
+\begin{enumerate}
+\item[(81)] a. Jean ne va $\mathit{pas}$ au magasin.\\
+ \hspace{8pt} Jean ne goes not to the store.\\
+ \hspace{8pt} 'Jean doesn't go to the store.'\\
+                b. Jean ne $\mathit{pas}$ va au magasin.
+\vspace{10pt}
+\item[(81a)]
+{\fontsize{8pt}{8pt}\selectfont
+\begin{forest}
+[TP[DP[Jean$_i$, {roof}]][T$'$[T[ne va+v, name=T]][NegP[Neg$'$[Neg[pas]][$v$P[DP[$t_i$]][$v'$[$t_v$$'$, name=v][VP[V$'$[V[$t_v$, name=V]][PP[au magasin,  {roof}]]]]]]]]]]
+\draw[->](V)to[out=-140, in=-110, looseness=0.7](v);
+\draw[->](v)to[out=-140, in=-100](T);
+\end{forest}}
+\end{enumerate}
+やはりフランス語の本動詞は, NegPを越えてVからTまで移動するのである.
+\newpage
+\subsection*{LFにおける主要部移動と素性の照合}
+ここまでの議論でフランス語の本動詞はVからTへ移動するが, 英語の本動詞はTまで移動しないことをみた. しかし後者はあくまでS構造においてであり, LFではTまで移動すると考えられる. 言語の普遍性を捉えたい生成文法の枠組みにおいて, 主要部移動をも統一的に扱おうとするこの考えはかなり自然である.\\
+\indent さて, 英語の本動詞の移動を考える具体的な根拠としてVP削除(VP deletion/ellipsis)を観察する. T$^0$には(i)主語と動詞の一致(subject-verb agreement)=$\varphi$素性(phi-features), (ii)時制(tense)の情報が含まれていることを思い出そう. これらの情報はVP削除された文にも残っている$\colon$
+\begin{enumerate}
+\item[(82)] a. John practices for three hours every day and Bill [does too].\\
+                b. John practices $\cdots$ and Bill [practices for three hours every day]. 
+\end{enumerate}
+(82a)の意味するところは(82b)であり, 確かに虚辞の$\mathit{do}$が三人称$\cdot$単数$\cdot$現在(以下, 三単現)を示す. これは(i),(ii)の情報がT$^0$に含まれおり, 省略されたのがVPのみであることを考えれば合点がいく. しかし(82)の前半部分はどうであろうか. 上の議論に倣えば(i),(ii)の情報を表すためにT$^0$に何らかの助動詞\footnote{法の助動詞(modal verb), be動詞/$\mathit{have}$, 虚辞の$\mathit{do}$を指す. 実は$\mathit{have}$もbe動詞同様, 主要部移動する. 例えば\cite{watanabe}p.23, pp33-36を参照せよ.}が必要になるが, 空である. 実際, ここでは本動詞の$\mathit{practices}$が三単現を表示しているので, むしろVと元から(i),(ii)を備えているT$^0$がそれらを照合し, 実現を確かめる仕組みが必要になる.
+\indent そのために, まず「語彙目録(lexicon)から$\mathit{practice}$を取り出して(i),(ii)の情報を併合し, $\mathit{practices}$(あるいは$\mathit{practiced}$など)を構成する」のではなく, 「語彙目録からあらかじめ(i),(ii)の情報を持った$\mathit{practices}$を取り出す」モデルを仮定する. するとその後のVからTへの主要部移動によって, (i),(ii)の情報の照合及び文法性判断が可能となる. 英語とフランス語の主要部移動における違いは, これがLFで行われる(=不可視)か, D構造とS構造の間で行われる(=可視)かの差異に還元される. それゆえ次の(83)のLFとして(84)が想定される$\colon$
+\begin{enumerate}
+\item[(83)] John [{\tiny $v$P} often[{\tiny $v$P} sees Bill]].
+\vspace{10pt}
+\item[(84)] 
+{\fontsize{8pt}{8pt}\selectfont
+\begin{forest}
+[TP[DP[John$_i$, {roof}]][T$'$[T[$v$+sees, name=T]][$v$P[AdvP[often, {roof}]][$v$P[DP[$t_i$]][$v'$[$t_v$$'$, name=v][VP[V$'$[V[$t_v$]][DP[Bill, {roof}]]]]]]]]]
+\draw[->](v)to[out=-140, in=-100](T);
+\end{forest}}
+\end{enumerate}
+\indent この議論によって, 意味に寄与する形態たるLFにおいて, 英語とフランス語を統一的に扱えるようになった. 
+
+\subsection*{接辞移動とdo 挿入}
+英語の否定文や疑問文の分析のうち代表的なものとして, 接辞移動(affix hopping)とdo 挿入(do-support)が挙げられる\footnote{例えば\cite{watanabe}pp.37-40を参照せよ.}. \\
+\indent 接辞(affix)とは「独立した単語としては機能できず, 他の要素にくっつかなければならないもの\footnote{\cite{watanabe}p.38より引用.}」である. 例えば過去形を作る$\mathit{-ed}$が接辞(接尾辞/suffix)であり, (先の議論では採用しなかった)語彙目録から原形を取り出すモデルを想定する場合, T$^0$に含まれる時制の情報[Past]をVに位置する原形動詞に与える必要がある. そこで接辞を動詞にくっつけてV+[Past]という形を作る操作を接辞移動と呼ぶ. これらは語の形態(morphology)に関わり, 今まで扱ってきた移動とは本質的に異なる. しかし接辞移動はいつでも可能なわけではない$\colon$
+\begin{enumerate}
+\item[(a)] *Mary not come to the party.
+\item[(b)] Did Mary come to the party?
+\item[(b$'$)]
+{\fontsize{8pt}{8pt}\selectfont
+\begin{forest}
+[CP[C$'$[C[T[\lbrack Past\rbrack, name=C]]][TP[DP[Mary$_i$, {roof}]][T$'$[T[$t$, name=T]][$v$P[DP[$t_i$]][$v'$[$v$+come][VP[$t_v$ to the party, {roof}]]]]]]]]
+\draw[->](T)to[out=-140, in=-100](C);
+\end{forest}}
+\end{enumerate}
+(a)のような接辞移動によって出来上がる否定文は非文となる. また, (b)のSAI.後の構造は(b$'$)のようになり, 接辞移動の代わりに時制をになる虚辞の$\mathit{do}$が必要になる. これをdo 挿入とよぶ. このことから,接辞移動は隣接条件(Adjacency condition)を満たさなければならないと考えられる.\\
+\indent しかしこの理論では, VPを修飾する副詞が登場する(77)のような文章が説明できず, 修正を強いられる. この点でも英語のLFでの主要部移動を考える理論は優れている.
+
+
+
+
+
+
+\begin{thebibliography}{9}
+\bibitem{Poole} Geoffrey Poole.
+\newblock {\em Syntactic Theory}.
+\newblock Red Globe Press, 2nd ed, 2011
+\bibitem{watanabe} 渡辺 明.
+\newblock 『生成文法』
+\newblock 東京大学出版会, 第9刷, 2021.
+\bibitem{hotta1} 堀田 隆一.
+\newblock 「hellog$\thicksim$英語史ブログ\#3765」. 2019.
+\newblock \url{https://user.keio.ac.jp/~rhotta/hellog/cat_interrogative.html.} (参照2025.5.9)
+\bibitem{hotta2} 堀田 隆一.
+\newblock 『英語の「なぜ?」に答えるはじめての英語史』.
+\newblock 研究社, 第9刷, 2024.
+ 
+
+\end{thebibliography}
+\end{document}
