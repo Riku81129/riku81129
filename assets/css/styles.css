@@ -1,11 +1,11 @@
 /* Minimal, elegant portfolio styles */
 :root {
-  --bg:#faf5e3;
+  --bg: #f3ead0;
   --text: #1a1a1a;      /* 文字：黒寄り */
   --muted: #6f6a63;     /* 補助テキスト */
   --accent: #3a6ea5;   /* 控えめな青（照井サイト系） */
-  --card: #ffffff;     /* 文字が乗るところは白 */
-  --border: #e2ddd6;   /* 肌色寄りの境界線 */
+  --card: #f1ead7;     /* 文字が乗るところは白 */
+  --border: #d8cdb5;   /* 肌色寄りの境界線 */
   --radius: 16px;
   --maxw: 920px;
 }
