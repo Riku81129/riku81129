@@ -1,0 +1,475 @@
+\documentclass{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage[linguistics]{forest}
+
+\usepackage{ascmac}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{url}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{ulem}
+\usepackage{fancybox}
+\usepackage{framed}
+\usepackage[most]{tcolorbox}
+\usepackage{varwidth} 
+\tcbuselibrary{skins,breakable}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{movement-arrows}
+
+
+
+\newcommand{\N}{\mathbb{N}}%自然数
+\newcommand{\Z}{\mathbb{Z}}%整数
+\newcommand{\Q}{\mathbb{Q}}%有理数
+\newcommand{\R}{\mathbb{R}}%実数
+\newcommand{\C}{\mathbb{C}}%複素数
+
+\newtcolorbox{def2}[2][]{%
+  enhanced,
+  title={#2},
+  fonttitle=\bfseries,
+  colback=cyan!5,
+  colframe=cyan!50!black,
+  sharp corners=northwest,
+  % --- ここからタイトルの見た目調整 ---
+  attach boxed title to top left={%
+    xshift=0mm,                 % 左端から少し内側
+    yshift*=-0.5mm % 枠線に半分かぶせる
+  },
+  varwidth boxed title*=-3mm,   % タイトルの幅に合わせた小さい箱
+  boxed title style={%
+    colback=cyan!50!black,
+    colframe=cyan!50!black,
+    rounded corners,
+    sharp corners=south,
+    boxrule=0.5pt,
+  },
+  % --- ここまで ---
+  #1
+}
+
+\newtcolorbox{thm}[2][]{%
+  enhanced,
+  title={#2},
+  fonttitle=\bfseries,
+  colback=green!5,
+  colframe=green!50!black,
+  sharp corners=northwest,
+  % --- ここからタイトルの見た目調整 ---
+  attach boxed title to top left={%
+    xshift=0mm,                 % 左端から少し内側
+    yshift*=-0.5mm % 枠線に半分かぶせる
+  },
+  varwidth boxed title*=-3mm,   % タイトルの幅に合わせた小さい箱
+  boxed title style={%
+    colback=green!50!black,
+    colframe=green!50!black,
+    rounded corners,
+    sharp corners=south,
+    boxrule=0.5pt,
+  },
+  #1
+}
+
+\newtcolorbox{lem}[2][]{%
+  enhanced,
+  title={#2},
+  fonttitle=\bfseries,
+  colback=blue!5,
+  colframe=blue!50!black,
+  sharp corners=northwest,
+  % --- ここからタイトルの見た目調整 ---
+  attach boxed title to top left={%
+    xshift=0mm,                 % 左端から少し内側
+    yshift*=-0.5mm % 枠線に半分かぶせる
+  },
+  varwidth boxed title*=-3mm,   % タイトルの幅に合わせた小さい箱
+  boxed title style={%
+    colback=blue!50!black,
+    colframe=blue!50!black,
+    rounded corners,
+    sharp corners=south,
+    boxrule=0.5pt,
+  },
+  % --- ここまで ---
+  #1
+}
+
+\newtcolorbox{ex}[2][]{%
+  enhanced,
+  title={#2},
+  fonttitle=\bfseries,
+  colback=violet!5,
+  colframe=violet!50!black,
+  sharp corners=northwest,
+  % --- ここからタイトルの見た目調整 ---
+  attach boxed title to top left={%
+    xshift=0mm,                 % 左端から少し内側
+    yshift*=-0.5mm 
+  },
+  varwidth boxed title*=-3mm,   % タイトルの幅に合わせた小さい箱
+  boxed title style={%
+    colback=violet!50!black,
+    colframe=violet!50!black,
+    rounded corners,
+    sharp corners=south,
+    boxrule=0.5pt,
+  },
+  #1
+}
+
+\newtcolorbox{marker}{
+  enhanced,
+  colback=yellow!20,
+  colframe=yellow!40!black,
+  boxrule=0.4pt,
+  left=8mm,
+  overlay={
+    % 左の!帯
+    \fill[brown!80!black] (frame.north west) rectangle ([xshift=6mm]frame.south west);
+    \node[white,font=\bfseries\Large] at ([xshift=3mm]frame.west) {!};
+    % 右下折れ曲がり
+    \fill[yellow!70!white]
+      (frame.south east) -- ++(-6mm,0) -- ++(6mm,6mm) -- cycle;
+  },
+}
+
+
+% ---- 証明環境のカスタマイズ ----------------------------
+% 左側だけ線を引いた mdframed 環境を定義
+\newmdenv[
+  skipabove=\topsep,
+  skipbelow=\topsep,
+  leftline=true,      % 左の線だけ true
+  rightline=false,
+  topline=false,
+  bottomline=false,
+  linecolor=gray!70,
+  linewidth=2pt,
+  innerleftmargin=5mm,
+  innerrightmargin=0mm,
+  innertopmargin=1ex,
+  innerbottommargin=1ex,
+]{proofbox}
+
+% amsthm の proof 環境を上書き
+\renewenvironment{proof}[1][Proof]{%
+  \begin{proofbox}%
+    \textit{#1. }\ignorespaces
+}{%
+    \hfill\qedsymbol%
+  \end{proofbox}%
+}
+
+
+\begin{document}
+\begin{center}
+{\large \textbf{Ascoli–Arzelàの定理}}\par
+\vspace{0.5em}
+荒木 理求\par
+\texttt{araki-riku@ed.tmu.ac.jp}\par
+\end{center}
+
+\begin{thm}{定理1 (Ascoli–Arzelàの定理, 1次元version).}
+$I$を$\mathbb{R}$上の有界閉区間, $\{f_n\}_{n\in\mathbb{N}}$を$I$上の実数値連続関数全体$C^{0}(I;\mathbb{R})$の点列とする. このとき$\{f_n\}_{n\in\mathbb{N}}$が一様有界かつ同程度連続ならば, $\{f_n\}_{n\in\mathbb{N}}$は$I$上一様収束する部分列を持つ.
+\end{thm}
+\uline{Key Point}$\colon$\fbox{可分性, Cantorの対角線論法}
+\begin{proof}[Proof]
+$I\cap\mathbb{Q}$の全ての元からなる数列$\{x_n\}_{n\in\mathbb{N}}$は, $I$の稠密部分集合である ($I$の可分性).
+
+\indent$\{f_n\}_{n\in\mathbb{N}}$は一様有界なので, 特に$\{f_{n}(x_{1})\}_{n\in\mathbb{N}}$は有界である.したがってBolzano-Weierstrassの定理より, $x_1$での値が収束するような$\{f_n\}_{n\in\mathbb{N}}$の部分列$\{f_{1,n}\}_{n\in\mathbb{N}}$がとれる. 同様に, ある部分列$\{f_{2,n}\}_{n\in\mathbb{N}}\subset\{f_{1,n}\}_{n\in\mathbb{N}}$が存在して, $\{f_{2,n}(x_2)\}_{n\in\mathbb{N}}$は収束する. この操作を繰り返せば, $\{f_{k,n}\}_{n\in\mathbb{N}}\subset\{f_{k-1,n}\}_{n\in\mathbb{N}}$で, $\{f_{k,n}(x_{k})\}_{n\in\mathbb{N}}$が収束するような部分列がとれる. このとき対角線上に並ぶ列$\{f_{n,n}\}_{n\in\mathbb{N}}$は, 任意の$i\in\mathbb{N}$について$\{f_{n,n}(x_i)\}_{n\in\mathbb{N}}$が収束するような関数列である (対角線論法). 実際, $\{f_{n,n}\}_{n\ge i}\subset\{f_{i,n}\}_{n\in\mathbb{N}}$であり, かつ$\{f_{i,n}(x_i)\}_{n\in\mathbb{N}}$は収束する.
+
+\vspace{1em}
+\begin{center}
+\begin{tikzpicture}[x=1.6cm,y=1cm]
+
+  % 1 行目：f_{1,n}
+  \node (11)    at (0,0) {$f_{1,1}$};
+  \node (12)    at (1,0) {$f_{1,2}$};
+  \node (13)    at (2,0) {$f_{1,3}$};
+  \node (1dots) at (3,0) {$\cdots$};
+
+  \node[right=1.5cm of 1dots] (exp1)
+     {$\text{s.t. }\{f_{1,n}(x_{1})\}\text{ は収束する}$};
+
+  % 2 行目：f_{2,n}
+  \node (21)    at (0,-1) {$f_{2,1}$};
+  \node (22)    at (1,-1) {$f_{2,2}$};
+  \node (23)    at (2,-1) {$f_{2,3}$};
+  \node (2dots) at (3,-1) {$\cdots$};
+
+  \node[right=1.5cm of 2dots] (exp2)
+     {$\text{s.t. }\{f_{2,n}(x_{2})\}\text{ は収束する}$};
+  % 3 行目：f_{3,n}
+  \node (31)    at (0,-2) {$f_{3,1}$};
+  \node (32)    at (1,-2) {$f_{3,2}$};
+  \node (33)    at (2,-2) {$f_{3,3}$};
+  \node (3dots) at (3,-2) {$\cdots$};
+
+  \node[right=1.5cm of 3dots] (exp3)
+     {$\text{s.t. }\{f_{3,n}(x_{3})\}\text{は収束する }$};
+
+  % 以下ずっと続くイメージ
+  \node (vdots1) at (0,-3) {$\vdots$};
+  \node (vdots2) at (1,-3) {$\vdots$};
+  \node (vdots3) at (2,-3) {$\vdots$};
+  \node (vdots4) at (3,-3) {$\ddots$};
+
+  % 対角線上の成分を丸で囲む
+  \draw[thick] (11) circle [radius=0.4];
+  \draw[thick] (22) circle [radius=0.4];
+  \draw[thick] (33) circle [radius=0.4];
+
+  % 対角列 {f_{n,n}} のラベル（お好みで）
+  \node[right] at (3.8,-3.2) {$\{f_{n,n}\}_{n\in\mathbb{N}}$};
+
+\end{tikzpicture}
+\end{center}
+
+\vspace{1em}
+
+\noindent 以下$\{f_{n,n}\}_{n\in\mathbb{N}}$が$||\cdot||_{I}$(一様ノルム) についてCauchy列であることを示す. $\varepsilon>0$を任意にとる. このとき
+
+\begin{enumerate}
+\item[(1)] ある$\delta>0$が存在して
+\[
+\forall n\in\mathbb{N}\;\forall x, y\in I\; \left(|x-y|<\delta\to|f_{n,n}(x)-f_{n,n}(y)|<\frac{\varepsilon}{3}\right)
+\]
+を満たす($\{f_{n,n}\}_{n\in\mathbb{N}}$の同程度連続性より).
+
+\item[(2)] (1)の$\delta$に対し, ある$M\in\mathbb{N}$が存在して
+\[
+\forall x\in I \;\exists i\in\{1, 2, \cdots, M\}\; |x-x_i|<\delta
+\]
+を満たす($I$の有界性$\&\{x_n\}_{n\in\mathbb{N}}$の$I$における稠密性より).
+
+\item[(3)] (2)の$M$に対し
+\[
+\forall i\in\{1, 2, \cdots, M\} \;\exists N_{i}\in\mathbb{N} \;\forall m,n\in\mathbb{N}\; \left(m,n\ge N_i\to|f_{m,m}(x_i)-f_{n,n}(x_i)|<\frac{\varepsilon}{3}\right)
+\]
+が成り立つ($\{f_{n,n}\}_{n\in\mathbb{N}}$のとり方から, 任意の$i\in\mathbb{N}$に対して$\{f_{n,n}(x_i)\}_{n\in\mathbb{N}}$は絶対値ノルム$|\cdot|$についてCauchy列だから). したがって$N\coloneq \max_{1\le i\le M} N_i$とすれば
+\[
+\forall i\in\{1, 2, \cdots, M\} \;\forall m,n\in\mathbb{N}\; \left(m,n\ge N\to|f_{m,m}(x_i)-f_{n,n}(x_i)|<\frac{\varepsilon}{3}\right)
+\]
+が成り立つ.
+\end{enumerate}
+ここで (1)-(3) の手順から, $N$は$M$にのみ依存し, $M$は$\delta$, $\delta$は$\varepsilon$にのみ依存することがわかる. すなわち (3) の$N$は$\varepsilon$にのみ依存する. したがって任意の$m, n\ge N,$任意の$x\in I$について, (2) の$|x-x_i|<\delta$を満たす$x_i$をとれば
+\begin{align*}
+|f_{m,m}(x)-f_{n,n}(x)|&\le |f_{m,m}(x)-f_{m,m}(x_i)|+|f_{m,m}(x_i)-f_{n,n}(x_i)|+|f_{n,n}(x_i)-f_{n,n}(x)|\\
+                          &< \frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3}=\varepsilon
+\end{align*}
+が成り立つ. $\varepsilon>0$は任意だったので
+\begin{align*}
+&\forall \varepsilon>0\; \exists N\in\mathbb{N}\; \forall m, n\in\mathbb{N}\; \forall x\in I\;(m, n\ge N \to |f_{m,m}(x)-f_{n,n}(x)|<\varepsilon) &\\
+\iff &\forall \varepsilon>0\; \exists N\in\mathbb{N}\; \forall m, n\in\mathbb{N}\;(m, n\ge N \to ||f_{m,m}(x)-f_{n,n}(x)||_{I}<\varepsilon) &\\
+\iff
+&\{f_{n,n}\}_{n\in\mathbb{N}}\;\text{は}||\cdot||_{I}\;\text{についてCauchy列} &
+\end{align*}
+がわかる. さて$\{f_{n,n}\}_{n\in\mathbb{N}}$の一様有界性から
+\[
+\{f_{n,n}\}_{n\in\mathbb{N}}\subset C^{0}_{b}(I)\coloneq\{f\in C^{0}(I)\colon\;||f||_{I}<\infty\}
+\]
+であり, 
+$(C^{0}_{b}(I),||\cdot||_{I})$はBanach空間なので, $\{f_{n,n}\}_{n\in\mathbb{N}}$は$I$上一様収束する.
+\end{proof}
+\vspace{1em}
+$\{f_n\}_{n\in\mathbb{N}}$を$I$上の複素数値連続関数全体$C^{0}(I;\mathbb{C})$の部分集合としても, 複素数の絶対値を考えることで, 1次元versionのAscoli–Arzelàの定理が成り立つことは容易にわかる.
+
+\vspace{1em}
+
+
+さて, 定義域を$\mathbb{R}^n$上の有界領域 (連結な開集合) としても同様に成立するのだが, 少し詳しく見てみよう. 有界領域$K\subset\mathbb{R}^n$に対し, $K\cap\mathbb{Q}^n$の元からなる点列は$K$の可算な稠密部分集合であり, 「$\mathbb{R}^n$の任意の有界数列は収束する部分列を持つ」というのがBolzano-Weierstrassの定理の主張だから, Euclidノルムを考えれば, 前半の対角線論法までは問題ない. \\
+\indent あとは構成した部分列がCauchy列であることを示せばよいのだが, (2) は1次元のときより多少複雑になる. 上の証明の (2) は, くだけた言い方をすれば, $I$の有界性から「有界区間$I$を幅$\delta$で分割すると部屋は有限個で足りる」こと, そして$\{\bm{x}_n\}_{n\in\mathbb{N}}$の稠密性から「どの部屋にも必ず$\{\bm{x}_n\}_{n\in\mathbb{N}}$の元がいる」ことがわかるので, 各部屋に一つずつ割り当てた$\{\bm{x}_n\}_{n\in\mathbb{N}}$の元のうち, 最も大きい添え字を$M$とすればよい, という流れであった. \\
+\indent$K$の稠密部分集合がとれることはすでに見たが, 1次元のときとパラレルな議論をするには, 「有界区間$I$を ($\varepsilon$に依存して決まる) 幅$\delta$で分割すると部屋は有限個で足りる」ことに対応する, 「任意の$\delta>0$について, $K$の有限$\delta$-ネットが存在する」ことが必要となる. 
+
+\begin{figure}[H]
+\centering
+\vspace{1em}
+\begin{tikzpicture}
+
+  %%%%%%%%%%%%% 左側: R 上の有界閉区間 I %%%%%%%%%%%%%
+  \begin{scope}
+    % ラベル R と枠（下辺と右辺のみ）
+    \node[anchor=west] (Rlabel) at (-0.45,1.7) {$\mathbb{R}$};
+    \draw (-0.45,1.45) -- (0.05,1.45);   % 下辺
+    \draw (0.05,1.45) -- (0.05,1.95);      % 右辺
+
+    % 実数直線
+    \draw[->] (-0.5,0) -- (5.5,0);
+
+     % 区間 I = [a,b]
+  \coordinate (a) at (1,0);
+  \coordinate (b) at (4,0);
+  \draw[line width=2pt] (a) -- (b);
+
+  \node at (2.5,0.4) {$I$};
+
+  % ---- 目盛り位置（今回は一律 0.6 刻みとして） ----
+  \def\TickStep{0.6}
+  \foreach \k in {1,...,7}{
+  \draw (\k*\TickStep,0.15) -- (\k*\TickStep,-0.15);
+  }
+
+  % ---- δ のラベルも座標指定 ----
+  % 左端の目盛りから TickStep の半分のところ
+  \node at (1,-0.5) {幅$\delta$};
+
+ \end{scope}
+
+  %%%%%%%%%%%%% 右側: R^2 上の K と δ-ネット %%%%%%%%%%%%%
+  \begin{scope}[xshift=7cm]
+    % ラベル R^2 と枠（下辺と右辺のみ）
+    \node[anchor=west] (Rtwo) at (-0.8,3.2) {$\mathbb{R}^2$};
+    \draw (-0.8,2.95) -- (-0.2,2.95);   % 下辺
+    \draw (-0.2,2.95) -- (-0.2,3.45);     % 右辺
+
+    % 座標軸
+    \draw[->] (-0.5,0) -- (4.5,0);
+    \draw[->] (0,-0.5) -- (0,3.5);
+
+    % 非凸な領域 K
+    \draw[thick, fill=gray!10]
+      (0.6,0.6) .. controls (1.4,0.1) and (2.2,0.3) ..
+      (3.2,0.7) .. controls (3.8,1.4) and (3.4,2.4) ..
+      (2.6,2.8) .. controls (2.0,2.6) and (1.4,2.8) ..
+      (0.8,2.3) .. controls (0.4,1.9) and (0.4,1.3) ..
+      (0.5,0.9) .. controls (0.5,0.7) and (0.55,0.65) ..
+      cycle;
+
+    \node at (2.2,1.6) {$K$};
+
+    % K を覆う δ-ボール（すべて K をきちんと覆うように配置）
+    \def\r{0.65}
+    \foreach \x/\y in {
+      0.9/0.8,
+      1.8/0.7,
+      2.8/0.8,
+      3.1/1.5,
+      2.8/2.3,
+      1.9/2.5,
+      1.1/2.0,
+      0.9/1.3,
+      1.9/1.5
+    }{
+      \draw[dashed] (\x,\y) circle (\r);
+    }
+
+    \node[below right] at (0.5,-0.2) {有限個の半径$\delta$の開円板};
+  \end{scope}
+
+\end{tikzpicture}
+\vspace{1em}
+\end{figure}
+
+
+
+言い換えれば$K$の全有界性が必要で, これは (ほとんど明かな) 次の補題からわかる.
+
+\begin{lem}{補題2.}
+Euclid空間$\mathbb{R}^n$における任意の部分集合$K\subset\mathbb{R}^n$について
+\[
+Kは\text{有界}\Rightarrow Kは\text{全有界}
+\]
+が成り立つ.
+\end{lem}
+
+\begin{proof}[Proof]
+$K$を${R}^n$の有界部分集合とすれば, ある点$\bm{a}\in\mathbb{R}^n$と$M>0$が存在して
+\[
+K\subset B(\bm{a},M)\coloneq \{\bm{x}\in \mathbb{R}^n\; \colon d(\bm{x}, \bm{a})<M\}
+\]
+が成り立つ. この$\bm{a}, M$について$M'\coloneq d(\bm{a}, \bm{0})+M$とおくと $B(\bm{a},M)\subset [-M',M']^n$ なので, $ [-M',M']^n$が全有界であることを示せばよい.\\
+\indent $\varepsilon>0$を任意にとる. このとき$m\in\mathbb{N}$を十分大きくとることで$1/m<\varepsilon/\sqrt{n}$とできる. さて
+\[
+A\coloneq \left\{\left(\frac{k_1}{m}, \frac{k_2}{m}, \cdots, \frac{k_n}{m}\right)\; \colon -mM'\le k_1, k_2, \cdots, k_n\le mM'\right\}
+\]
+という, 各$[-M',M']^n$を幅$1/m$で分割したときの格子点の集合を考えれば
+\[
+[-M',M']^n \subset \bigcup_{\bm{\alpha} \in A} B(\bm{\alpha}, \varepsilon)
+\]
+となる. 実際, 任意の$\bm{x}=(x_1, x_2, \cdots, x_n)\in [-M',M']^n$に対し$\bm{y}\coloneq\left(\frac{k_1}{m}, \frac{k_2}{m}, \cdots, \frac{k_n}{m}\right)\in A$が存在して
+\[
+\forall i\in \{1, 2, \cdots, n\}\; \left|x_i-\frac{k_i}{m}\right|<\frac{1}{m}
+\]
+が成り立つので, このような$\bm{y}$について
+\begin{align*}
+d(\bm{x}, \bm{y}) &= \sqrt{\sum_{i=1}^{n} \left(x_i-\frac{k_i}{m}\right)^2} \\
+		      &< \sqrt{\sum_{i=1}^{n}  \dfrac{1}{m^2}} = \dfrac{\sqrt{n}}{m}< \varepsilon
+\end{align*}
+となり, $\bm{x}\in B(\bm{y}, \varepsilon)$が従う.
+\end{proof}
+
+\vspace{1em}
+
+このように$\R^n$の有界領域$K$についても無事 (2) の議論ができて, 対角線論法で構成した部分列がCauchy列であることがわかる.\\
+\indent 念のため証明の最後も復習すると, 完備性のために$\{f_{n,n}\}_{n\in\mathbb{N}}\subset C^{0}_{b}(K)$であることを使っていた. $K\subset\R^n$が有界閉集合 (Heine-Borelの被覆定理より$K$はコンパクト) のとき最大値の原理 (コンパクト集合上の連続関数は最大値を持つ) より
+$C^0(K,\C) = C^{0}_{b}(K,\C)$が成り立つのだが, 前述の通り一様有界性さえあればそのような議論は不要である. 
+
+\begin{marker}
+以上の確認から, 定義域をEuclid空間で考える場合には有界性さえあれば十分で, 定理1における$I$が開集合であるという仮定, あるいは$K$が領域であるという仮定は減らせることがわかる.
+\end{marker}
+
+ここまでの結果をまとめると次の様になる.
+\begin{thm}{定理3 (Ascoli–Arzelàの定理, Euclid空間version).}
+$K$を$\R^n$上の有界集合, $\{f_n\}_{n\in\mathbb{N}}$を$K$上の複素数値連続関数全体$C^{0}(K;\C)$の点列とする. このとき$\{f_n\}_{n\in\mathbb{N}}$が一様有界かつ同程度連続ならば, $\{f_n\}_{n\in\mathbb{N}}$は$K$上一様収束する部分列を持つ.
+\end{thm}
+
+$\C$と$\R^2$は同一視できるので, 定理3は定義域を$\C$の有界領域としても成り立ち, この形は例えばMontelの定理の証明で役立つ (開集合でなくてよいことは用無しである).
+
+\vspace{1em}
+
+さらなる一般化によって定義域を任意の全有界距離空間としても上の定理は成り立つ. 全有界距離空間$X$上の複素数値連続関数全体を$C^0(K, \C)$とすると, $(C^0(K, \C), ||\cdot||_{I})$はBanach空間となる ($\C$ の完備性から示せるので, 定理3でも問題にならなかった).
+
+\begin{thm}{定理4 (Ascoli–Arzelàの定理).}
+$(X,d)$を全有界距離空間, $\{f_n\}_{n\in\mathbb{N}}$を$X$上の複素数値連続関数全体$C^{0}(X;\C)$の点列とする. このとき$\{f_n\}_{n\in\mathbb{N}}$が一様有界かつ同程度連続ならば, $\{f_n\}_{n\in\mathbb{N}}$は$X$上一様収束する部分列を持つ.
+\end{thm}
+定理3までの議論で得た教訓から, 次の補題があれば十分である.
+
+\begin{lem}{補題5.}
+全有界距離空間$(X, d)$は可分である. すなわち$X$の可算部分集合で, $X$で稠密なものが存在する.
+\end{lem}
+\begin{proof}[Proof]
+$X$は全有界なので, 各$n\in\N$に対して有限$1/n$-ネット$S_n= \left\{B\left(x_{n,k},\frac{1}{n}\right)\;\colon 1\le k\le k_n\right\}$が存在する. このとき
+\[
+S\coloneq \{x_{n,k}\;\colon n\in\N, 1\le k\le k_n\}
+\]
+とおけば, $S$は$X$の可算な稠密部分集合である. 実際, 有限集合$S_n$の可算個の合併なので可算である. また任意の$x\in X$, 任意の$\varepsilon>0$に対し$m\in\N$を十分大きくとることで$1/n<\varepsilon$とできて, $S_m$は$X$の被覆だから, ある$x_{m,k}\in S_m$が存在して$x\in B(x_{m,k},\frac{1}{n})$となる. すなわち$d(x,x_{x_{m,k}})<1/n<\varepsilon$が成り立つので, $S$は$X$で稠密である.
+
+\end{proof}
+
+\vspace{1em}
+
+定理3が定理1として知られているように, 定理4を``きれいな形''で主張し直したのが定理6である.
+\begin{thm}{定理6 (Ascoli–Arzelàの定理).}
+$(X,d)$をコンパクト距離空間, $\{f_n\}_{n\in\mathbb{N}}$を$X$上の複素数値連続関数全体$C^{0}(X;\C)$の点列とする. このとき$\{f_n\}_{n\in\mathbb{N}}$が一様有界かつ同程度連続ならば, $\{f_n\}_{n\in\mathbb{N}}$は$X$上一様収束する部分列を持つ.
+\end{thm}
+\begin{proof}[Proof]
+$X$をコンパクト距離空間とすれば, $X$は全有界である.実際, 任意の$\varepsilon>0$について$\{B(x,\varepsilon)\; \colon \; x\in X\}$は$X$の開被覆だから有限部分被覆が存在し, それは$X$の有限$\varepsilon$-ネットに他ならない.
+\end{proof}
+
+上で使った「コンパクト距離空間は全有界である」は自明だが, 次の関係が有名である. 
+\begin{lem}{定理7.}
+$(X, d)$を距離空間とすると, 以下は同値である.
+\begin{enumerate}
+\item[(1)] $X$はコンパクト
+\item[(2)] $X$は点列コンパクト
+\item[(3)] $X$は全有界かつ完備
+\end{enumerate}
+\end{lem}
+
+\begin{thebibliography}{99}
+\bibitem{Jost}
+ Jurgen Jost. \textit{Postmodern Analysis}. Springer.
+\bibitem{Karel}
+ Karel SVADLENKA. 『解析学A\;:\;講義ノート』.
+\end{thebibliography}
+
+\end{document}
