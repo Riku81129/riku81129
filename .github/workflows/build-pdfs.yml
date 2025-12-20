@@ -24,13 +24,7 @@ jobs:
           root_file: modernism.tex
           working_directory: tex
           compiler: latexmk
-          args: >
-            -pdfdvi
-            -latex=platex
-            -e '$dvipdf="dvipdfmx %O -o %D %S"'
-            -interaction=nonstopmode
-            -halt-on-error
-            -file-line-error
+          args: -pdfdvi -interaction=nonstopmode -halt-on-error -file-line-error
 
       - name: Move PDF into pdfs/
         run: |
@@ -42,3 +36,9 @@ jobs:
         with:
           add: "pdfs/modernism.pdf"
           message: "Auto-build modernism.pdf"
+      
+      - name: Check outputs
+        run: |
+          ls -la tex
+          test -f tex/modernism.pdf
+
