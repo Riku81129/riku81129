@@ -1,11 +1,12 @@
 /* Minimal, elegant portfolio styles */
 :root {
-  --bg: #f3ead0;
+  --bg: #f6edd6;
   --text: #1a1a1a;      /* 文字：黒寄り */
   --muted: #6f6a63;     /* 補助テキスト */
   --accent: #3a6ea5;   /* 控えめな青（照井サイト系） */
+  --nav-accent: #6b2f3a;
   --card: #f1ead7;     /* 文字が乗るところは白 */
-  --border: #d8cdb5;   /* 肌色寄りの境界線 */
+  --border: #dccfb3;   /* 肌色寄りの境界線 */
   --radius: 16px;
   --maxw: 920px;
 }
@@ -31,7 +32,7 @@ header.site-header {
   top: 0;
   left: 0;
   right: 0;
-  background: var(--card);      /* 白 */
+  background: var(--bg);     
   border-bottom: 1px solid var(--border);
   z-index: 9999;
 }
@@ -89,9 +90,16 @@ nav ul li a {
 
 nav ul li a:hover {
   background: #efe9e1;   /* 肌色より少し濃い */
-  color: var(--text);
+  color: var(--nav-accent);
+  text-decoration: none; /*下線けす*/
 }
 
+/* 現在のページ（ヘッダーのリンク）だけ赤紺に */
+nav ul li a.active,
+nav ul li a[aria-current="page"] {
+  color: #6b2f3a;   /* 赤紺 */
+  font-weight: 600; /* 少し強調（不要なら消してOK） */
+}
 
 .hero {
   padding: 72px 0 24px;
