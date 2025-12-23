@@ -1,0 +1,497 @@
+\documentclass{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage[linguistics]{forest}
+
+\usepackage{ascmac}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{ulem}
+\usepackage{fancybox}
+\usepackage{framed}
+\usepackage[most]{tcolorbox}
+\usepackage{varwidth} 
+\tcbuselibrary{skins,breakable}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{movement-arrows}
+
+
+
+\newcommand{\N}{\mathbb{N}}%自然数
+\newcommand{\Z}{\mathbb{Z}}%整数
+\newcommand{\Q}{\mathbb{Q}}%有理数
+\newcommand{\R}{\mathbb{R}}%実数
+\newcommand{\C}{\mathbb{C}}%複素数
+
+\newtcolorbox{Def}[2][]{%
+enhanced,
+title={#2},
+fonttitle=\bfseries,
+colback=cyan!5,
+colframe=cyan!50!black,
+sharp corners=northwest,
+% --- ここからタイトルの見た目調整 ---
+attach boxed title to top left={%
+xshift=0mm, % 左端から少し内側
+yshift*=-0.5mm % 枠線に半分かぶせる
+},
+varwidth boxed title*=-3mm, % タイトルの幅に合わせた小さい箱
+boxed title style={%
+colback=cyan!50!black,
+colframe=cyan!50!black,
+rounded corners,
+sharp corners=south,
+boxrule=0.5pt,
+},
+% --- ここまで ---
+#1
+}
+
+\newtcolorbox{thm}[2][]{%
+enhanced,
+title={#2},
+fonttitle=\bfseries,
+colback=green!5,
+colframe=green!50!black,
+sharp corners=northwest,
+% --- ここからタイトルの見た目調整 ---
+attach boxed title to top left={%
+xshift=0mm, % 左端から少し内側
+yshift*=-0.5mm % 枠線に半分かぶせる
+},
+varwidth boxed title*=-3mm, % タイトルの幅に合わせた小さい箱
+boxed title style={%
+colback=green!50!black,
+colframe=green!50!black,
+rounded corners,
+sharp corners=south,
+boxrule=0.5pt,
+},
+#1
+}
+
+\newtcolorbox{lem}[2][]{%
+enhanced,
+title={#2},
+fonttitle=\bfseries,
+colback=blue!5,
+colframe=blue!50!black,
+sharp corners=northwest,
+% --- ここからタイトルの見た目調整 ---
+attach boxed title to top left={%
+xshift=0mm, % 左端から少し内側
+yshift*=-0.5mm % 枠線に半分かぶせる
+},
+varwidth boxed title*=-3mm, % タイトルの幅に合わせた小さい箱
+boxed title style={%
+colback=blue!50!black,
+colframe=blue!50!black,
+rounded corners,
+sharp corners=south,
+boxrule=0.5pt,
+},
+% --- ここまで ---
+#1
+}
+
+\newtcolorbox{ex}[2][]{%
+enhanced,
+title={#2},
+fonttitle=\bfseries,
+colback=violet!5,
+colframe=violet!50!black,
+sharp corners=northwest,
+% --- ここからタイトルの見た目調整 ---
+attach boxed title to top left={%
+xshift=0mm, % 左端から少し内側
+yshift*=-0.5mm 
+},
+varwidth boxed title*=-3mm, % タイトルの幅に合わせた小さい箱
+boxed title style={%
+colback=violet!50!black,
+colframe=violet!50!black,
+rounded corners,
+sharp corners=south,
+boxrule=0.5pt,
+},
+#1
+}
+
+\newtcolorbox{cor}[2][]{%
+enhanced,
+title={#2},
+fonttitle=\bfseries,
+colback=gray!5,
+colframe=gray!50!black,
+sharp corners=northwest,
+% --- ここからタイトルの見た目調整 ---
+attach boxed title to top left={%
+xshift=0mm, % 左端から少し内側
+yshift*=-0.5mm 
+},
+varwidth boxed title*=-3mm, % タイトルの幅に合わせた小さい箱
+boxed title style={%
+colback=gray!50!black,
+colframe=gray!50!black,
+rounded corners,
+sharp corners=south,
+boxrule=0.5pt,
+},
+#1
+}
+\newtcolorbox{marker}{
+enhanced,
+colback=yellow!20,
+colframe=yellow!40!black,
+boxrule=0.4pt,
+left=8mm,
+overlay={
+% 左の!帯
+\fill[brown!80!black] (frame.north west) rectangle ([xshift=6mm]frame.south west);
+\node[white,font=\bfseries\Large] at ([xshift=3mm]frame.west) {!};
+% 右下折れ曲がり
+\fill[yellow!70!white]
+(frame.south east) -- ++(-6mm,0) -- ++(6mm,6mm) -- cycle;
+},
+drop shadow,
+}
+
+
+% ---- 証明環境のカスタマイズ ----------------------------
+% 左側だけ線を引いた mdframed 環境を定義
+\newmdenv[
+skipabove=\topsep,
+skipbelow=\topsep,
+leftline=true, % 左の線だけ true
+rightline=false,
+topline=false,
+bottomline=false,
+linecolor=gray!70,
+linewidth=2pt,
+innerleftmargin=5mm,
+innerrightmargin=0mm,
+innertopmargin=1ex,
+innerbottommargin=1ex,
+]{proofbox}
+
+% amsthm の proof 環境を上書き
+\renewenvironment{proof}[1][Proof]{%
+\begin{proofbox}%
+\textit{#1. }\ignorespaces
+}{%
+\hfill\qedsymbol%
+\end{proofbox}%
+}
+
+\begin{document}
+\begin{center}
+{\large \textbf{Riemannの写像定理}}\par
+\vspace{0.5em}
+荒木 理求\par
+\texttt{rikuman81129@gmail.com}\par
+最終更新$\colon$\today
+\end{center}
+\textbf{\textcolor{red}{本日12月22日の目標}は, 複素解析の基本事項の簡単な復習の後, 解析学で重要度の高いAscoli–-Arzelàの定理とMontelの定理を示すことである.}
+\section{はじめに}
+複素解析といえば, 学部で習う最も美しい定理として評判のCauchyの積分定理や, そこから直ちに導かれ, 実積分への応用がある留数定理を思い浮かべる人が多い (らしい). このことは, 留数定理を目標とする講義動画が, YouTubeにおいて大変充実していることからも窺える.
+
+しかしながら, もう少し進んでRiemannの写像定理まで扱う授業が標準的であることも事実だ. せっかく留数定理まで学んだのなら, Riemannの写像定理までやってしまわないのは大変惜しい. 
+
+そこで留数定理までは多くの優れた教科書や動画に任せ, 短時間でRiemannの写像定理までたどり着こう, というのが本稿の主旨である. いざ行かん.　 
+
+\begin{thm}{Riemannの写像定理.}
+$D\subsetneq\C$, $D$は単連結領域とする. $a\in D$を任意にとれば, $D$から単位開円板$B$への双正則写像$f\colon D\to B$で, 次の条件\footnote{正規化条件と呼ばれる.}を満たすものが一意的に存在する$\colon$
+\[
+f(a)=0\quad かつ\quad f'(a)>0.
+\]
+\end{thm}
+\section{前提}
+予告通り, Cauchyの積分定理は既知とする (証明はなかなか大変である).
+\begin{thm}{定理1 (Cauchyの積分定理, 簡易版).}
+$D$を$\C$の領域\footnote{連結な開集合のこと.}, $f\colon D\to \C$は$D$上で正則な関数\footnote{各点で複素微分可能な関数のことで, 解析関数とも呼ばれる. 後に述べるCauchyの積分公式から無限級数展開可能なことがわかり, 無限回微分可能なことが従うのであった.}とする. $D$内の単純閉曲線\footnote{自己交叉のないループのこと. Jordan曲線や単一閉曲線とも呼ばれる.}\;$\gamma$について, その内部でも$f$が正則ならば
+\[
+\int_{\gamma}f(z)\:dz=0
+\]
+が成り立つ.
+\end{thm}
+
+このことから留数定理の中核をなす次の補題が得られるのであった.
+\begin{lem}{補題2 (積分経路の変形).}
+$D$を$\C$の領域, $f\colon D\to \C$は$D$上で正則な関数とする. $D$上の単純閉曲線$\gamma$について, $\gamma$を$D$内で連続的に変形させると$\gamma'$になるとき
+\[
+\int_{\gamma}f(z)\;dz = \int_{\gamma'}f(z)\;dz
+\]
+が成り立つ.
+\end{lem}
+
+\section{復習}
+\begin{thm}{定理3 (Cauchyの積分公式).}
+$D$を$\C$の領域, $f\colon D\to \C$は$D$上で正則な関数とする. 任意の$\zeta\in D$について$z$を内部に含む$D$内の単純閉曲線$\gamma$を考え, その内部でも$f$が正則ならば
+\[
+f(z)=\frac{1}{2\pi i}\int_{\gamma}\dfrac{f(\zeta)}{\zeta-z}\:d\zeta
+\]
+が成り立つ.
+\end{thm}
+この定理には二通りの証明を与えておく.
+\begin{proof}(その1)\\
+両辺に$2\pi i$をかけた形を示す. $I\coloneq\int_{\gamma}{\left\{f(\zeta)-f(z)\right\}}/{(\zeta-z)}\:d\zeta$とおけば
+\begin{align*}
+\int_{\gamma}\dfrac{f(\zeta)}{\zeta-z}\:d\zeta &= \int_{\gamma}\dfrac{f(\zeta)-f(z)}{\zeta-z}\:d\zeta+\int_{\gamma}\dfrac{f(z)}{\zeta-z}\:d\zeta \\
+& = I+2\pi if(z)
+\end{align*}
+なので, $I=0$を示せばよい. \\
+$\varepsilon>0$を任意にとる. $f$は$D$上正則より連続なので, $r>0$を十分小さくとれば$\partial B(z, r)$上の任意の$\zeta$に対し
+\[
+\left|f(\zeta)-f(z)\right|<\varepsilon
+\]
+とできる. $\left\{f(\zeta)-f(z)\right\}/\left(\zeta-z\right)$の正則性\footnote{$\gamma$を境界とする有界領域から$B(z, r)$を引いて閉包を取った集合上での正則性を指す.}と補題より, 積分経路を$\gamma$から$\partial B(z,r)$に取り替えてよかったので
+\begin{align*}
+|I| & = \left|\int_{\partial B(z,r)}\dfrac{f(\zeta)-f(z)}{\zeta-z}\:d\zeta\right|\\
+   & = \left|\int_{0}^{2\pi} \dfrac{f(\zeta)-f(z)}{r(cos\theta+isin\theta)}\cdot r(-sin\theta+icos\theta)\;d\theta  \right|\\
+   & \le \int_{0}^{2\pi} \left|\dfrac{f(\zeta)-f(z)}{r(cos\theta+isin\theta)}\cdot r(-sin\theta+icos\theta)\right|\;d\theta\\
+  & = \int_{0}^{2\pi} \left|f(\zeta)-f(z)\right|\;d\zeta\\
+  & < 2\pi\varepsilon
+\end{align*}
+が成り立ち, $\varepsilon>0$を任意にとったことから$I=0$が従う.
+\end{proof}
+\vspace{1em}
+この証明は直接的でわかりやすいが, その分汎用性は低い. 一方, 次の平均値の定理は証明がやや面倒なものの, かなり有用な最大値原理を示すのにも役立つ優れものである.
+
+\begin{thm}{定理4 (平均値定理).}
+$D$を$\C$の領域, $f\colon D\to \C$は$\overline{B(c, r)}\subset D$上で正則な関数とする. このとき
+\[
+f(c) = \int_{0}^{2\pi}f(c+re^{i\theta})\:d\theta
+\] 
+が成り立つ.
+\end{thm}
+\begin{proof}
+略.
+\end{proof}
+\vspace{1em}
+Cauchyの積分公式はこの結果から直ちに従う.
+\begin{proof}(その2)\\
+$r>0$を十分小さくとることで, $\overline{B(z,r)}$が$\gamma$を境界とする有界領域に含まれるようにできる. 平均値定理より
+\begin{align*}
+\frac{1}{2\pi i}\int_{\partial B(z,r)}\dfrac{f(\zeta)}{\zeta-z}\:d\zeta & = \frac{1}{2\pi i}\int_{0}^{2\pi}\dfrac{f(z+re^{i\theta})}{(z+re^{i\theta})-z}\cdot(ire^{i\theta})\;d\theta \\
+& = \dfrac{1}{2\pi}\int_{0}^{2\pi} f(z+re^{i\theta})\;d\theta \\
+& = f(z)
+\end{align*}
+が成り立つ. $f(\zeta) / (\zeta-z)$の正則性\footnote{これも$\gamma$を境界とする有界領域から$B(z, r)$を引いて閉包を取った集合上での正則性を指す.}と補題より積分経路を$\partial B(z, r)$から$\gamma$に取り替えてよかったので
+\begin{align*}
+\frac{1}{2\pi i}\int_{\partial B(z,r)}\dfrac{f(\zeta)}{\zeta-z}\:d\zeta &= \frac{1}{2\pi i}\int_{\gamma}\dfrac{f(\zeta)}{\zeta-z}\:d\zeta\\
+&= f(z)
+\end{align*}
+がわかる.
+\end{proof}
+
+\begin{thm}{定理5 (最大値原理).}
+$D$を$\C$の領域, $f\colon D\to \C$は$D$上で正則な関数とする. $f(z)$が定数関数でないならば, 実数値関数$\left|f(z)\right|$は$D$において最大値を取らない.
+\end{thm}
+\begin{proof}(方針のみ)
+平均値定理とCauchy--Riemannの関係式を用いる.
+\end{proof}
+
+\begin{cor}{系6.}
+$D\subset\C$を有界領域, $f\in C^{0}(\overline{D}; \C)$\footnote{$C^{0}(X; Y)\coloneq\left\{f\colon X\to Y\;|\; f\text{は}X\text{上の連続関数}\right\}$}は$D$上正則な関数とする. このとき$|f(z)|$は$\partial D$において最大値を取る.
+\end{cor}
+\begin{proof}
+$f$が定数関数のときは明らか. そうでないときも$|f(z)|$は連続関数なので, 有界閉集合$\overline{D}$上のある点$c$で最大値を取るが (コンパクト集合上の連続関数は最大値・最小値を持つ), $c\in D$ならば最大値原理に矛盾する.
+\end{proof}
+
+
+
+
+\section{準備}
+Ascoli–Arzelàの定理は, Montelの定理のみならず, Peanoの定理 (ODEの初期値問題の局所解の存在を保証する) 等の証明にも用いられる. まず一様有界性と同程度連続性を定義するところから始める.
+\begin{Def}{定義7 (一様有界性と同程度連続性).}
+$D\subset\C$, $f_n\colon D\to \C$とする. このとき
+\begin{enumerate}
+\item[(i)]
+
+\begin{align*}
+\{f_n\}_{n\in\N}\text{ は }D\text{ 上}\textbf{一様有界}\text{である}
+&\mathrel{\underset{\mathrm{def.}}{\Longleftrightarrow}} \exists M\in\R\ \forall n\in\N\;\forall z\in D\:|f_n(z)|\le M .
+\end{align*}
+
+
+\item[(ii)]
+\begin{align*} &\{f_n\}_{n\in\N}\text{ は }D\text{ 上}\textbf{同程度連続}\text{である}\\ &\mathrel{\underset{\mathrm{def.}}{\Longleftrightarrow}} \forall \varepsilon>0\ \exists\delta>0\;\forall n\in\N\ \forall z,w\in D\:\left(|z-w|<\delta \to \left|f_n(z)-f_n(w)\right|<\varepsilon\right). \end{align*}
+
+\end{enumerate}
+\end{Def}
+
+\begin{thm}{定理8 (Ascoli–-Arzelàの定理).}
+$D$を$C$上の有界閉集合, $\{f_n\}_{n\in\mathbb{N}}$を$D$上の複素数値連続関数全体$C^{0}(D;\C)$の点列とする. このとき$\{f_n\}_{n\in\mathbb{N}}$が一様有界かつ同程度連続ならば, $\{f_n\}_{n\in\mathbb{N}}$は$D$上一様収束する部分列を持つ.
+\end{thm}
+\uline{Key Point}$\colon$\fbox{可分性, Cantorの対角線論法}
+\begin{proof}
+簡単のため, 有界閉区間$I\subset\R$上の実数値連続関数に対し示す.
+
+$I\cap\mathbb{Q}$の全ての元からなる数列$\{x_n\}_{n\in\mathbb{N}}$は, $I$の稠密部分集合である ($I$の可分性).
+
+\indent$\{f_n\}_{n\in\mathbb{N}}$は一様有界なので, 特に$\{f_{n}(x_{1})\}_{n\in\mathbb{N}}$は有界である.したがってBolzano-Weierstrassの定理より, $x_1$での値が収束するような$\{f_n\}_{n\in\mathbb{N}}$の部分列$\{f_{1,n}\}_{n\in\mathbb{N}}$がとれる. 同様に, ある部分列$\{f_{2,n}\}_{n\in\mathbb{N}}\subset\{f_{1,n}\}_{n\in\mathbb{N}}$が存在して, $\{f_{2,n}(x_2)\}_{n\in\mathbb{N}}$は収束する. この操作を繰り返せば, $\{f_{k,n}\}_{n\in\mathbb{N}}\subset\{f_{k-1,n}\}_{n\in\mathbb{N}}$で, $\{f_{k,n}(x_{k})\}_{n\in\mathbb{N}}$が収束するような部分列がとれる. このとき対角線上に並ぶ列$\{f_{n,n}\}_{n\in\mathbb{N}}$は, 任意の$i\in\mathbb{N}$について$\{f_{n,n}(x_i)\}_{n\in\mathbb{N}}$が収束するような関数列である (対角線論法). 実際, $\{f_{n,n}\}_{n\ge i}\subset\{f_{i,n}\}_{n\in\mathbb{N}}$であり, かつ$\{f_{i,n}(x_i)\}_{n\in\mathbb{N}}$は収束する.
+
+\vspace{1em}
+\begin{center}
+\begin{tikzpicture}[x=1.6cm,y=1cm]
+
+  % 1 行目：f_{1,n}
+  \node (11)    at (0,0) {$f_{1,1}$};
+  \node (12)    at (1,0) {$f_{1,2}$};
+  \node (13)    at (2,0) {$f_{1,3}$};
+  \node (1dots) at (3,0) {$\cdots$};
+
+  \node[right=1.5cm of 1dots] (exp1)
+     {$\text{s.t. }\{f_{1,n}(x_{1})\}\text{ は収束する}$};
+
+  % 2 行目：f_{2,n}
+  \node (21)    at (0,-1) {$f_{2,1}$};
+  \node (22)    at (1,-1) {$f_{2,2}$};
+  \node (23)    at (2,-1) {$f_{2,3}$};
+  \node (2dots) at (3,-1) {$\cdots$};
+
+  \node[right=1.5cm of 2dots] (exp2)
+     {$\text{s.t. }\{f_{2,n}(x_{2})\}\text{ は収束する}$};
+  % 3 行目：f_{3,n}
+  \node (31)    at (0,-2) {$f_{3,1}$};
+  \node (32)    at (1,-2) {$f_{3,2}$};
+  \node (33)    at (2,-2) {$f_{3,3}$};
+  \node (3dots) at (3,-2) {$\cdots$};
+
+  \node[right=1.5cm of 3dots] (exp3)
+     {$\text{s.t. }\{f_{3,n}(x_{3})\}\text{は収束する }$};
+
+  % 以下ずっと続くイメージ
+  \node (vdots1) at (0,-3) {$\vdots$};
+  \node (vdots2) at (1,-3) {$\vdots$};
+  \node (vdots3) at (2,-3) {$\vdots$};
+  \node (vdots4) at (3,-3) {$\ddots$};
+
+  % 対角線上の成分を丸で囲む
+  \draw[thick] (11) circle [radius=0.4];
+  \draw[thick] (22) circle [radius=0.4];
+  \draw[thick] (33) circle [radius=0.4];
+
+  % 対角列 {f_{n,n}} のラベル（お好みで）
+  \node[right] at (3.8,-3.2) {$\{f_{n,n}\}_{n\in\mathbb{N}}$};
+
+\end{tikzpicture}
+\end{center}
+
+\vspace{1em}
+
+\noindent 以下$\{f_{n,n}\}_{n\in\mathbb{N}}$が$||\cdot||_{I}$(一様ノルム) についてCauchy列であることを示す. $\varepsilon>0$を任意にとる. このとき
+
+\begin{enumerate}
+\item[(1)] ある$\delta>0$が存在して
+\[
+\forall n\in\mathbb{N}\;\forall x, y\in I\; \left(|x-y|<\delta\to|f_{n,n}(x)-f_{n,n}(y)|<\frac{\varepsilon}{3}\right)
+\]
+を満たす($\{f_{n,n}\}_{n\in\mathbb{N}}$の同程度連続性より).
+
+\item[(2)] (1)の$\delta$に対し, ある$M\in\mathbb{N}$が存在して
+\[
+\forall x\in I \;\exists i\in\{1, 2, \cdots, M\}\; |x-x_i|<\delta
+\]
+を満たす($I$の有界性$\&\{x_n\}_{n\in\mathbb{N}}$の$I$における稠密性より).
+
+\item[(3)] (2)の$M$に対し
+\[
+\forall i\in\{1, 2, \cdots, M\} \;\exists N_{i}\in\mathbb{N} \;\forall m,n\in\mathbb{N}\; \left(m,n\ge N_i\to|f_{m,m}(x_i)-f_{n,n}(x_i)|<\frac{\varepsilon}{3}\right)
+\]
+が成り立つ($\{f_{n,n}\}_{n\in\mathbb{N}}$のとり方から, 任意の$i\in\mathbb{N}$に対して$\{f_{n,n}(x_i)\}_{n\in\mathbb{N}}$は絶対値ノルム$|\cdot|$についてCauchy列だから). したがって$N\coloneq \max_{1\le i\le M} N_i$とすれば
+\[
+\forall i\in\{1, 2, \cdots, M\} \;\forall m,n\in\mathbb{N}\; \left(m,n\ge N\to|f_{m,m}(x_i)-f_{n,n}(x_i)|<\frac{\varepsilon}{3}\right)
+\]
+が成り立つ.
+\end{enumerate}
+ここで (1)-(3) の手順から, $N$は$M$にのみ依存し, $M$は$\delta$, $\delta$は$\varepsilon$にのみ依存することがわかる. すなわち (3) の$N$は$\varepsilon$にのみ依存する. したがって任意の$m, n\ge N,$任意の$x\in I$について, (2) の$|x-x_i|<\delta$を満たす$x_i$をとれば
+\begin{align*}
+|f_{m,m}(x)-f_{n,n}(x)|&\le |f_{m,m}(x)-f_{m,m}(x_i)|+|f_{m,m}(x_i)-f_{n,n}(x_i)|+|f_{n,n}(x_i)-f_{n,n}(x)|\\
+                          &< \frac{\varepsilon}{3}+\frac{\varepsilon}{3}+\frac{\varepsilon}{3}=\varepsilon
+\end{align*}
+が成り立つ. $\varepsilon>0$は任意だったので
+\begin{align*}
+&\forall \varepsilon>0\; \exists N\in\mathbb{N}\; \forall m, n\in\mathbb{N}\; \forall x\in I\;(m, n\ge N \to |f_{m,m}(x)-f_{n,n}(x)|<\varepsilon) &\\
+\iff &\forall \varepsilon>0\; \exists N\in\mathbb{N}\; \forall m, n\in\mathbb{N}\;(m, n\ge N \to ||f_{m,m}(x)-f_{n,n}(x)||_{I}<\varepsilon) &\\
+\iff
+&\{f_{n,n}\}_{n\in\mathbb{N}}\;\text{は}||\cdot||_{I}\;\text{についてCauchy列} &
+\end{align*}
+がわかる. さて$\{f_{n,n}\}_{n\in\mathbb{N}}$の一様有界性から
+\[
+\{f_{n,n}\}_{n\in\mathbb{N}}\subset C^{0}_{b}(I)\coloneq\{f\in C^{0}(I)\colon\;||f||_{I}<\infty\}
+\]
+であり, 
+$(C^{0}_{b}(I),||\cdot||_{I})$はBanach空間なので, $\{f_{n,n}\}_{n\in\mathbb{N}}$は$I$上一様収束する.
+\end{proof}
+\vspace{1em}
+証明のアイディアは今見た1次元の場合で尽きているのだが, もう少し仮定を弱めることもできる. 上の主張の詳細も含め, \cite{Riku}を参照されたい (1次元の場合はここから引用).
+
+\newpage
+いよいよRiemannの写像定理の証明で大活躍するMontelの定理の証明の準備に取り掛かる.
+
+\begin{Def}{定義 (正規族).}
+$D$を$\R^n$の非空な部分集合, $\mathcal{F}\subset C^{0}(D; \C)$とする. $\mathcal{F}$が\textbf{正規族}(\textbf{normal family}) であるとは, $\mathcal{F}$内の任意の部分列が$D$で広義一様収束する部分列を持つことをいう.
+\end{Def}
+\vspace{1em}
+
+Montelの定理の証明の後半で必要な手法も先に紹介しておく.
+\begin{Def}{定義 (exhaustion by compact sets).}
+位相空間$X$のexhaustion by compact sets\footnote{compact exhaustionともいう. 定着した日本語訳はない.}とは, 次の条件を満たすような$X$の部分集合$K_n$の列のことである$\colon$
+\begin{enumerate}
+\item[(i)] $\forall i\in\N$ $K_i$は$X$のコンパクト部分集合
+\item[(ii)] $\forall i\in\N\; K_i\subset int(K_{i+1})$
+\item[(iii)] $X=\bigcup_{i=1}^{\infty} K_i$
+\end{enumerate}
+
+\end{Def}
+
+\begin{thm}{定理 (Montelの定理).}
+$D$を$\C$の領域, $\mathcal{F}$は$D$上定義された正則関数全体の部分集合とすると, 以下は同値である$\colon$
+\begin{enumerate}
+\item[(i)]$\mathcal{F}$は正規族
+\item[(ii)]$D$の任意のコンパクト部分集合$K$について$\mathcal{F}$は一様有界
+\end{enumerate}
+\end{thm}
+
+
+
+\begin{thebibliography}{99}
+
+\bibitem{Jost}
+Jürgen Jost:
+\textit{Postmodern Analysis}.
+Springer.
+
+\bibitem{Ahlfors}
+L. V. アールフォルス (著), 笠原乾吉 (訳):
+『複素解析』.
+現代数学社.
+
+\bibitem{Karel}
+Karel Svadlenka:
+『解析学A：講義ノート』.
+
+\bibitem{Noguchi}
+野口潤次郎:
+『複素解析概論』.
+裳華房.
+
+\bibitem{Riku}
+Riku the hat: \url{https://riku-the-hat.com/pdfs/Ascoli-Arzela.pdf}
+
+\end{thebibliography}
+
+
+\end{document}
+
