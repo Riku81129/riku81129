@@ -30,7 +30,6 @@ jobs:
             MP.tex
             UnderstandingMinimalism_Exercise.tex
             report_0.tex
-            EnglishVerb.tex
             complex_analysis.tex
             
           working_directory: tex
