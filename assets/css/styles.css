@@ -1,12 +1,12 @@
 /* Minimal, elegant portfolio styles */
 :root {
-  --bg: #f3e6b8;
-  --text: #1a1a1a;      /* 文字：黒寄り */
-  --muted: #6f6a63;     /* 補助テキスト */
-  --accent: #3a6ea5;   /* 控えめな青（照井サイト系） */
+  --bg: #ffffe0;  /*lightyellow*/
+  --text: #1a1a1a;     
+  --muted: #6f6a63;     
+  --accent: #3a6ea5;   
   --nav-accent: #6b2f3a;
-  --card: #f1ead7;     /* 文字が乗るところは白 */
-  --border: #dccfb3;   /* 肌色寄りの境界線 */
+  --card: #f1ead7;    
+  --border: #dccfb3;   
   --radius: 16px;
   --maxw: 920px;
 }
@@ -81,24 +81,24 @@ nav ul li a {
   color: var(--text);
   font-weight: 500;
 
-  border: none;            /* 枠線を消す */
-  border-radius: 10px;     /* 角は少し丸い程度 */
-  background: transparent; /* ふだんは何も塗らない */
+  border: none;           
+  border-radius: 10px;    
+  background: transparent; 
 
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 nav ul li a:hover {
-  background: #efe9e1;   /* 肌色より少し濃い */
+  background: #efe9e1;   
   color: var(--nav-accent);
-  text-decoration: none; /*下線けす*/
+  text-decoration: none; /
 }
 
 /* 現在のページ（ヘッダーのリンク）だけ赤紺に */
 nav ul li a.active,
 nav ul li a[aria-current="page"] {
-  color: #6b2f3a;   /* 赤紺 */
-  font-weight: 600; /* 少し強調（不要なら消してOK） */
+  color: #6b2f3a;   
+  font-weight: 600;
 }
 
 .hero {
@@ -131,7 +131,7 @@ nav ul li a[aria-current="page"] {
 }
 
 .news {
-  margin-bottom: 24px; /* Newsカードの下にだけ隙間 */
+  margin-bottom: 24px; 
 }
 
 
@@ -204,20 +204,20 @@ nav ul li a[aria-current="page"] {
 
 
 .fa-youtube {
-  color: red;   /* ここを好きな色コードに */
+  color: red;   
 }
 
 .link-group {
-  display: flex;       /* 横並び */
-  flex-wrap: wrap;     /* はみ出したら折り返し */
-  gap: 10px;           /* ボタン間の余白 */
-  margin-bottom: 20px; /* グループ間の余白 */
+  display: flex;       
+  flex-wrap: wrap;    
+  gap: 10px;          
+  margin-bottom: 20px; 
 }
 
 .image-grid{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: auto;   /* ← 固定行高をやめる */
+  grid-auto-rows: auto;  
   gap: 12px;
 }
 
