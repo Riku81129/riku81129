@@ -63,6 +63,8 @@ body {
 .brand {
   font-weight: 700;
   letter-spacing: 0.2px;
+  white-space: nowrap;   /* 追加：brand改行禁止 */
+  flex: 0 0 auto;        /* 追加：縮ませない */
 }
 
 nav ul {
@@ -71,7 +73,7 @@ nav ul {
   list-style: none;
   display: flex;
   gap: 18px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 nav ul li a {
