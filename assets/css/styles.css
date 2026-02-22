@@ -414,3 +414,71 @@ nav ul li a[aria-current="page"] {
   .grid-4 { grid-template-columns: 1fr; }
   .food-card img { height: 220px; }
 }
+
+/* ===== Travel Page Card Layout ===== */
+
+.travel-entry-card {
+  margin: 40px 0;
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+}
+
+/* ヘッダー */
+.travel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.travel-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.travel-date {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* 写真 */
+.travel-photo {
+  margin: 0;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.travel-photo img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.travel-photo figcaption {
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+/* 本文 */
+.travel-text {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.travel-text p {
+  margin: 0 0 12px;
+}
+
+.travel-text ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
