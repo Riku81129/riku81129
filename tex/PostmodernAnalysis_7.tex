@@ -1,0 +1,437 @@
+\documentclass{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
+\usepackage[linguistics]{forest}
+
+\usepackage{ascmac}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{url}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{ulem}
+\usepackage{fancybox}
+\usepackage{framed}
+\usepackage[most]{tcolorbox}
+\usepackage{varwidth} 
+\tcbuselibrary{skins,breakable}
+\usepackage[framemethod=tikz]{mdframed}
+
+
+
+
+
+
+\newcommand{\N}{\mathbb{N}}%自然数
+\newcommand{\Z}{\mathbb{Z}}%整数
+\newcommand{\Q}{\mathbb{Q}}%有理数
+\newcommand{\R}{\mathbb{R}}%実数
+\newcommand{\C}{\mathbb{C}}%複素数
+
+\newmdenv[
+skipabove=\topsep,
+skipbelow=\topsep,
+leftline=true, % 左の線だけ true
+rightline=false,
+topline=false,
+bottomline=false,
+linecolor=gray!70,
+linewidth=2pt,
+innerleftmargin=5mm,
+innerrightmargin=0mm,
+innertopmargin=1ex,
+innerbottommargin=1ex,
+]{proofbox}
+
+% amsthm の proof 環境を上書き
+\renewenvironment{proof}[1][Proof]{%
+\begin{proofbox}%
+\textit{#1. }\ignorespaces
+}{%
+\hfill\qedsymbol%
+\end{proofbox}%
+}
+
+\theoremstyle{definition}
+\newtheorem{thm}{定理}[section]
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem*{thm*}{例}
+\newtheorem*{rem*}{注}
+
+\begin{document}
+\begin{center}
+{\large \textbf{ノルム空間と距離空間の基本性質}}\par
+\vspace{0.5em}
+荒木 理求\par
+2026年1月22日
+\end{center}
+\section{ノルム空間}
+\begin{dfn}[$=$\textbf{Definition 7.17} 有界線形作用素]
+$(V, \|\cdot\|_{V}), (W, \|\cdot\|_{W})$をノルム空間, $L \colon V \to W$を線形写像とする. 次の条件が成り立つとき, $L$は有界であるという$\colon$
+\[
+\exists c > 0 \;\forall x \in V\; \colon \|L(x)\|_{W} \le c\|x\|_{V} 
+\]
+\end{dfn}
+
+\begin{thm}[$=$\textbf{Theorem 7.18} 有界性と連続性]
+$V, W$をノルム空間, $L \colon V \to W$を線形写像とすると, 以下は同値である$\colon$
+\begin{enumerate}
+\item[(1)] $L$は有界である.
+\item[(2)] $L$は連続である. [i.e. $\forall x \in V\;\forall \varepsilon > 0\; \exists \delta > 0\;\forall y\in V \left(\|x-y\|_{V}<\delta \to \|L(x)-L(y)\|_{W} < \varepsilon\right)$]
+\end{enumerate}
+\end{thm}
+\begin{rem*}
+証明の流れから, 実は(1), $\hat{\text{(2)}}$, (3)が同値であることまでわかる$\colon$
+\begin{enumerate}
+\item[$\hat{\text{(2)}}$] $L$は一様連続である.
+\item[] [i.e. $\forall \varepsilon > 0\; \exists \delta > 0\;\forall x, y\in V \left(\|x-y\|_{V}<\delta \to \|L(x)-L(y)\|_{W} < \varepsilon\right)$]
+
+\item[(3)] $L$は$V$上のある一点で連続である. 
+\item[] [i.e. $\exists x \in V\;\forall \varepsilon > 0\; \exists \delta > 0\;\forall y\in V \left(\|x-y\|_{V}<\delta \to \|L(x)-L(y)\|_{W} < \varepsilon\right)$]
+\end{enumerate}
+\end{rem*}
+\begin{proof}
+\fbox{(3)$\Rightarrow$(2)}\hspace{0.5em}任意の$x\in V$について$\{x_n\}_{n\in\N}\subset V\;\text{s.t.}\; x_n \to x$なる点列を取る. 線形写像$L \colon V \to W$はある点$y\in V$で連続なので
+\begin{align*}
+L(x_n) &=  L(x_n-x+y) + L(x-y) \\
+         &\xrightarrow[n\to \infty]{} L(y) + L(x-y) = L(x)
+\end{align*}
+が成り立ち, $L$は$x$で連続だとわかる. $x\in V$は任意にとったから, (2)が従う.
+\end{proof}
+
+
+
+\begin{cor}[$=$\textbf{Theorem 7.18}の後半]
+有限次元ベクトル空間$V, W$の間の線形写像$L \colon V \to W$は連続である.
+\end{cor}
+\begin{proof}(その1)
+基底を取って同一視することで$V=\R^n$, $W=\R^m$とし, $L$はある行列$A\coloneq (a_{ij})\in M_{m\times n}$を用いて
+\[
+L(x) = Ax
+\]
+とかける. このとき$Ax$の第$i$成分について, 例えば最大値ノルム$\|\cdot\|_\infty$によって
+\[
+|(Ax)_i| = \left|\sum_{j=1}^n a_{ij} x_j\right| \le \sum_{j=1}^n |a_{ij}||x_j| \le \left(\sum_{j=1}^n |a_{ij}|\right) \|x\|_\infty
+\]
+と評価できる. よって
+\[
+\|Ax\|_\infty\le \left(\max_{1\le i \le m}\sum_{j=1}^n |a_{ij}|\right) \|x\|_\infty
+\]
+が成り立ち, 有界性から$L$の連続性が従う. 
+\end{proof}
+有限次元ではどのノルムも同値なので, 上の証明で最大値ノルムを使ったことは本質的でない.
+
+\begin{proof}(その2)
+写像$x \mapsto \|L(x)\|_W$は連続である. 実際, $V$の基底$\{e_1, \cdots, e_n\}$を取れば任意の$x\in V$はある$(x^1, x^2, \cdots, x^n)$によって$x=\sum_{i=1}^n x^i e_i$とかけるので, $x, y\in V$に対し
+\begin{align*}
+\Big|\,\|L(x)\|_{W}-\|L(y)\|_W\,\Big| \le \|L(x)-L(y)\|_W&\le \left\lVert \sum_{i=1}^n (x^i-y^i)L(e_i) \right\rVert_{W} \\
+&\le \sum_{i=1}^n |x^i-y^i|\|L(e_i)\|_{W} \to 0\hspace{1em}\text{as}\;\;x\to y
+\end{align*}
+が三角不等式と線形性より成り立つ. さてこのとき, 単位球面$S=\{x\in V\;\colon\; \|x\|_V=1\}$はコンパクトなので (これは有限次元のときに限り成り立つ)
+\[
+M\coloneq \max_{\xi\in S} \|L(x)\|_W < +\infty
+\]
+が存在する. したがって任意の$x\in V\setminus\{0\}$について
+\[
+\|L(x)\|_W=\|x\|_V \left\lVert L\left(\dfrac{x}{\|x\|_V}\right) \right\rVert_W \le M\|x\|_V
+\]
+となる. よって$L$は有界, すなわち連続である.
+\end{proof}
+\begin{dfn}[$=$\textbf{Definition 7.19} 作用素ノルム]
+$V, W$をノルム空間, $L \colon V \to W$を有界な線形写像とすると, $L$のノルムは
+\[
+\|L\|\coloneq \sup_{x\in V\setminus \{0\}}\dfrac{\|L(x)\|_W}{\|x\|_V} = \sup_{\|x\|_V=1}\|L(x)\|_W
+\]
+と定義される ($L$の連続性の仮定から$\|L\|$は有限となる).
+\end{dfn}
+
+\begin{dfn}[$=$\textbf{Definition 7.20} 連続線形作用素のなす空間]
+ノルム空間$V, W$に対し$B(V, W)$($\mathcal L(V, W)$ とかくこともある) を
+\[
+B(V, W) \coloneq \{L\; \colon \; V\to W\;\colon\;L\text{は連続線形写像}\}
+\]
+と定めると, 作用素ノルムによりノルム空間となる. $V=W$のとき単に$B(V)$とかく.
+\end{dfn}
+
+\begin{thm}[$=$\textbf{Theorem 7.21}]
+$V$をノルム空間, $W$を\textit{Banach}空間とする. このとき$B(V, W)$は\textit{Banach}空間となる.
+\end{thm}
+
+\begin{lem}[作用素の合成とノルムの劣乗法性]
+$U, V, W$をノルム空間, $L\in B(V, W)$, $M\in B(U, V)$とすると
+\[
+\|LM\|\le\|L\|\|M\|
+\]
+が成り立つ (ただし$LM(x)\coloneq L(M(x))$とする).
+\end{lem}
+\begin{proof}
+任意の$x\in U$に対し
+\[
+\|LM(x)\|_{W}\le\|L\|\|M(x)\|_V\le \|L\|\|M\|\|x\|_U
+\]
+なので両辺$\|x\|_U\:(x\neq 0)$で割ると
+\[
+\dfrac{\|LM(x)\|_U}{\|x\|_V}\le\|L\|\|M\|
+\]
+となる. ここで左辺の上限を取れば
+\[
+\|LM\| = \sup_{x\in U\setminus\{0\}} \dfrac{\|LM(x)\|_W}{\|x\|_U}\le\|L\|\|M\|
+\]
+が従う.
+\end{proof}
+
+\begin{lem}[作用素の合成に関する分配法則]
+$V$をノルム空間, $L, M, N\in B(V)$とすると
+\[
+ST-SU=S(T-U)
+\]
+が成り立つ.
+\end{lem}
+\begin{proof}
+任意の$x\in V$について
+\[
+(ST-SU)(x) = ST(x)-SU(x) = S(Tx-Ux) = S((T-U)x) = S(T-U)(x)
+\]
+より従う. 実際は線形性さえあれば十分なこともわかる.
+\end{proof}
+
+
+\begin{thm}[Neumann級数]
+$V$を\textit{Banach}空間, $L\in B(V)$は$\|L\|<1$を満たすとする. このとき$I-L$は可逆作用素で
+\[
+(I-L)^{-1} = \sum_{i=0}^{\infty} L^i
+\]
+が成り立つ (ただし$I\colon\: V\to V$恒等作用素, $L^0 = I$とする). また, このとき
+\[
+\|(I-L)^{-1}\| \le \dfrac{1}{1-\|L\|}
+\]
+と評価できる.
+\end{thm}
+\begin{proof}
+部分和$S_n\coloneq \sum_{i=0}^{n} L^i$とおく. $m>n$について
+\[
+\|S_m-S_n\| = \left\lVert \sum_{i=n+1}^{m} L^i \right\rVert \le \sum_{i=n+1}^{m} \|L^i\|\le\sum_{i=n+1}^{m} \|L\|^i
+\]
+なので, $\|L\|<1$から
+\[
+\|S_m-S_n\| \le \sum_{i=n+1}^{m} \|L\|^i \to 0 \hspace{1em} \text{as}\:\:m, n \to \infty
+\]
+が成り立つので, $\{S_n\}$は$B(V)$のCauchy列である. $V$が\textit{Banach}空間のとき$B(V)$も\textit{Banach}空間となるので
+\[
+\exists S\in B(V)\;\text{s.t.}\;S_n \to S \hspace{1em} \text{as}\:\:n\to \infty
+\]
+がわかる. さて各$n$について
+\[
+(I-L)S_n=(I-L)\sum_{i=0}^{n} L^i = \sum_{i=0}^{n} L^i  - \sum_{i=1}^{n+1} L^i = I - L^{n+1} 
+\]
+であり, また
+\[
+\|(I-L)(S_n-S)\|\le \|I-L\|\|S_n-S\| \to 0 
+\]
+なので
+\[
+(I-L)S = \lim_{n\to\infty}(I-L)S_n =\lim_{n\to\infty}(I-L^{n+1}) = I
+\]
+が成り立つ. ここに$\|L^{n+1}\| \le \|L\|^{n+1} \to 0$ より $L^{n+1}\to 0$であることを加味した. $S(I-L)=I$となることも同様にわかるので, $S=(I-L)^{-1}$が従う. このとき
+\[
+\sum_{i=0}^\infty \|L^i\| \le \sum_{i=0}^\infty \|L\|^i  = \dfrac{1}{1-\|L\|}
+\]
+と評価できるので
+\[
+\|(I-L)^{-1}\| \le \dfrac{1}{1-\|L\|}
+\]
+が成り立ち, $(I-L)^{-1}\in B(V)$もわかる.
+\end{proof}
+
+\begin{cor}[$=$\textbf{Lemma 7.22}]
+$V, W$を\textit{Banach}空間, $L_0\;\colon V\to W$を全単射な連続線形写像で, かつ逆写像$L_0^{-1}$が連続であるとする. $L\in B(V, W)$が
+\[
+\|L-L_0\|<\|L_0^{-1}\|^{-1}
+\]
+を満たすとき, $L$も全単射で逆写像$L^{-1}$は連続である.
+\end{cor}
+\begin{proof}
+$A \coloneq L_0^{-1}(L_0-L)\in B(V)$とおけば$L= L_0(I-A)$であり, さらに
+\[
+\|A\|\le \|L_0^{-1}\|\|L_0-L\| < 1
+\]
+が成り立つので, $(I-A)^{-1}= \sum_{i=0}^{\infty}A^i$が存在し
+\[
+L^{-1} = (I-A)^{-1}L_0^{-1}= \left(\sum_{i=0}^{\infty} (L_0^{-1}(L_0-L))^i\right)L_0^{-1}
+\]
+となる. また任意の$x\in W$に対し
+
+\begin{align*}
+\|L^{-1}(x)\|_{V} = \|(I-A)^{-1}(L_0^{-1}x)\|_{V} & \le \|(I-A)^{-1}\|\|L_0^{-1}(x)\|_{V} \\
+&\le \|(I-A)^{-1}\|\|L_0^{-1}\|\|x\|_W
+\end{align*}
+より$L^{-1}$は有界であり, 連続性が従う.
+
+\end{proof}
+
+\begin{dfn}[ノルム空間の同値性]
+ベクトル空間$V$上に2つのノルム$\|\cdot\|_0, \|\cdot\|_1$があって
+
+\[
+\begin{aligned}
+&\exists \lambda, \mu >0\; \forall x \in V \;\colon\; \lambda\|x\|_0 \le \|x\|_1 \le \mu\|x\|_0
+\end{aligned}
+\hfill (\sharp)
+\]
+
+が成り立つとき, この2つのノルムは同値であるという.
+\end{dfn}
+
+\begin{prop}[]
+ベクトル空間$V$上の同値なノルム$\|\cdot\|_0, \|\cdot\|_1$について
+\[
+\|x_n-x\|_0\to 0\hspace{1em}\text{as}\:\:n\to\infty \Leftrightarrow \|x_n-x\|_1\to 0\hspace{1em}\text{as}\:\:n\to \infty
+\]
+が成り立つ.
+\end{prop}
+\begin{proof}
+ノルム空間の同値性の定義より, ある$\lambda, \mu>0$が存在して
+\[
+\lambda \|x_n-x\|_0 \le \|x_n-x\|_1 \le \mu \|x_n-x\|_0
+\]
+となることからわかる.
+\end{proof}
+
+\begin{thm}[$=$\textbf{Theorem 7.47}]
+有限次元ベクトル空間上の任意のノルムは同値である.
+\end{thm}
+\begin{proof}
+$V\colon$有限次元ベクトル空間, $\dim V = d < +\infty$とする. $V$の基底$\{e_1, \cdots, e_d\}$が取れるので, 任意の$x\in V$はある$(x^i, \cdots, x^d)$によって$x=\sum_{i=1}^d x^i e_i$とかけて
+\[
+\|x\|_{*} \coloneq \sum_{i=1}^d |x^i|
+\]
+はノルムとなる. \\
+\indent$V$上の任意のノルム$\|\cdot\|_0$について
+\[
+\begin{aligned}
+&\exists M, N > 0\; \forall x\in V\;\colon\; N\|x\|_{*} \le \|x\|_0 \le M\|x\|_{*}\end{aligned}
+\hfill (\sharp\sharp)
+\]
+を示せば ($\sharp$) が直ちに従うので, ($\sharp\sharp$) を導く方針をとる.\\
+まず\[
+\|x\|_0 = \left\|\sum_{i=0}^d x^ie_i\right\| \le \sum_{i=0}^d \|x^ie_i\|_0 = \sum_{i=0}^d  |x^i|\|e_i\|_0
+\]
+なので, $M \coloneq \max_{1 \le i \le d}\|e_i\|$とすれば
+\[
+\|x\|_0 \le M\sum_{i=0}^d  |x^i| = M\|x\|_{*}
+\]
+が成り立つ. 次に$N \coloneq \inf\{\|y\|_0\colon\; \|y\|_{*}=1\}$とおく. $V$上の$\|\cdot\|_{*}$から定められる距離を考えれば$\{y \in V\colon\; \|y\|_{*}=1\}$はコンパクト集合であり, $\|\cdot\|_0\colon V \to \R$は連続関数となる. 実際, $x_n = x_n^1e_1+\cdots+x_n^de_d \in V$として
+\begin{align*}
+\Big|\|x_n\|_0-\|x\|_0 \Big| \le \|x_n-x\|_0 &= \left\|\sum_{i=1}^d (x_n^i-x^i)e_i\right\|_0\\
+& \le \sum_{i=1}^d |(x_n^i-x^i)|\|e_i\|_0\\
+& \le M\|x_n-x\|_{*} \to 0 \hspace{1em} \text{as}\:\:x_n\to x
+\end{align*}
+からわかる. したがって, コンパクト集合上の連続関数は最小値を持つことから
+\[
+\exists x_0 \in V\;\text{s.t.}\;\|x_0\|_{*}=1 \land \|x_0\|_0 = N 
+\]
+が成り立ち
+\[
+\|x\|_0 = \|x\|_{*}\left\| \dfrac{x}{\|x\|_{*}} \right\|_0 \ge N\|x\|_{*}
+\]
+を得る. \\
+\indent あとは任意のノルム$\|\cdot\|_0, \|\cdot\|_1$をそれぞれ($\sharp\sharp$)で評価すればよい. ある$N, N', M, M' > 0$が存在して, 任意の$x\in V$に対し
+\begin{align*}
+&N\|x\|_{*} \le \|x\|_0 \le M\|x\|_{*}\\
+&N'\|x\|_{*} \le \|x\|_1 \le M'\|x\|_{*}
+\end{align*}
+が成り立つので
+\begin{align*}
+&\|x\|_0 \le M\|x\|_{*} \le \dfrac{M}{N'}\|x\|_1\\
+&\|x\|_1 \le M'\|x\|_{*} \le \dfrac{M'}{N}\|x\|_0
+\end{align*}
+となるから, $\lambda\coloneq {N'}/{M},\;\mu\coloneq {M'}/{N}$とおくことで($\sharp$)を得る.
+
+\end{proof}
+
+\begin{dfn}[$=$\textbf{Definition 7.48} コンパクト作用素]
+$X, Y$を距離空間, $f\;\colon X\to Y$を連続写像とする. $f$がコンパクトであるとは, 任意の有界列$\{x_n\}_{n\in\N}\subset X$について, $\{f(x_n)\}_{n\in\N}$が収束する部分列を持つことをいう.
+\end{dfn}
+
+\begin{thm*}
+$I\colon\;C^{0,\alpha}([0, 1])\to C^{0}([0, 1])\;;\;f\mapsto f$はコンパクト作用素である (ただし$0<\alpha\le 1$). 実際, 任意の$\{f_n\}_{n\in\N}\subset C^{0,\alpha}([0, 1])$に対し
+\[
+\|f_n\|_{C^{0,\alpha}([0, 1])} = \|f_n\|_{C^{0}([0, 1])}+\sup_{x\neq y}\dfrac{|f_n(x)-f_n(y)|}{|x-y|^\alpha} < +\infty
+\]
+であることから, $\{f_n\}_{n\in\N}\subset C^{0}([0, 1])$は有界かつ同程度連続なので, Ascoli-Arzelaの定理から収束する部分列を持つ.
+\end{thm*}
+
+\newpage
+\section{距離空間}
+\begin{thm}[$=$\textbf{Definition 7.40}]
+$X$を距離空間とすると, 以下は同値である$\colon$
+\begin{enumerate}
+\item[(1)] $X$はコンパクトである.
+\item[(2)] $X$は点列コンパクトである.
+\item[(3)] $X$は全有界かつ完備である.
+\end{enumerate}
+\end{thm}
+
+\begin{thm}[]
+全有界距離空間$(X, d)$は第二可算公理を満たし, さらに任意の点列はCauchy列を部分列に持つ.
+\end{thm}
+\begin{proof}
+例えば\cite{内田}定理27.1, \cite{藤岡}定理30.1.
+\end{proof}
+
+\begin{thm}[$=$\textbf{Corollary 7.42} Heine-Borelの被覆定理]
+$\R^d$の有界閉部分集合はコンパクトである.
+\end{thm}
+
+\begin{thm}[$=$\textbf{Corollary 7.43} Bolzano-Weierstrassの定理]
+$\R^d$の有界な数列は収束する部分列を持つ.
+\end{thm}
+
+\begin{thm}[$=$\textbf{Theorem 7.44} 最大値・最小値の定理]
+コンパクト上の実数値連続関数は最大値・最小値を持つ.
+\end{thm}
+
+\begin{rem*}
+2階算術の枠組みで, 数学的性質や定理を証明するのにどの程度の集合存在公理が必要かを調べるプログラムを「逆数学」といい, 2階算術のフル体系\textbf{Z}$_2$の部分体系として, \textbf{RCA$_0$}, \textbf{WKL$_0$}, \textbf{ACA$_0$} (証明能力の弱い順) などを考える. 例えばHeine-Borelの被覆定理は\textbf{RCA$_0$}上で\textbf{WKL$_0$}と同値で, Bolzano-Weierstrassの定理は\textbf{ACA$_0$}と同値であることが知られている\cite{田中}第7章.\\
+\indent\cite{Jost}では定理2.1 (=Definition 7.40) (i)$\Rightarrow$(ii)の証明で\textbf{ACA$_0$}が必要になっている.
+ 
+\end{rem*}
+
+
+
+
+
+
+
+
+\begin{thebibliography}{99}
+\bibitem{Jost}
+ Jurgen Jost, \textit{Postmodern Analysis}. Springer (2005).
+\bibitem{内田}
+ 内田伏一, 『集合と位相 増補新装版』. 裳華房 (2020).
+\bibitem{倉田}
+ 倉田和浩, 「解析学特別講義I: 講義ノート1」\\
+ Available at \url{https://tmu-kurata.fpark.tmu.ac.jp/lectures/fun19/note-1.pdf}
+\bibitem{田中}
+ 田中一之, 『数学基礎論序説』. 裳華房 (2019).
+\bibitem{藤岡}
+ 藤岡敦, 『手を動かしてまなぶ集合と位相』. 裳華房 (2020).
+\end{thebibliography}
+
+
+
+
+
+
+
+
+\end{document}
